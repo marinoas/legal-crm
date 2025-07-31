@@ -1,0 +1,297 @@
+{
+  "clients": {
+    "title": "Εντολείς",
+    "singular": "Εντολέας",
+    "plural": "Εντολείς",
+    "new": "Νέος Εντολέας",
+    "edit": "Επεξεργασία Εντολέα",
+    "delete": "Διαγραφή Εντολέα",
+    "view": "Προβολή Εντολέα",
+    "profile": "Καρτέλα Εντολέα",
+    "list": "Λίστα Εντολέων",
+    "search": "Αναζήτηση εντολέων...",
+    "active": "Ενεργοί Εντολείς",
+    "inactive": "Ανενεργοί Εντολείς",
+    "all": "Όλοι οι Εντολείς",
+    "noResults": "Δεν βρέθηκαν εντολείς",
+    "total": "Σύνολο εντολέων"
+  },
+  
+  "client": {
+    "type": {
+      "label": "Τύπος Εντολέα",
+      "individual": "Φυσικό Πρόσωπο",
+      "company": "Νομικό Πρόσωπο",
+      "placeholder": "Επιλέξτε τύπο"
+    },
+    
+    "personalInfo": {
+      "title": "Προσωπικά Στοιχεία",
+      "firstName": {
+        "label": "Όνομα",
+        "placeholder": "π.χ. Γιώργος"
+      },
+      "lastName": {
+        "label": "Επώνυμο",
+        "placeholder": "π.χ. Παπαδόπουλος"
+      },
+      "fatherName": {
+        "label": "Πατρώνυμο",
+        "placeholder": "π.χ. Δημήτριος"
+      },
+      "companyName": {
+        "label": "Επωνυμία Εταιρείας",
+        "placeholder": "π.χ. ABC Α.Ε."
+      },
+      "legalForm": {
+        "label": "Νομική Μορφή",
+        "ae": "Α.Ε.",
+        "epe": "Ε.Π.Ε.",
+        "ike": "Ι.Κ.Ε.",
+        "oe": "Ο.Ε.",
+        "ee": "Ε.Ε.",
+        "other": "Άλλη"
+      }
+    },
+    
+    "contactInfo": {
+      "title": "Στοιχεία Επικοινωνίας",
+      "phone": {
+        "label": "Σταθερό Τηλέφωνο",
+        "placeholder": "π.χ. 2101234567"
+      },
+      "mobile": {
+        "label": "Κινητό Τηλέφωνο",
+        "placeholder": "π.χ. 6971234567"
+      },
+      "fax": {
+        "label": "Fax",
+        "placeholder": "π.χ. 2101234568"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "π.χ. client@example.com"
+      },
+      "website": {
+        "label": "Website",
+        "placeholder": "π.χ. www.example.com"
+      }
+    },
+    
+    "address": {
+      "title": "Διεύθυνση",
+      "street": {
+        "label": "Οδός",
+        "placeholder": "π.χ. Πανεπιστημίου"
+      },
+      "number": {
+        "label": "Αριθμός",
+        "placeholder": "π.χ. 42"
+      },
+      "area": {
+        "label": "Περιοχή",
+        "placeholder": "π.χ. Κέντρο"
+      },
+      "city": {
+        "label": "Πόλη",
+        "placeholder": "π.χ. Αθήνα"
+      },
+      "postalCode": {
+        "label": "Τ.Κ.",
+        "placeholder": "π.χ. 10679"
+      },
+      "country": {
+        "label": "Χώρα",
+        "placeholder": "π.χ. Ελλάδα"
+      }
+    },
+    
+    "financialInfo": {
+      "title": "Οικονομικά Στοιχεία",
+      "vat": {
+        "label": "ΑΦΜ",
+        "placeholder": "π.χ. 123456789"
+      },
+      "taxOffice": {
+        "label": "ΔΟΥ",
+        "placeholder": "π.χ. Α' Αθηνών"
+      },
+      "profession": {
+        "label": "Επάγγελμα",
+        "placeholder": "π.χ. Μηχανικός"
+      },
+      "idNumber": {
+        "label": "Αρ. Ταυτότητας",
+        "placeholder": "π.χ. ΑΒ123456"
+      },
+      "passport": {
+        "label": "Αρ. Διαβατηρίου",
+        "placeholder": "π.χ. K12345678"
+      }
+    },
+    
+    "folderInfo": {
+      "title": "Στοιχεία Φακέλου",
+      "folderNumber": {
+        "label": "Αριθμός Φακέλου",
+        "placeholder": "Αυτόματη αρίθμηση",
+        "manual": "Χειροκίνητη εισαγωγή",
+        "auto": "Αυτόματη αρίθμηση",
+        "current": "Τρέχων αριθμός"
+      },
+      "subFolders": {
+        "label": "Υποφάκελοι",
+        "add": "Προσθήκη υποφακέλου",
+        "placeholder": "π.χ. 299α, 299β"
+      },
+      "dateCreated": "Ημερομηνία δημιουργίας",
+      "lastModified": "Τελευταία τροποποίηση"
+    },
+    
+    "status": {
+      "label": "Κατάσταση",
+      "active": "Ενεργός",
+      "inactive": "Ανενεργός",
+      "suspended": "Σε αναστολή",
+      "archived": "Αρχειοθετημένος"
+    },
+    
+    "notes": {
+      "label": "Σημειώσεις",
+      "placeholder": "Προσθέστε σημειώσεις για τον εντολέα...",
+      "internal": "Εσωτερικές σημειώσεις",
+      "general": "Γενικές σημειώσεις"
+    }
+  },
+  
+  "tabs": {
+    "overview": "Επισκόπηση",
+    "courts": "Δικαστήρια",
+    "deadlines": "Προθεσμίες",
+    "pendings": "Εκκρεμότητες",
+    "appointments": "Ραντεβού",
+    "communications": "Επικοινωνίες",
+    "financial": "Οικονομικά",
+    "documents": "Έγγραφα",
+    "notes": "Σημειώσεις"
+  },
+  
+  "communications": {
+    "title": "Αρχείο Επικοινωνιών",
+    "date": "Ημερομηνία",
+    "type": "Τύπος",
+    "summary": "Περίληψη",
+    "duration": "Διάρκεια",
+    "phoneCall": "Τηλεφωνική κλήση",
+    "email": "Email",
+    "meeting": "Συνάντηση",
+    "sms": "SMS",
+    "letter": "Επιστολή",
+    "addCommunication": "Καταχώρηση επικοινωνίας",
+    "incoming": "Εισερχόμενη",
+    "outgoing": "Εξερχόμενη"
+  },
+  
+  "financial": {
+    "title": "Οικονομική Καρτέλα",
+    "balance": "Υπόλοιπο",
+    "debit": "Χρέωση",
+    "credit": "Πίστωση",
+    "total": "Σύνολο",
+    "date": "Ημερομηνία",
+    "description": "Περιγραφή",
+    "amount": "Ποσό",
+    "invoice": "Τιμολόγιο",
+    "receipt": "Απόδειξη",
+    "payment": "Πληρωμή",
+    "addTransaction": "Νέα συναλλαγή",
+    "transactions": "Συναλλαγές",
+    "unpaid": "Ανεξόφλητα",
+    "paid": "Εξοφλημένα"
+  },
+  
+  "documents": {
+    "title": "Έγγραφα",
+    "clientDocuments": "Έγγραφα Εντολέα",
+    "legalDocuments": "Δικόγραφα",
+    "uploaded": "Μεταφορτώθηκε",
+    "uploadNew": "Μεταφόρτωση εγγράφου",
+    "fileName": "Όνομα αρχείου",
+    "fileType": "Τύπος",
+    "fileSize": "Μέγεθος",
+    "uploadDate": "Ημερομηνία",
+    "download": "Λήψη",
+    "preview": "Προεπισκόπηση",
+    "delete": "Διαγραφή",
+    "categories": {
+      "contract": "Σύμβαση",
+      "id": "Ταυτότητα",
+      "authorization": "Εξουσιοδότηση",
+      "powerOfAttorney": "Πληρεξούσιο",
+      "evidence": "Αποδεικτικά",
+      "correspondence": "Αλληλογραφία",
+      "lawsuit": "Δικόγραφο",
+      "decision": "Απόφαση",
+      "other": "Άλλο"
+    }
+  },
+  
+  "statistics": {
+    "totalCases": "Σύνολο υποθέσεων",
+    "activeCases": "Ενεργές υποθέσεις",
+    "completedCases": "Ολοκληρωμένες υποθέσεις",
+    "totalRevenue": "Συνολικά έσοδα",
+    "outstandingBalance": "Οφειλόμενο υπόλοιπο",
+    "lastAppointment": "Τελευταίο ραντεβού",
+    "nextAppointment": "Επόμενο ραντεβού",
+    "totalAppointments": "Σύνολο ραντεβού",
+    "averageCallsPerMonth": "Μ.Ο. κλήσεων/μήνα"
+  },
+  
+  "actions": {
+    "addCourt": "Προσθήκη δικαστηρίου",
+    "addDeadline": "Προσθήκη προθεσμίας",
+    "addPending": "Προσθήκη εκκρεμότητας",
+    "addAppointment": "Προσθήκη ραντεβού",
+    "addTransaction": "Προσθήκη συναλλαγής",
+    "uploadDocument": "Μεταφόρτωση εγγράφου",
+    "sendEmail": "Αποστολή email",
+    "callClient": "Κλήση εντολέα",
+    "viewProfile": "Προβολή προφίλ",
+    "editClient": "Επεξεργασία",
+    "archiveClient": "Αρχειοθέτηση",
+    "activateClient": "Ενεργοποίηση",
+    "exportData": "Εξαγωγή δεδομένων"
+  },
+  
+  "filters": {
+    "allClients": "Όλοι οι εντολείς",
+    "activeOnly": "Μόνο ενεργοί",
+    "inactiveOnly": "Μόνο ανενεργοί",
+    "individuals": "Φυσικά πρόσωπα",
+    "companies": "Νομικά πρόσωπα",
+    "withBalance": "Με υπόλοιπο",
+    "withoutBalance": "Χωρίς υπόλοιπο",
+    "byCity": "Ανά πόλη",
+    "byProfession": "Ανά επάγγελμα"
+  },
+  
+  "validation": {
+    "vatExists": "Το ΑΦΜ υπάρχει ήδη",
+    "emailExists": "Το email υπάρχει ήδη",
+    "folderNumberExists": "Ο αριθμός φακέλου υπάρχει ήδη",
+    "invalidVat": "Μη έγκυρο ΑΦΜ",
+    "requiredForCompany": "Υποχρεωτικό για νομικά πρόσωπα",
+    "requiredForIndividual": "Υποχρεωτικό για φυσικά πρόσωπα"
+  },
+  
+  "messages": {
+    "clientCreated": "Ο εντολέας δημιουργήθηκε επιτυχώς",
+    "clientUpdated": "Ο εντολέας ενημερώθηκε επιτυχώς",
+    "clientDeleted": "Ο εντολέας διαγράφηκε επιτυχώς",
+    "clientArchived": "Ο εντολέας αρχειοθετήθηκε",
+    "clientActivated": "Ο εντολέας ενεργοποιήθηκε",
+    "confirmDelete": "Είστε σίγουροι ότι θέλετε να διαγράψετε τον εντολέα {{name}}; Αυτή η ενέργεια δεν μπορεί να αναιρεθεί.",
+    "confirmArchive": "Είστε σίγουροι ότι θέλετε να αρχειοθετήσετε τον εντολέα {{name}};"
+  }
+}
