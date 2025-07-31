@@ -41,6 +41,7 @@
     "@reduxjs/toolkit": "^2.0.1",
     "@stripe/react-stripe-js": "^2.4.0",
     "@stripe/stripe-js": "^2.2.2",
+    "ajv": "^8.17.1",
     "axios": "^1.6.5",
     "date-fns": "^3.2.0",
     "date-fns-tz": "^2.0.0",
@@ -69,6 +70,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.23.7",
+    "@babel/plugin-transform-runtime": "^7.28.0",
     "@babel/preset-env": "^7.23.7",
     "@babel/preset-react": "^7.23.3",
     "@babel/preset-typescript": "^7.23.3",
@@ -76,6 +78,7 @@
     "@testing-library/react": "^14.1.2",
     "@testing-library/user-event": "^14.5.2",
     "@types/jest": "^29.5.11",
+    "@types/minimatch": "^6.0.0",
     "@types/node": "^20.10.6",
     "@types/react": "^18.2.46",
     "@types/react-big-calendar": "^1.8.5",

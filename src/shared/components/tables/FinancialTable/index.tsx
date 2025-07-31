@@ -1,0 +1,1 @@
+export { FinancialTable } from './FinancialTable';
