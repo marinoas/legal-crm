@@ -1,0 +1,803 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Legal CRM API",
+    "description": "Comprehensive API documentation for the Legal CRM system - A modern law office management platform",
+    "version": "2.0.0",
+    "contact": {
+      "name": "API Support",
+      "email": "support@legalcrm.gr"
+    },
+    "license": {
+      "name": "Proprietary",
+      "url": "https://legalcrm.gr/license"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000/api/v1",
+      "description": "Development server"
+    },
+    {
+      "url": "https://api.legalcrm.gr/v1",
+      "description": "Production server"
+    }
+  ],
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Authentication",
+      "description": "User authentication and authorization"
+    },
+    {
+      "name": "Users",
+      "description": "User management operations"
+    },
+    {
+      "name": "Clients",
+      "description": "Client management operations"
+    },
+    {
+      "name": "Courts",
+      "description": "Court case management"
+    },
+    {
+      "name": "Deadlines",
+      "description": "Deadline tracking and management"
+    },
+    {
+      "name": "Appointments",
+      "description": "Appointment scheduling and management"
+    },
+    {
+      "name": "Financial",
+      "description": "Financial transactions and invoicing"
+    },
+    {
+      "name": "Documents",
+      "description": "Document management"
+    },
+    {
+      "name": "AI",
+      "description": "AI-powered features"
+    },
+    {
+      "name": "Analytics",
+      "description": "Analytics and reporting"
+    }
+  ],
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "Register a new user",
+        "description": "Creates a new user account with the specified role",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input data"
+          },
+          "409": {
+            "description": "User already exists"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "Login user",
+        "description": "Authenticates user and returns JWT token",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid credentials"
+          }
+        }
+      }
+    },
+    "/auth/2fa/setup": {
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "Setup 2FA",
+        "description": "Generates QR code for 2FA setup",
+        "security": [{"bearerAuth": []}],
+        "responses": {
+          "200": {
+            "description": "2FA setup data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "qrCode": {
+                      "type": "string"
+                    },
+                    "secret": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/clients": {
+      "get": {
+        "tags": ["Clients"],
+        "summary": "Get all clients",
+        "description": "Retrieves a paginated list of clients",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": ["individual", "company"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of clients",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "count": {
+                      "type": "integer"
+                    },
+                    "pagination": {
+                      "$ref": "#/components/schemas/Pagination"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Client"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Clients"],
+        "summary": "Create new client",
+        "description": "Creates a new client record",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Client created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Client"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/courts": {
+      "get": {
+        "tags": ["Courts"],
+        "summary": "Get all court cases",
+        "description": "Retrieves court cases with filtering options",
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": ["scheduled", "completed", "postponed", "canceled"]
+            }
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of court cases",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Court"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ai/classify-document": {
+      "post": {
+        "tags": ["AI"],
+        "summary": "Classify document",
+        "description": "Uses AI to classify and extract information from documents",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "filePath": {
+                    "type": "string"
+                  },
+                  "mimeType": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Document classification results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentClassification"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ai/predict-outcome": {
+      "post": {
+        "tags": ["AI"],
+        "summary": "Predict case outcome",
+        "description": "Uses AI to predict the likely outcome of a legal case",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CaseData"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Case outcome prediction",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OutcomePrediction"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/analytics/dashboard": {
+      "get": {
+        "tags": ["Analytics"],
+        "summary": "Get dashboard analytics",
+        "description": "Retrieves comprehensive analytics for the dashboard",
+        "parameters": [
+          {
+            "name": "startDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Dashboard analytics data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DashboardAnalytics"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "RegisterRequest": {
+        "type": "object",
+        "required": ["firstName", "lastName", "email", "password", "role"],
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "example": "Γιώργος"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Παπαδόπουλος"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "george@lawfirm.gr"
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "minLength": 6
+          },
+          "role": {
+            "type": "string",
+            "enum": ["admin", "supervisor", "secretary", "client"]
+          },
+          "phone": {
+            "type": "string",
+            "example": "2101234567"
+          },
+          "mobile": {
+            "type": "string",
+            "example": "6971234567"
+          }
+        }
+      },
+      "LoginRequest": {
+        "type": "object",
+        "required": ["email", "password"],
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "format": "password"
+          },
+          "twoFactorCode": {
+            "type": "string",
+            "description": "Required if 2FA is enabled"
+          }
+        }
+      },
+      "AuthResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "token": {
+            "type": "string"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "twoFactorEnabled": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Client": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "companyName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "mobile": {
+            "type": "string"
+          },
+          "vatNumber": {
+            "type": "string"
+          },
+          "folderNumber": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["individual", "company"]
+          },
+          "balance": {
+            "type": "number"
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          }
+        }
+      },
+      "ClientInput": {
+        "type": "object",
+        "required": ["type"],
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "companyName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "mobile": {
+            "type": "string"
+          },
+          "vatNumber": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["individual", "company"]
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      },
+      "Court": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "client": {
+            "$ref": "#/components/schemas/Client"
+          },
+          "court": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "time": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "opponent": {
+            "type": "string"
+          },
+          "hearing": {
+            "type": "string"
+          }
+        }
+      },
+      "Address": {
+        "type": "object",
+        "properties": {
+          "street": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "postalCode": {
+            "type": "string"
+          }
+        }
+      },
+      "Pagination": {
+        "type": "object",
+        "properties": {
+          "next": {
+            "type": "object",
+            "properties": {
+              "page": {
+                "type": "integer"
+              },
+              "limit": {
+                "type": "integer"
+              }
+            }
+          },
+          "prev": {
+            "type": "object",
+            "properties": {
+              "page": {
+                "type": "integer"
+              },
+              "limit": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      },
+      "DocumentClassification": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "confidence": {
+            "type": "number"
+          },
+          "category": {
+            "type": "string"
+          },
+          "extractedData": {
+            "type": "object"
+          },
+          "keywords": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "term": {
+                  "type": "string"
+                },
+                "score": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "summary": {
+            "type": "string"
+          },
+          "suggestedActions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "CaseData": {
+        "type": "object",
+        "properties": {
+          "court": {
+            "type": "object"
+          },
+          "type": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "documents": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "OutcomePrediction": {
+        "type": "object",
+        "properties": {
+          "probability": {
+            "type": "object",
+            "properties": {
+              "success": {
+                "type": "number"
+              },
+              "partial": {
+                "type": "number"
+              },
+              "failure": {
+                "type": "number"
+              }
+            }
+          },
+          "factors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "recommendations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "estimatedDuration": {
+            "type": "string"
+          },
+          "estimatedCost": {
+            "type": "number"
+          }
+        }
+      },
+      "DashboardAnalytics": {
+        "type": "object",
+        "properties": {
+          "clients": {
+            "type": "object"
+          },
+          "courts": {
+            "type": "object"
+          },
+          "financial": {
+            "type": "object"
+          },
+          "productivity": {
+            "type": "object"
+          },
+          "upcoming": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    }
+  }
+}

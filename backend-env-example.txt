@@ -1,0 +1,153 @@
+# Environment
+NODE_ENV=development
+
+# Server
+PORT=5000
+API_VERSION=v1
+
+# Database
+MONGO_URI=mongodb://localhost:27017/legal-crm
+MONGO_OPTIONS_USE_NEW_URL_PARSER=true
+MONGO_OPTIONS_USE_UNIFIED_TOPOLOGY=true
+
+# Redis (for caching and real-time features)
+REDIS_HOST=localhost
+REDIS_PORT=6379
+REDIS_PASSWORD=
+
+# JWT
+JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
+JWT_EXPIRE=30d
+JWT_COOKIE_EXPIRE=30
+
+# Session
+SESSION_SECRET=your-session-secret-change-this-in-production
+
+# Encryption
+ENCRYPTION_KEY=your-32-character-encryption-key-change-this
+BACKUP_ENCRYPTION_KEY=your-backup-encryption-key-change-this
+
+# Email Configuration
+EMAIL_ENABLED=true
+EMAIL_PROVIDER=smtp
+# SMTP Settings
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_USER=your-email@gmail.com
+SMTP_PASS=your-app-password
+EMAIL_FROM=noreply@legalcrm.gr
+EMAIL_FROM_NAME=Legal CRM
+
+# Alternative Email Providers
+# SendGrid
+SENDGRID_API_KEY=
+SENDGRID_FROM_EMAIL=
+
+# Mailgun
+MAILGUN_API_KEY=
+MAILGUN_DOMAIN=
+MAILGUN_FROM_EMAIL=
+
+# SMS Configuration (Twilio)
+SMS_ENABLED=false
+TWILIO_ACCOUNT_SID=
+TWILIO_AUTH_TOKEN=
+TWILIO_FROM_NUMBER=
+
+# Payment Providers
+# Stripe
+STRIPE_ENABLED=true
+STRIPE_PUBLISHABLE_KEY=pk_test_...
+STRIPE_SECRET_KEY=sk_test_...
+STRIPE_WEBHOOK_SECRET=whsec_...
+
+# Viva Wallet
+VIVA_ENABLED=true
+VIVA_MERCHANT_ID=
+VIVA_API_KEY=
+VIVA_CLIENT_ID=
+VIVA_CLIENT_SECRET=
+VIVA_WEBHOOK_KEY=
+VIVA_ENVIRONMENT=demo
+
+# OpenAI (for AI features)
+OPENAI_API_KEY=sk-...
+OPENAI_MODEL=gpt-4
+OPENAI_MAX_TOKENS=2000
+
+# Google APIs
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+GOOGLE_REDIRECT_URI=http://localhost:5000/api/v1/auth/google/callback
+
+# File Upload
+FILE_UPLOAD_PATH=./uploads
+MAX_FILE_UPLOAD=10485760
+ALLOWED_FILE_TYPES=pdf,doc,docx,xls,xlsx,jpg,jpeg,png,gif
+
+# Security
+RATE_LIMIT_WINDOW_MS=900000
+RATE_LIMIT_MAX_REQUESTS=100
+BCRYPT_ROUNDS=10
+ALLOWED_ORIGINS=http://localhost:3000,http://localhost:3001,http://localhost:3002,http://localhost:3003,http://localhost:3004
+IP_WHITELIST=
+IP_BLACKLIST=
+
+# Backup
+BACKUP_AUTO_ENABLED=true
+BACKUP_RETENTION_DAYS=30
+BACKUP_STORAGE=local
+# S3 Backup (optional)
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_S3_BUCKET=
+AWS_S3_REGION=eu-south-1
+
+# Logging
+LOG_LEVEL=info
+LOG_FILE=./logs/app.log
+LOG_MAX_SIZE=10m
+LOG_MAX_FILES=14d
+LOG_DATE_PATTERN=YYYY-MM-DD
+
+# WebSocket
+WS_URL=ws://localhost:5000
+WS_PATH=/socket.io/
+
+# Monitoring (optional)
+SENTRY_DSN=
+NEW_RELIC_LICENSE_KEY=
+
+# Feature Flags
+FEATURE_AI_ENABLED=true
+FEATURE_REALTIME_ENABLED=true
+FEATURE_ANALYTICS_ENABLED=true
+FEATURE_BACKUP_ENABLED=true
+FEATURE_2FA_ENABLED=true
+FEATURE_PAYMENT_ENABLED=true
+
+# Development
+SWAGGER_ENABLED=true
+DEBUG_SQL=false
+MOCK_EXTERNAL_SERVICES=false
+
+# Legal CRM Specific
+DEFAULT_FOLDER_NUMBER_START=1000
+DEFAULT_APPOINTMENT_DURATION=60
+DEFAULT_APPOINTMENT_BUFFER=15
+DEFAULT_VAT_RATE=24
+DEFAULT_PAYMENT_TERMS=30
+DEFAULT_CURRENCY=EUR
+DEFAULT_TIMEZONE=Europe/Athens
+DEFAULT_LOCALE=el-GR
+DEFAULT_DATE_FORMAT=DD/MM/YYYY
+DEFAULT_TIME_FORMAT=HH:mm
+
+# Court System Integration (future feature)
+COURT_API_URL=
+COURT_API_KEY=
+
+# Bar Association Integration (future feature)
+BAR_API_URL=
+BAR_API_KEY=
