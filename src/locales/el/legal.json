@@ -1,1 +1,191 @@
-{}
+{
+  "legal": {
+    "terms": {
+      "kpold": "Κώδικας Πολιτικής Δικονομίας",
+      "ak": "Αστικός Κώδικας",
+      "pk": "Ποινικός Κώδικας",
+      "kpd": "Κώδικας Ποινικής Δικονομίας",
+      "kdk": "Κώδικας Διοικητικής Δικονομίας",
+      "article": "Άρθρο",
+      "articles": "Άρθρα",
+      "paragraph": "Παράγραφος",
+      "case": "Υπόθεση",
+      "lawsuit": "Δικόγραφο",
+      "decision": "Απόφαση",
+      "decree": "Διάταγμα",
+      "judgment": "Δικαστική απόφαση",
+      "verdict": "Ετυμηγορία",
+      "appeal": "Έφεση",
+      "cassation": "Αναίρεση",
+      "objection": "Ανακοπή",
+      "petition": "Αίτηση",
+      "motion": "Αίτημα",
+      "claim": "Αξίωση",
+      "plaintiff": "Ενάγων",
+      "defendant": "Εναγόμενος",
+      "appellant": "Εκκαλών",
+      "respondent": "Εφεσίβλητος",
+      "applicant": "Αιτών",
+      "claimant": "Αναιρεσείων",
+      "witness": "Μάρτυρας",
+      "evidence": "Αποδεικτικά στοιχεία",
+      "testimony": "Κατάθεση",
+      "hearing": "Συζήτηση",
+      "trial": "Δίκη",
+      "proceedings": "Διαδικασία",
+      "jurisdiction": "Δικαιοδοσία",
+      "competence": "Αρμοδιότητα"
+    },
+    
+    "procedures": {
+      "regular": "Τακτική διαδικασία",
+      "special": "Ειδική διαδικασία",
+      "labor": "Εργατικές διαφορές",
+      "tenancy": "Μισθωτικές διαφορές",
+      "voluntary": "Εκούσια δικαιοδοσία",
+      "injunction": "Ασφαλιστικά μέτρα",
+      "provisional": "Προσωρινή διαταγή",
+      "enforcement": "Αναγκαστική εκτέλεση",
+      "bankruptcy": "Πτώχευση",
+      "inheritance": "Κληρονομική διαδικασία"
+    },
+    
+    "deadlines": {
+      "legal": "Νόμιμη προθεσμία",
+      "judicial": "Δικαστική προθεσμία",
+      "peremptory": "Αποκλειστική προθεσμία",
+      "directory": "Ενδεικτική προθεσμία",
+      "extension": "Παράταση προθεσμίας",
+      "expiry": "Λήξη προθεσμίας",
+      "suspension": "Αναστολή προθεσμίας",
+      "interruption": "Διακοπή προθεσμίας",
+      "statute": "Παραγραφή",
+      "limitation": "Αποσβεστική προθεσμία"
+    },
+    
+    "documents": {
+      "lawsuit": "Δικόγραφο",
+      "petition": "Αίτηση",
+      "objection": "Ανακοπή",
+      "appeal": "Έφεση",
+      "cassation": "Αναίρεση",
+      "memorandum": "Υπόμνημα",
+      "proposals": "Προτάσεις",
+      "additionalReasons": "Πρόσθετοι λόγοι",
+      "rebuttal": "Αντίκρουση",
+      "supplementRebuttal": "Προσθήκη-Αντίκρουση",
+      "powerOfAttorney": "Πληρεξούσιο",
+      "affidavit": "Ένορκη βεβαίωση",
+      "declaration": "Υπεύθυνη δήλωση",
+      "contract": "Σύμβαση",
+      "deed": "Συμβολαιογραφική πράξη",
+      "certificate": "Πιστοποιητικό",
+      "notice": "Εξώδικο",
+      "summons": "Κλήτευση",
+      "subpoena": "Κλήση μάρτυρα",
+      "notification": "Επίδοση"
+    },
+    
+    "courts": {
+      "supremeCourt": "Άρειος Πάγος",
+      "councilOfState": "Συμβούλιο της Επικρατείας",
+      "courtOfAudit": "Ελεγκτικό Συνέδριο",
+      "appealCourt": "Εφετείο",
+      "firstInstance": "Πρωτοδικείο",
+      "magistrate": "Ειρηνοδικείο",
+      "administrativeAppeal": "Διοικητικό Εφετείο",
+      "administrativeFirst": "Διοικητικό Πρωτοδικείο",
+      "criminal": "Ποινικό Δικαστήριο",
+      "civil": "Πολιτικό Δικαστήριο",
+      "commercial": "Εμπορικό Δικαστήριο",
+      "labor": "Εργατικό Δικαστήριο",
+      "juvenile": "Δικαστήριο Ανηλίκων",
+      "maritime": "Ναυτοδικείο"
+    },
+    
+    "outcomes": {
+      "accepted": "Δεκτή",
+      "rejected": "Απορριπτέα",
+      "partiallyAccepted": "Εν μέρει δεκτή",
+      "inadmissible": "Απαράδεκτη",
+      "withdrawn": "Παραίτηση",
+      "settled": "Συμβιβασμός",
+      "dismissed": "Έρημη",
+      "postponed": "Αναβολή",
+      "cancelled": "Ματαίωση",
+      "suspended": "Αναστολή"
+    },
+    
+    "fees": {
+      "courtFees": "Δικαστικά έξοδα",
+      "stampDuty": "Τέλος απογράφου",
+      "bailiffFees": "Έξοδα επίδοσης",
+      "lawyerFees": "Δικηγορική αμοιβή",
+      "expertFees": "Αμοιβή πραγματογνώμονα",
+      "witnessFees": "Έξοδα μαρτύρων",
+      "translationFees": "Έξοδα μετάφρασης",
+      "registrationFees": "Τέλη καταχώρησης",
+      "certificationFees": "Τέλη πιστοποιητικών",
+      "publicationFees": "Έξοδα δημοσίευσης"
+    },
+    
+    "statuses": {
+      "pending": "Εκκρεμής",
+      "scheduled": "Προσδιορισμένη",
+      "inProgress": "Σε εξέλιξη",
+      "suspended": "Σε αναστολή",
+      "completed": "Περαιωμένη",
+      "archived": "Αρχειοθετημένη",
+      "appealed": "Υπό έφεση",
+      "final": "Τελεσίδικη",
+      "enforceable": "Εκτελεστή",
+      "executed": "Εκτελεσμένη"
+    },
+    
+    "parties": {
+      "plaintiff": "Ενάγων",
+      "defendant": "Εναγόμενος",
+      "appellant": "Εκκαλών",
+      "respondent": "Εφεσίβλητος",
+      "applicant": "Αιτών",
+      "opposing": "Καθ' ου",
+      "intervenor": "Παρεμβαίνων",
+      "thirdParty": "Τρίτος",
+      "guarantor": "Εγγυητής",
+      "debtor": "Οφειλέτης",
+      "creditor": "Δανειστής",
+      "lessor": "Εκμισθωτής",
+      "lessee": "Μισθωτής",
+      "buyer": "Αγοραστής",
+      "seller": "Πωλητής"
+    },
+    
+    "articles": {
+      "632kpold": "Άρθρο 632 ΚΠολΔ - Ανακοπή κατά διαταγής πληρωμής",
+      "933kpold": "Άρθρο 933 ΚΠολΔ - Ανακοπή κατά εκτέλεσης",
+      "954kpold": "Άρθρο 954 ΚΠολΔ - Ανακοπή τρίτου",
+      "973kpold": "Άρθρο 973 ΚΠολΔ - Ανακοπή κατά πίνακα κατάταξης",
+      "938kpold": "Άρθρο 938 ΚΠολΔ - Αναστολή εκτέλεσης",
+      "686kpold": "Άρθρο 686 ΚΠολΔ - Προσωρινή ρύθμιση κατάστασης",
+      "691kpold": "Άρθρο 691 ΚΠολΔ - Προσωρινή διαταγή"
+    }
+  },
+  
+  "legalActions": {
+    "fileAppeal": "Άσκηση έφεσης",
+    "fileCassation": "Άσκηση αναίρεσης",
+    "fileObjection": "Άσκηση ανακοπής",
+    "filePetition": "Κατάθεση αίτησης",
+    "fileLawsuit": "Κατάθεση αγωγής",
+    "requestPostponement": "Αίτημα αναβολής",
+    "requestSuspension": "Αίτημα αναστολής",
+    "submitProposals": "Κατάθεση προτάσεων",
+    "submitMemorandum": "Κατάθεση υπομνήματος",
+    "submitEvidence": "Προσκόμιση αποδεικτικών",
+    "examineWitness": "Εξέταση μάρτυρα",
+    "requestExpertise": "Αίτημα πραγματογνωμοσύνης",
+    "issueNotice": "Έκδοση εξωδίκου",
+    "serveDocuments": "Επίδοση εγγράφων",
+    "executeDecision": "Εκτέλεση απόφασης"
+  }
+}
