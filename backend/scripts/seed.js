@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
 const mongoose = require('mongoose');
+const { format, addDays, addHours, addWeeks, subDays, subWeeks, subMonths, subYears, startOfDay, endOfDay, startOfMonth, endOfMonth, startOfYear, endOfYear, differenceInDays, differenceInHours } = require('date-fns');
+const { zonedTimeToUtc, utcToZonedTime, format: formatTz } = require('date-fns-tz');
 const bcrypt = require('bcryptjs');
 const faker = require('faker');
-const moment = require('moment');
 require('dotenv').config();
 
 // Set locale for Greek data
@@ -252,8 +253,8 @@ const seedCourts = async (users, clients) => {
     if (!client) continue;
     
     const date = faker.date.between(
-      moment().subtract(6, 'months').toDate(),
-      moment().add(6, 'months').toDate()
+      subMonths(new Date(), 6).toDate(),
+      addMonths(new Date(), 6)
     );
     
     const court = await Court.create({
@@ -283,7 +284,7 @@ const seedCourts = async (users, clients) => {
         client: client._id,
         court: court._id,
         name: 'Κατάθεση προτάσεων',
-        dueDate: moment(court.date).subtract(20, 'days').toDate(),
+        dueDate: subDays(new Date(court.date), 20),
         priority: 'high',
         status: 'pending',
         category: 'court'
@@ -317,8 +318,8 @@ const seedDeadlines = async (users, clients, courts) => {
           'Καταβολή δικαστικού ενσήμου'
         ]),
         dueDate: faker.date.between(
-          moment().subtract(1, 'month').toDate(),
-          moment().add(3, 'months').toDate()
+          subMonths(new Date(), 1).toDate(),
+          addMonths(new Date(), 3)
         ),
         priority: faker.random.arrayElement(['low', 'medium', 'high', 'urgent']),
         status: faker.random.arrayElement(['pending', 'completed', 'overdue']),
@@ -360,8 +361,8 @@ const seedAppointments = async (users, clients) => {
       if (!client) continue;
       
       const date = faker.date.between(
-        moment().subtract(1, 'month').toDate(),
-        moment().add(1, 'month').toDate()
+        subMonths(new Date(), 1).toDate(),
+        addMonths(new Date(), 1)
       );
       
       const appointment = await Appointment.create({
@@ -506,8 +507,8 @@ const seedPendings = async (users, clients) => {
         name: faker.random.arrayElement(taskNames),
         description: faker.lorem.sentence(),
         dueDate: faker.date.between(
-          moment().subtract(1, 'week').toDate(),
-          moment().add(2, 'weeks').toDate()
+          subWeeks(new Date(), 1).toDate(),
+          addWeeks(new Date(), 2)
         ),
         priority: faker.random.arrayElement(['low', 'medium', 'high']),
         status: faker.random.arrayElement(['pending', 'in-progress', 'completed']),

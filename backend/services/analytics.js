@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const moment = require('moment-timezone');
+const { format, startOfDay, endOfDay, startOfMonth, endOfMonth, startOfYear, endOfYear, subDays, subMonths, subYears } = require('date-fns');
+const { zonedTimeToUtc, utcToZonedTime } = require('date-fns-tz');
 
 // Models
 const User = require('../models/User');
@@ -39,7 +40,7 @@ class AnalyticsService {
     const cached = this.getCached(cacheKey);
     if (cached) return cached;
 
-    const { startDate = moment().startOf('month').toDate(), endDate = new Date() } = dateRange;
+    const { startDate = startOfMonth(new Date()).toDate(), endDate = new Date() } = dateRange;
 
     const [
       clientStats,
@@ -168,7 +169,7 @@ class AnalyticsService {
           byMonth: [
             {
               $match: {
-                date: { $gte: moment().subtract(12, 'months').toDate() }
+                date: { $gte: subMonths(new Date(), 12).toDate() }
               }
             },
             {
@@ -494,7 +495,7 @@ class AnalyticsService {
     const utilization = result.utilizationRate[0] || { totalMinutes: 0, count: 0 };
     
     // Assuming 8 working hours per day
-    const workingDays = moment(endDate).diff(moment(startDate), 'days');
+    const workingDays = differenceInDays(new Date(endDate), new Date(startDate));
     const availableMinutes = workingDays * 8 * 60;
     const utilizationRate = availableMinutes > 0 
       ? (utilization.totalMinutes / availableMinutes * 100).toFixed(1)
@@ -682,7 +683,7 @@ class AnalyticsService {
 
   // Upcoming Events
   async getUpcomingEvents(userId, days = 7) {
-    const endDate = moment().add(days, 'days').toDate();
+    const endDate = addDays(new Date(), days);
 
     const [courts, deadlines, appointments] = await Promise.all([
       Court.find({
@@ -754,12 +755,12 @@ class AnalyticsService {
 
   // Trend Analysis
   async getProductivityTrends(userId) {
-    const sixMonthsAgo = moment().subtract(6, 'months').startOf('month').toDate();
+    const sixMonthsAgo = subMonths(new Date(), 6).startOf('month').toDate();
     
     const trends = await Promise.all(
       Array.from({ length: 6 }, (_, i) => {
-        const start = moment().subtract(5 - i, 'months').startOf('month').toDate();
-        const end = moment().subtract(5 - i, 'months').endOf('month').toDate();
+        const start = startOfMonth(subMonths(new Date(), 5 - i));
+        const end = endOfMonth(subMonths(new Date(), 5 - i));
         
         return this.getMonthlyProductivity(userId, start, end);
       })
@@ -818,7 +819,7 @@ class AnalyticsService {
     ]);
 
     return {
-      month: moment(startDate).format('YYYY-MM'),
+      month: format(new Date(startDate), 'yyyy-MM'),
       appointments,
       deadlines,
       revenue: revenue[0]?.total || 0,
@@ -876,8 +877,8 @@ class AnalyticsService {
 
   async generateMonthlyReport(userId, options) {
     const { year, month } = options;
-    const startDate = moment().year(year).month(month - 1).startOf('month').toDate();
-    const endDate = moment().year(year).month(month - 1).endOf('month').toDate();
+    const startDate = startOfMonth(new Date(year, month - 1, 1));
+    const endDate = endOfMonth(new Date(year, month - 1, 1));
 
     const [
       dashboard,

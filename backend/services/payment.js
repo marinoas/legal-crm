@@ -1,6 +1,7 @@
 const stripe = require('stripe');
 const axios = require('axios');
 const crypto = require('crypto');
+const { format } = require('date-fns');
 
 class PaymentService {
   constructor() {
@@ -489,7 +490,7 @@ class PaymentService {
       await emailService({
         email: appointment.client.email,
         subject: 'Επιβεβαίωση Πληρωμής Ραντεβού',
-        message: `Η πληρωμή σας ύψους €${amount} για το ραντεβού της ${moment(appointment.date).format('DD/MM/YYYY HH:mm')} ολοκληρώθηκε επιτυχώς.`
+        message: `Η πληρωμή σας ύψους €${amount} για το ραντεβού της ${format(new Date(appointment.date), 'dd/MM/yyyy HH:mm')} ολοκληρώθηκε επιτυχώς.`
       });
     }
   }

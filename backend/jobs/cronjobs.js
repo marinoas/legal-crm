@@ -1,6 +1,7 @@
 const cron = require('node-cron');
 const mongoose = require('mongoose');
-const moment = require('moment-timezone');
+const { format, addDays, startOfDay, endOfDay, isAfter, isBefore, parseISO } = require('date-fns');
+const { zonedTimeToUtc, utcToZonedTime, format: formatTz } = require('date-fns-tz');
 
 // Models
 const User = require('../models/User');
@@ -17,8 +18,8 @@ const sendEmail = require('../utils/sendEmail');
 const sendSMS = require('../utils/sendSMS');
 const { createBackup } = require('../utils/backup');
 
-// Set timezone to Athens
-moment.tz.setDefault('Europe/Athens');
+// Athens timezone constant
+const ATHENS_TZ = 'Europe/Athens';
 
 // Job status tracking
 const jobStatus = {
@@ -33,7 +34,7 @@ const jobStatus = {
 
 // Helper function to log job execution
 const logJob = (jobName, message, isError = false) => {
-  const timestamp = moment().format('YYYY-MM-DD HH:mm:ss');
+  const timestamp = formatTz(new Date(), 'yyyy-MM-dd HH:mm:ss', { timeZone: ATHENS_TZ });
   console.log(`[${timestamp}] [${jobName}] ${message}`);
   
   if (isError) {
@@ -66,7 +67,7 @@ const deadlineRemindersJob = cron.schedule('0 9 * * *', async () => {
         if (!settings?.notifications?.deadlineReminders?.enabled) continue;
         
         const reminderDays = settings.notifications.deadlineReminders.daysBefore || [30, 15, 7, 3, 1];
-        const today = moment().startOf('day');
+        const today = startOfDay(new Date());
         
         // Get all active deadlines for this user
         const deadlines = await Deadline.find({
@@ -76,7 +77,7 @@ const deadlineRemindersJob = cron.schedule('0 9 * * *', async () => {
         }).populate('client court');
         
         for (const deadline of deadlines) {
-          const daysUntilDue = moment(deadline.dueDate).diff(today, 'days');
+          const daysUntilDue = differenceInDays(new Date(deadline.dueDate), today);
           
           if (reminderDays.includes(daysUntilDue)) {
             // Get template or use default
@@ -90,7 +91,7 @@ const deadlineRemindersJob = cron.schedule('0 9 * * *', async () => {
               template = {
                 render: () => ({
                   subject: `Υπενθύμιση Προθεσμίας: ${deadline.name}`,
-                  body: `Η προθεσμία "${deadline.name}" λήγει σε ${daysUntilDue} ημέρες (${moment(deadline.dueDate).format('DD/MM/YYYY')}).`
+                  body: `Η προθεσμία "${deadline.name}" λήγει σε ${daysUntilDue} ημέρες (${format(new Date(deadline.dueDate), 'dd/MM/yyyy')}).`
                 })
               };
             }
@@ -98,7 +99,7 @@ const deadlineRemindersJob = cron.schedule('0 9 * * *', async () => {
             const rendered = template.render({
               deadlineName: deadline.name,
               daysRemaining: daysUntilDue,
-              deadlineDate: moment(deadline.dueDate).format('DD/MM/YYYY'),
+              deadlineDate: format(new Date(deadline.dueDate), 'dd/MM/yyyy'),
               clientName: deadline.client ? `${deadline.client.firstName} ${deadline.client.lastName}` : '',
               lawyerName: `${user.firstName} ${user.lastName}`
             });
@@ -165,7 +166,7 @@ const courtRemindersJob = cron.schedule('0 8,18 * * *', async () => {
         if (!settings?.notifications?.courtReminders?.enabled) continue;
         
         const reminderDays = settings.notifications.courtReminders.daysBefore || [7, 3, 1];
-        const today = moment().startOf('day');
+        const today = startOfDay(new Date());
         
         // Get upcoming courts
         const courts = await Court.find({
@@ -173,15 +174,15 @@ const courtRemindersJob = cron.schedule('0 8,18 * * *', async () => {
           status: 'scheduled',
           date: { 
             $gte: today.toDate(),
-            $lte: moment().add(30, 'days').toDate()
+            $lte: addDays(new Date(), 30).toDate()
           }
         }).populate('client');
         
         for (const court of courts) {
-          const daysUntilCourt = moment(court.date).diff(today, 'days');
+          const daysUntilCourt = differenceInDays(new Date(court.date), today);
           
           // Check if it's tomorrow and we're in the evening run
-          const isTomorrow = daysUntilCourt === 1 && moment().hour() >= 18;
+          const isTomorrow = daysUntilCourt === 1 && new Date().getHours() >= 18;
           
           if (reminderDays.includes(daysUntilCourt) || isTomorrow) {
             // Get template
@@ -192,13 +193,13 @@ const courtRemindersJob = cron.schedule('0 8,18 * * *', async () => {
             }) || {
               render: () => ({
                 subject: 'Υπενθύμιση Δικαστηρίου',
-                body: `Υπενθυμίζουμε το δικαστήριο σας ${moment(court.date).format('DD/MM/YYYY')} στο ${court.court}.`
+                body: `Υπενθυμίζουμε το δικαστήριο σας ${format(new Date(court.date), 'dd/MM/yyyy')} στο ${court.court}.`
               })
             };
             
             const rendered = template.render({
               court: court.court,
-              date: moment(court.date).format('DD/MM/YYYY'),
+              date: format(new Date(court.date), 'dd/MM/yyyy'),
               time: court.time || '',
               courtType: court.type,
               clientName: court.client ? `${court.client.firstName} ${court.client.lastName}` : '',
@@ -225,7 +226,7 @@ const courtRemindersJob = cron.schedule('0 8,18 * * *', async () => {
                 const clientRendered = clientTemplate.render({
                   clientName: `${court.client.firstName} ${court.client.lastName}`,
                   court: court.court,
-                  date: moment(court.date).format('DD/MM/YYYY'),
+                  date: format(new Date(court.date), 'dd/MM/yyyy'),
                   time: court.time || '',
                   courtType: court.type,
                   lawyerName: `${user.firstName} ${user.lastName}`,
@@ -240,7 +241,7 @@ const courtRemindersJob = cron.schedule('0 8,18 * * *', async () => {
               }
             }
             
-            logJob(jobName, `Sent court reminder for ${court.court} on ${moment(court.date).format('DD/MM/YYYY')}`);
+            logJob(jobName, `Sent court reminder for ${court.court} on ${format(new Date(court.date), 'dd/MM/yyyy')}`);
           }
         }
       } catch (error) {
@@ -273,8 +274,8 @@ const appointmentRemindersJob = cron.schedule('0 * * * *', async () => {
   logJob(jobName, 'Starting appointment reminders job...');
   
   try {
-    const now = moment();
-    const reminderWindow = moment().add(24, 'hours');
+    const now = new Date();
+    const reminderWindow = addHours(new Date(), 24);
     
     // Get appointments in the next 24 hours that haven't been reminded
     const appointments = await Appointment.find({
@@ -291,7 +292,7 @@ const appointmentRemindersJob = cron.schedule('0 * * * *', async () => {
         const settings = await Settings.findOne({ user: appointment.user._id });
         if (!settings?.notifications?.appointmentReminders?.enabled) continue;
         
-        const hoursUntil = moment(appointment.date).diff(now, 'hours');
+        const hoursUntil = differenceInHours(new Date(appointment.date), now);
         const reminderHours = settings.notifications.appointmentReminders.hoursBefore || [24, 2];
         
         if (reminderHours.includes(hoursUntil)) {
@@ -305,8 +306,8 @@ const appointmentRemindersJob = cron.schedule('0 * * * *', async () => {
           if (template && appointment.client?.email) {
             const rendered = template.render({
               clientName: `${appointment.client.firstName} ${appointment.client.lastName}`,
-              date: moment(appointment.date).format('DD/MM/YYYY'),
-              time: moment(appointment.date).format('HH:mm'),
+              date: format(new Date(appointment.date), 'dd/MM/yyyy'),
+              time: format(new Date(appointment.date), 'HH:mm'),
               meetingType: appointment.type === 'online' ? 'Διαδικτυακό ραντεβού' : 'Δια ζώσης ραντεβού',
               meetingLocation: appointment.type === 'online' ? appointment.meetingLink : appointment.location,
               duration: appointment.duration,
@@ -324,7 +325,7 @@ const appointmentRemindersJob = cron.schedule('0 * * * *', async () => {
             if (settings.notifications.appointmentReminders.sms && appointment.client.mobile) {
               await sendSMS({
                 to: appointment.client.mobile,
-                body: rendered.smsBody || `Υπενθύμιση ραντεβού: ${moment(appointment.date).format('DD/MM HH:mm')}`
+                body: rendered.smsBody || `Υπενθύμιση ραντεβού: ${format(new Date(appointment.date), 'dd/MM HH:mm')}`
               });
             }
             
@@ -365,7 +366,7 @@ const birthdayWishesJob = cron.schedule('0 10 * * *', async () => {
   logJob(jobName, 'Starting birthday/name day wishes job...');
   
   try {
-    const today = moment();
+    const today = new Date();
     const day = today.date();
     const month = today.month() + 1;
     
@@ -455,12 +456,12 @@ const autoBackupJob = cron.schedule('0 3 * * *', async () => {
   logJob(jobName, 'Starting automatic backup job...');
   
   try {
-    const now = moment();
+    const now = new Date();
     
     // Find users with backup scheduled for today
     const settings = await Settings.find({
       'backupSchedule.enabled': true,
-      'backupSchedule.nextRun': { $lte: now.toDate() }
+      'backupSchedule.nextRun': { $lte: now }
     }).populate('user');
     
     for (const setting of settings) {
@@ -471,7 +472,7 @@ const autoBackupJob = cron.schedule('0 3 * * *', async () => {
         // Update next run time
         const { frequency, time } = setting.backupSchedule;
         const [hours, minutes] = time.split(':').map(Number);
-        const nextRun = moment().hours(hours).minutes(minutes);
+        const nextRun = new Date().setHours(hours, minutes, 0, 0);
         
         switch (frequency) {
           case 'daily':
@@ -527,7 +528,7 @@ const pendingRemindersJob = cron.schedule('30 8 * * *', async () => {
   logJob(jobName, 'Starting pending tasks reminders job...');
   
   try {
-    const today = moment().startOf('day');
+    const today = startOfDay(new Date());
     const users = await User.find({ isActive: true });
     
     for (const user of users) {
@@ -543,15 +544,15 @@ const pendingRemindersJob = cron.schedule('30 8 * * *', async () => {
         }).populate('client');
         
         if (pendings.length > 0) {
-          const overdue = pendings.filter(p => moment(p.dueDate).isBefore(today));
-          const dueToday = pendings.filter(p => moment(p.dueDate).isSame(today, 'day'));
+          const overdue = pendings.filter(p => new Date(p.dueDate).getTime() < today.getTime()));
+          const dueToday = pendings.filter(p => isSameDay(new Date(p.dueDate), today)));
           
           let message = `Καλημέρα ${user.firstName},\n\n`;
           
           if (overdue.length > 0) {
             message += `Έχετε ${overdue.length} εκκρεμότητες που έχουν ξεπεράσει την προθεσμία:\n`;
             overdue.forEach(p => {
-              const daysOverdue = today.diff(moment(p.dueDate), 'days');
+              const daysOverdue = differenceInDays(today, new Date(p.dueDate));
               message += `- ${p.name} (${daysOverdue} ημέρες καθυστέρηση)\n`;
             });
             message += '\n';
@@ -605,7 +606,7 @@ const systemCleanupJob = cron.schedule('0 4 * * 0', async () => {
   
   try {
     // Clean up old completed tasks (older than 1 year)
-    const oneYearAgo = moment().subtract(1, 'year').toDate();
+    const oneYearAgo = subYears(new Date(), 1).toDate();
     
     const deletedDeadlines = await Deadline.deleteMany({
       status: 'completed',
@@ -618,7 +619,7 @@ const systemCleanupJob = cron.schedule('0 4 * * 0', async () => {
     });
     
     // Clean up old communications (older than 2 years)
-    const twoYearsAgo = moment().subtract(2, 'years').toDate();
+    const twoYearsAgo = subYears(new Date(), 2).toDate();
     const deletedComms = await Communication.deleteMany({
       createdAt: { $lt: twoYearsAgo }
     });
