@@ -1,0 +1,354 @@
+import apiClient from './apiClient';
+
+interface BusinessSettings {
+  name: string;
+  address: string;
+  phone: string;
+  email: string;
+  taxId: string;
+  website?: string;
+  logo?: string;
+}
+
+interface AppointmentSettings {
+  duration: number;
+  buffer: number;
+  price: number;
+  slots: Array<{
+    day: number;
+    startTime: string;
+    endTime: string;
+    enabled: boolean;
+  }>;
+  autoConfirm: boolean;
+  requirePrepayment: boolean;
+  cancellationHours: number;
+}
+
+interface FinancialSettings {
+  vatRate: number;
+  currency: string;
+  invoicePrefix: string;
+  invoiceStartNumber: number;
+  paymentTerms: number;
+}
+
+interface EmailSettings {
+  host: string;
+  port: number;
+  secure: boolean;
+  user: string;
+  from: string;
+  templates: EmailTemplate[];
+}
+
+interface EmailTemplate {
+  _id: string;
+  key: string;
+  name: string;
+  subject: string;
+  body: string;
+  variables: string[];
+}
+
+interface NotificationSettings {
+  emailEnabled: boolean;
+  smsEnabled: boolean;
+  deadlineReminders: number[];
+  appointmentReminders: number[];
+  courtReminders: number[];
+}
+
+interface SecuritySettings {
+  passwordMinLength: number;
+  passwordRequireUppercase: boolean;
+  passwordRequireNumbers: boolean;
+  passwordRequireSymbols: boolean;
+  maxLoginAttempts: number;
+  lockoutDuration: number;
+  sessionTimeout: number;
+  twoFactorRequired: boolean;
+}
+
+interface BackupSettings {
+  enabled: boolean;
+  frequency: 'daily' | 'weekly' | 'monthly';
+  time: string;
+  retention: number;
+  location: string;
+}
+
+interface SystemSettings {
+  language: string;
+  timezone: string;
+  dateFormat: string;
+  timeFormat: string;
+  firstDayOfWeek: number;
+  maintenanceMode: boolean;
+}
+
+interface Settings {
+  business: BusinessSettings;
+  appointments: AppointmentSettings;
+  financial: FinancialSettings;
+  email: EmailSettings;
+  notifications: NotificationSettings;
+  security: SecuritySettings;
+  backup: BackupSettings;
+  system: SystemSettings;
+}
+
+interface SettingsResponse {
+  success: boolean;
+  data: Settings;
+}
+
+interface BackupInfo {
+  _id: string;
+  filename: string;
+  size: number;
+  createdAt: Date;
+  type: string;
+  status: 'completed' | 'failed' | 'in_progress';
+}
+
+class SettingsService {
+  private basePath = '/settings';
+
+  async getAll(): Promise<SettingsResponse> {
+    const response = await apiClient.get<SettingsResponse>(this.basePath);
+    return response.data;
+  }
+
+  async getBySection(section: keyof Settings): Promise<{ success: boolean; data: any }> {
+    const response = await apiClient.get<{ success: boolean; data: any }>(`${this.basePath}/${section}`);
+    return response.data;
+  }
+
+  async update(data: Partial<Settings>): Promise<SettingsResponse> {
+    const response = await apiClient.put<SettingsResponse>(this.basePath, data);
+    return response.data;
+  }
+
+  async updateSection(section: keyof Settings, data: any): Promise<SettingsResponse> {
+    const response = await apiClient.put<SettingsResponse>(`${this.basePath}/${section}`, data);
+    return response.data;
+  }
+
+  async updateEmailTemplate(template: EmailTemplate): Promise<{
+    success: boolean;
+    data: EmailTemplate;
+  }> {
+    const response = await apiClient.put<{
+      success: boolean;
+      data: EmailTemplate;
+    }>(`${this.basePath}/email/templates/${template._id}`, template);
+    return response.data;
+  }
+
+  async testEmailConnection(): Promise<{
+    success: boolean;
+    message: string;
+  }> {
+    const response = await apiClient.post<{
+      success: boolean;
+      message: string;
+    }>(`${this.basePath}/email/test`);
+    return response.data;
+  }
+
+  async testSMSConnection(): Promise<{
+    success: boolean;
+    message: string;
+  }> {
+    const response = await apiClient.post<{
+      success: boolean;
+      message: string;
+    }>(`${this.basePath}/sms/test`);
+    return response.data;
+  }
+
+  async backupNow(): Promise<{
+    success: boolean;
+    message: string;
+    backupId?: string;
+  }> {
+    const response = await apiClient.post<{
+      success: boolean;
+      message: string;
+      backupId?: string;
+    }>(`${this.basePath}/backup/now`);
+    return response.data;
+  }
+
+  async getBackups(): Promise<{
+    success: boolean;
+    data: BackupInfo[];
+  }> {
+    const response = await apiClient.get<{
+      success: boolean;
+      data: BackupInfo[];
+    }>(`${this.basePath}/backup/list`);
+    return response.data;
+  }
+
+  async restoreBackup(backupId: string): Promise<{
+    success: boolean;
+    message: string;
+  }> {
+    const response = await apiClient.post<{
+      success: boolean;
+      message: string;
+    }>(`${this.basePath}/backup/restore/${backupId}`);
+    return response.data;
+  }
+
+  async downloadBackup(backupId: string): Promise<Blob> {
+    const response = await apiClient.get(`${this.basePath}/backup/download/${backupId}`, {
+      responseType: 'blob',
+    });
+    return response.data;
+  }
+
+  async deleteBackup(backupId: string): Promise<{
+    success: boolean;
+    message: string;
+  }> {
+    const response = await apiClient.delete<{
+      success: boolean;
+      message: string;
+    }>(`${this.basePath}/backup/${backupId}`);
+    return response.data;
+  }
+
+  async exportSettings(): Promise<Blob> {
+    const response = await apiClient.get(`${this.basePath}/export`, {
+      responseType: 'blob',
+    });
+    return response.data;
+  }
+
+  async importSettings(file: File): Promise<{
+    success: boolean;
+    message: string;
+    imported: string[];
+  }> {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const response = await apiClient.post<{
+      success: boolean;
+      message: string;
+      imported: string[];
+    }>(`${this.basePath}/import`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  }
+
+  async resetToDefaults(section?: keyof Settings): Promise<SettingsResponse> {
+    const response = await apiClient.post<SettingsResponse>(`${this.basePath}/reset`, {
+      section,
+    });
+    return response.data;
+  }
+
+  async getPaymentGateways(): Promise<{
+    success: boolean;
+    data: Array<{
+      id: string;
+      name: string;
+      enabled: boolean;
+      configured: boolean;
+    }>;
+  }> {
+    const response = await apiClient.get<{
+      success: boolean;
+      data: Array<{
+        id: string;
+        name: string;
+        enabled: boolean;
+        configured: boolean;
+      }>;
+    }>(`${this.basePath}/payment-gateways`);
+    return response.data;
+  }
+
+  async updatePaymentGateway(
+    gateway: string,
+    config: any
+  ): Promise<{
+    success: boolean;
+    message: string;
+  }> {
+    const response = await apiClient.put<{
+      success: boolean;
+      message: string;
+    }>(`${this.basePath}/payment-gateways/${gateway}`, config);
+    return response.data;
+  }
+
+  async getSystemInfo(): Promise<{
+    success: boolean;
+    data: {
+      version: string;
+      environment: string;
+      uptime: number;
+      memory: {
+        total: number;
+        used: number;
+        free: number;
+      };
+      disk: {
+        total: number;
+        used: number;
+        free: number;
+      };
+      database: {
+        connected: boolean;
+        size: number;
+        collections: number;
+      };
+    };
+  }> {
+    const response = await apiClient.get<{
+      success: boolean;
+      data: {
+        version: string;
+        environment: string;
+        uptime: number;
+        memory: {
+          total: number;
+          used: number;
+          free: number;
+        };
+        disk: {
+          total: number;
+          used: number;
+          free: number;
+        };
+        database: {
+          connected: boolean;
+          size: number;
+          collections: number;
+        };
+      };
+    }>(`${this.basePath}/system-info`);
+    return response.data;
+  }
+
+  async toggleMaintenanceMode(enabled: boolean): Promise<{
+    success: boolean;
+    message: string;
+  }> {
+    const response = await apiClient.post<{
+      success: boolean;
+      message: string;
+    }>(`${this.basePath}/maintenance`, { enabled });
+    return response.data;
+  }
+}
+
+export default new SettingsService();
