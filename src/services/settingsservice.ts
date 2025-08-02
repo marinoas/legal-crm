@@ -1,5 +1,5 @@
 // src/services/settingsService.ts
-import { apiClient } from './api';
+import apiClient from './apiClient';
 
 // Types
 interface GeneralSettings {
