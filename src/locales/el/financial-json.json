@@ -1,0 +1,160 @@
+{
+  "title": "Οικονομικά",
+  "overview": "Οικονομική Επισκόπηση",
+  "transactions": "Συναλλαγές",
+  "invoices": "Τιμολόγια",
+  "receipts": "Αποδείξεις",
+  "reports": "Αναφορές",
+  "balance": "Υπόλοιπο",
+  "addTransaction": "Νέα Συναλλαγή",
+  "addInvoice": "Νέο Τιμολόγιο",
+  "addExpense": "Νέο Έξοδο",
+  
+  "types": {
+    "charge": "Χρέωση",
+    "payment": "Πληρωμή",
+    "expense": "Έξοδο",
+    "refund": "Επιστροφή"
+  },
+  
+  "categories": {
+    "casePayment": "Αμοιβή υπόθεσης",
+    "consultation": "Συμβουλευτική",
+    "documentDrafting": "Σύνταξη εγγράφου",
+    "courtAppearance": "Παράσταση",
+    "legalOpinion": "Γνωμοδότηση",
+    "retainer": "Προκαταβολή",
+    "courtExpenses": "Δικαστικά έξοδα",
+    "rent": "Ενοίκιο",
+    "utilities": "Λογαριασμοί",
+    "salaries": "Μισθοδοσία",
+    "equipment": "Εξοπλισμός",
+    "supplies": "Αναλώσιμα",
+    "transportation": "Μετακινήσεις",
+    "taxes": "Φόροι",
+    "insurance": "Ασφάλιση",
+    "subscriptions": "Συνδρομές",
+    "marketing": "Marketing",
+    "other": "Άλλο"
+  },
+  
+  "fields": {
+    "date": "Ημερομηνία",
+    "type": "Τύπος",
+    "category": "Κατηγορία",
+    "amount": "Ποσό",
+    "vat": "ΦΠΑ",
+    "vatPercentage": "Ποσοστό ΦΠΑ",
+    "netAmount": "Καθαρό Ποσό",
+    "totalAmount": "Συνολικό Ποσό",
+    "includesVat": "Περιλαμβάνει ΦΠΑ",
+    "description": "Περιγραφή",
+    "paymentMethod": "Τρόπος Πληρωμής",
+    "paymentReference": "Αριθμός Αναφοράς",
+    "invoiceNumber": "Αριθμός Τιμολογίου",
+    "invoiceSeries": "Σειρά Τιμολογίου",
+    "dueDate": "Ημερομηνία Λήξης",
+    "issuedDate": "Ημερομηνία Έκδοσης",
+    "paidDate": "Ημερομηνία Πληρωμής",
+    "vendor": "Προμηθευτής",
+    "client": "Πελάτης",
+    "relatedCourt": "Σχετική Δικαστική Υπόθεση",
+    "notes": "Σημειώσεις",
+    "privateNotes": "Ιδιωτικές Σημειώσεις",
+    "status": "Κατάσταση"
+  },
+  
+  "paymentMethods": {
+    "cash": "Μετρητά",
+    "card": "Κάρτα",
+    "transfer": "Τραπεζική Μεταφορά",
+    "check": "Επιταγή",
+    "paypal": "PayPal",
+    "stripe": "Stripe",
+    "viva": "Viva Wallet",
+    "other": "Άλλο"
+  },
+  
+  "status": {
+    "pending": "Εκκρεμής",
+    "completed": "Ολοκληρωμένη",
+    "cancelled": "Ακυρωμένη",
+    "overdue": "Ληξιπρόθεσμη",
+    "paid": "Εξοφλημένη",
+    "unpaid": "Ανεξόφλητη",
+    "partiallyPaid": "Μερικώς Εξοφλημένη"
+  },
+  
+  "actions": {
+    "issueInvoice": "Έκδοση Τιμολογίου",
+    "markAsPaid": "Σήμανση ως Εξοφλημένο",
+    "sendToClient": "Αποστολή στον Πελάτη",
+    "downloadPdf": "Λήψη PDF",
+    "print": "Εκτύπωση",
+    "cancel": "Ακύρωση",
+    "edit": "Επεξεργασία",
+    "delete": "Διαγραφή",
+    "duplicate": "Αντιγραφή",
+    "generateReport": "Δημιουργία Αναφοράς",
+    "exportExcel": "Εξαγωγή σε Excel"
+  },
+  
+  "summary": {
+    "totalIncome": "Συνολικά Έσοδα",
+    "totalExpenses": "Συνολικά Έξοδα",
+    "netProfit": "Καθαρό Κέρδος",
+    "unpaidInvoices": "Ανεξόφλητα Τιμολόγια",
+    "overdueAmount": "Ληξιπρόθεσμο Ποσό",
+    "thisMonth": "Τρέχων Μήνας",
+    "thisYear": "Τρέχον Έτος",
+    "lastMonth": "Προηγούμενος Μήνας",
+    "lastYear": "Προηγούμενο Έτος",
+    "customPeriod": "Προσαρμοσμένη Περίοδος",
+    "averageMonthlyIncome": "Μέσα Μηνιαία Έσοδα",
+    "averageMonthlyExpenses": "Μέσα Μηνιαία Έξοδα"
+  },
+  
+  "filters": {
+    "dateRange": "Περίοδος",
+    "type": "Τύπος Συναλλαγής",
+    "category": "Κατηγορία",
+    "client": "Πελάτης",
+    "status": "Κατάσταση",
+    "paymentMethod": "Τρόπος Πληρωμής",
+    "amountRange": "Εύρος Ποσού",
+    "invoiced": "Τιμολογημένα",
+    "notInvoiced": "Μη Τιμολογημένα"
+  },
+  
+  "recurring": {
+    "title": "Επαναλαμβανόμενες Συναλλαγές",
+    "frequency": "Συχνότητα",
+    "monthly": "Μηνιαία",
+    "quarterly": "Τριμηνιαία",
+    "annually": "Ετήσια",
+    "nextDate": "Επόμενη Ημερομηνία",
+    "endDate": "Ημερομηνία Λήξης",
+    "createNext": "Δημιουργία Επόμενης"
+  },
+  
+  "messages": {
+    "invoiceGenerated": "Το τιμολόγιο δημιουργήθηκε επιτυχώς",
+    "invoiceSent": "Το τιμολόγιο στάλθηκε στον πελάτη",
+    "paymentRecorded": "Η πληρωμή καταχωρήθηκε επιτυχώς",
+    "transactionCancelled": "Η συναλλαγή ακυρώθηκε",
+    "confirmDelete": "Είστε σίγουροι ότι θέλετε να διαγράψετε αυτή τη συναλλαγή;",
+    "confirmCancel": "Είστε σίγουροι ότι θέλετε να ακυρώσετε αυτή τη συναλλαγή;",
+    "overdueDays": "Καθυστέρηση {{days}} ημέρες",
+    "dueIn": "Λήγει σε {{days}} ημέρες",
+    "vatCalculated": "Ο ΦΠΑ υπολογίστηκε αυτόματα"
+  },
+  
+  "export": {
+    "title": "Εξαγωγή Οικονομικών Στοιχείων",
+    "format": "Μορφή Αρχείου",
+    "includeDetails": "Συμπερίληψη Λεπτομερειών",
+    "includeSummary": "Συμπερίληψη Σύνοψης",
+    "groupBy": "Ομαδοποίηση κατά",
+    "exportButton": "Εξαγωγή"
+  }
+}

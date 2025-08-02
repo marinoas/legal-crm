@@ -1,0 +1,175 @@
+{
+  "title": "Έγγραφα",
+  "myDocuments": "Τα Έγγραφά μου",
+  "clientDocuments": "Έγγραφα Πελατών",
+  "courtDocuments": "Δικόγραφα",
+  "templates": "Πρότυπα",
+  "upload": "Ανέβασμα Εγγράφου",
+  "newDocument": "Νέο Έγγραφο",
+  "newTemplate": "Νέο Πρότυπο",
+  
+  "types": {
+    "pleading": "Δικόγραφο",
+    "contract": "Σύμβαση",
+    "letter": "Επιστολή",
+    "power_of_attorney": "Πληρεξούσιο",
+    "receipt": "Απόδειξη",
+    "invoice": "Τιμολόγιο",
+    "court_decision": "Δικαστική Απόφαση",
+    "legal_opinion": "Γνωμοδότηση",
+    "evidence": "Αποδεικτικό Στοιχείο",
+    "id_document": "Ταυτότητα/Διαβατήριο",
+    "tax_document": "Φορολογικό Έγγραφο",
+    "property_title": "Τίτλος Ιδιοκτησίας",
+    "bank_statement": "Τραπεζική Κίνηση",
+    "medical_report": "Ιατρική Γνωμάτευση",
+    "police_report": "Αστυνομική Αναφορά",
+    "other": "Άλλο"
+  },
+  
+  "categories": {
+    "incoming": "Εισερχόμενα",
+    "outgoing": "Εξερχόμενα",
+    "internal": "Εσωτερικά",
+    "clientProvided": "Από Πελάτη",
+    "courtFiled": "Κατατεθέντα",
+    "drafts": "Πρόχειρα",
+    "signed": "Υπογεγραμμένα",
+    "certified": "Επικυρωμένα"
+  },
+  
+  "fields": {
+    "fileName": "Όνομα Αρχείου",
+    "documentType": "Τύπος Εγγράφου",
+    "category": "Κατηγορία",
+    "description": "Περιγραφή",
+    "client": "Πελάτης",
+    "relatedCourt": "Σχετική Υπόθεση",
+    "uploadDate": "Ημερομηνία Ανεβάσματος",
+    "modifiedDate": "Ημερομηνία Τροποποίησης",
+    "fileSize": "Μέγεθος Αρχείου",
+    "uploadedBy": "Ανέβηκε από",
+    "tags": "Ετικέτες",
+    "notes": "Σημειώσεις",
+    "version": "Έκδοση",
+    "status": "Κατάσταση",
+    "confidential": "Εμπιστευτικό",
+    "watermark": "Υδατογράφημα"
+  },
+  
+  "status": {
+    "draft": "Πρόχειρο",
+    "final": "Τελικό",
+    "signed": "Υπογεγραμμένο",
+    "filed": "Κατατεθέν",
+    "archived": "Αρχειοθετημένο",
+    "pending": "Εκκρεμές",
+    "approved": "Εγκεκριμένο",
+    "rejected": "Απορριφθέν"
+  },
+  
+  "actions": {
+    "upload": "Ανέβασμα",
+    "download": "Λήψη",
+    "preview": "Προεπισκόπηση",
+    "edit": "Επεξεργασία",
+    "delete": "Διαγραφή",
+    "share": "Κοινοποίηση",
+    "print": "Εκτύπωση",
+    "sign": "Υπογραφή",
+    "certify": "Επικύρωση",
+    "archive": "Αρχειοθέτηση",
+    "restore": "Επαναφορά",
+    "duplicate": "Αντιγραφή",
+    "moveToFolder": "Μετακίνηση σε Φάκελο",
+    "addWatermark": "Προσθήκη Υδατογραφήματος",
+    "removeWatermark": "Αφαίρεση Υδατογραφήματος"
+  },
+  
+  "folders": {
+    "createFolder": "Νέος Φάκελος",
+    "folderName": "Όνομα Φακέλου",
+    "parentFolder": "Γονικός Φάκελος",
+    "subfolders": "Υποφάκελοι",
+    "documentsInFolder": "{{count}} έγγραφα",
+    "emptyFolder": "Κενός φάκελος"
+  },
+  
+  "search": {
+    "searchDocuments": "Αναζήτηση εγγράφων",
+    "searchPlaceholder": "Αναζήτηση με όνομα, περιγραφή ή ετικέτα...",
+    "filterByType": "Φίλτρο ανά τύπο",
+    "filterByClient": "Φίλτρο ανά πελάτη",
+    "filterByDate": "Φίλτρο ανά ημερομηνία",
+    "filterByStatus": "Φίλτρο ανά κατάσταση",
+    "advancedSearch": "Σύνθετη Αναζήτηση"
+  },
+  
+  "upload": {
+    "dragAndDrop": "Σύρετε αρχεία εδώ ή κάντε κλικ για επιλογή",
+    "selectFiles": "Επιλογή Αρχείων",
+    "uploadProgress": "Πρόοδος ανεβάσματος",
+    "uploadComplete": "Το ανέβασμα ολοκληρώθηκε",
+    "uploadFailed": "Το ανέβασμα απέτυχε",
+    "maxFileSize": "Μέγιστο μέγεθος αρχείου: {{size}}",
+    "allowedFormats": "Επιτρεπόμενοι τύποι: {{formats}}",
+    "multipleFiles": "Μπορείτε να ανεβάσετε πολλαπλά αρχεία"
+  },
+  
+  "watermark": {
+    "text": "ΕΜΠΙΣΤΕΥΤΙΚΟ - {{clientName}} - {{date}}",
+    "position": "Θέση Υδατογραφήματος",
+    "opacity": "Διαφάνεια",
+    "fontSize": "Μέγεθος Γραμματοσειράς",
+    "color": "Χρώμα",
+    "angle": "Γωνία",
+    "applyToAll": "Εφαρμογή σε όλες τις σελίδες"
+  },
+  
+  "permissions": {
+    "view": "Προβολή",
+    "download": "Λήψη",
+    "edit": "Επεξεργασία",
+    "delete": "Διαγραφή",
+    "share": "Κοινοποίηση",
+    "print": "Εκτύπωση",
+    "clientAccess": "Πρόσβαση Πελάτη",
+    "publicAccess": "Δημόσια Πρόσβαση"
+  },
+  
+  "messages": {
+    "uploadSuccess": "Το έγγραφο ανέβηκε επιτυχώς",
+    "uploadError": "Σφάλμα κατά το ανέβασμα του εγγράφου",
+    "deleteConfirm": "Είστε σίγουροι ότι θέλετε να διαγράψετε αυτό το έγγραφο;",
+    "deleteSuccess": "Το έγγραφο διαγράφηκε επιτυχώς",
+    "downloadStarted": "Η λήψη ξεκίνησε",
+    "documentShared": "Το έγγραφο κοινοποιήθηκε επιτυχώς",
+    "watermarkAdded": "Το υδατογράφημα προστέθηκε",
+    "noPreview": "Η προεπισκόπηση δεν είναι διαθέσιμη για αυτόν τον τύπο αρχείου",
+    "rightClickDisabled": "Το δεξί κλικ είναι απενεργοποιημένο για λόγους ασφαλείας",
+    "printOnly": "Αυτό το έγγραφο είναι διαθέσιμο μόνο για εκτύπωση"
+  },
+  
+  "templates": {
+    "courtTemplates": "Πρότυπα Δικογράφων",
+    "letterTemplates": "Πρότυπα Επιστολών",
+    "contractTemplates": "Πρότυπα Συμβάσεων",
+    "createFromTemplate": "Δημιουργία από Πρότυπο",
+    "saveAsTemplate": "Αποθήκευση ως Πρότυπο",
+    "templateName": "Όνομα Προτύπου",
+    "templateDescription": "Περιγραφή Προτύπου",
+    "templateVariables": "Μεταβλητές Προτύπου",
+    "fillTemplate": "Συμπλήρωση Προτύπου"
+  },
+  
+  "versions": {
+    "versionHistory": "Ιστορικό Εκδόσεων",
+    "currentVersion": "Τρέχουσα Έκδοση",
+    "previousVersions": "Προηγούμενες Εκδόσεις",
+    "versionNumber": "Έκδοση {{number}}",
+    "createdOn": "Δημιουργήθηκε στις",
+    "modifiedBy": "Τροποποιήθηκε από",
+    "restoreVersion": "Επαναφορά Έκδοσης",
+    "compareVersions": "Σύγκριση Εκδόσεων"
+  }
+}
