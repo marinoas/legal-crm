@@ -1,0 +1,119 @@
+{
+  "contacts": {
+    "title": "Επαφές",
+    "subtitle": "Διαχείριση επαφών και εορτολογίου"
+  },
+  "contact": {
+    "new": "Νέα Επαφή",
+    "edit": "Επεξεργασία Επαφής",
+    "search": "Αναζήτηση επαφών...",
+    "all": "Όλες",
+    "clients": "Εντολείς",
+    "client": "Εντολέας",
+    "professionals": "Επαγγελματίες",
+    "celebrations": "Εορτάζοντες",
+    "totalContacts": "Σύνολο Επαφών",
+    "upcomingCelebrations": "Επερχόμενες Εορτές",
+    "category": "Κατηγορία",
+    "wishes": "Ευχές",
+    "sendWishes": "Αποστολή Ευχών",
+    "selectCelebrants": "Επιλέξτε εορτάζοντες",
+    "wishesTemplate": "Πρότυπο Ευχών",
+    "wishesPlaceholder": "Χρόνια πολλά! Να έχετε υγεία και ευτυχία...",
+    "todaysCelebrations": "{{count}} άτομα γιορτάζουν σήμερα!",
+    "nameday": "Ονομαστική Εορτή",
+    "birthday": "Γενέθλια",
+    "logCommunication": "Καταγραφή Επικοινωνίας",
+    "convertToClient": "Μετατροπή σε Εντολέα",
+    "convertConfirm": "Θέλετε να μετατρέψετε τον/την {{name}} σε εντολέα;",
+    "communicationType": "Τύπος Επικοινωνίας",
+    "direction": "Κατεύθυνση",
+    "inbound": "Εισερχόμενη",
+    "outbound": "Εξερχόμενη",
+    "subject": "Θέμα",
+    "notes": "Σημειώσεις",
+    "phone": "Τηλέφωνο",
+    "mobile": "Κινητό",
+    "email": "Email",
+    "meeting": "Συνάντηση",
+    "sms": "SMS",
+    "fax": "Fax",
+    "any": "Οποιοδήποτε",
+    "deleteTitle": "Διαγραφή Επαφής",
+    "deleteConfirm": "Είστε σίγουροι ότι θέλετε να διαγράψετε αυτή την επαφή;",
+    "createSuccess": "Η επαφή δημιουργήθηκε επιτυχώς",
+    "updateSuccess": "Η επαφή ενημερώθηκε επιτυχώς",
+    "deleteSuccess": "Η επαφή διαγράφηκε επιτυχώς",
+    "convertSuccess": "Η επαφή μετατράπηκε σε εντολέα επιτυχώς",
+    "wishesSuccess": "Οι ευχές στάλθηκαν επιτυχώς",
+    "communicationLogged": "Η επικοινωνία καταγράφηκε επιτυχώς",
+    
+    "type": "Τύπος Επαφής",
+    "type.personal": "Προσωπική",
+    "type.professional": "Επαγγελματική",
+    "type.authority": "Αρχή",
+    "type.expert": "Ειδικός",
+    "type.other": "Άλλο",
+    
+    "categories": "Κατηγορίες",
+    "category.lawyer": "Δικηγόρος",
+    "category.judicial": "Δικαστικός",
+    "category.notary": "Συμβολαιογράφος",
+    "category.accountant": "Λογιστής",
+    "category.engineer": "Μηχανικός",
+    "category.doctor": "Ιατρός",
+    "category.expert": "Πραγματογνώμονας",
+    "category.witness": "Μάρτυρας",
+    "category.partner": "Συνεργάτης",
+    "category.supplier": "Προμηθευτής",
+    "category.publicService": "Δημόσια Υπηρεσία",
+    "category.bank": "Τράπεζα",
+    "category.insurance": "Ασφαλιστική",
+    "category.other": "Άλλο",
+    
+    "firstName": "Όνομα",
+    "lastName": "Επώνυμο",
+    "fatherName": "Πατρώνυμο",
+    "profession": "Επάγγελμα",
+    
+    "company": {
+      "name": "Εταιρεία",
+      "position": "Θέση",
+      "department": "Τμήμα"
+    },
+    
+    "address": {
+      "street": "Οδός",
+      "number": "Αριθμός",
+      "city": "Πόλη",
+      "postalCode": "Τ.Κ."
+    },
+    
+    "nameDay": {
+      "month": "Μήνας Ονομαστικής",
+      "day": "Ημέρα Ονομαστικής",
+      "name": "Όνομα Αγίου",
+      "nameHelp": "Αν διαφέρει από το όνομα της επαφής"
+    },
+    
+    "birthday": {
+      "month": "Μήνας Γενεθλίων",
+      "day": "Ημέρα Γενεθλίων",
+      "year": "Έτος Γέννησης",
+      "sendWishes": "Αποστολή Ευχών"
+    },
+    
+    "preferences": {
+      "preferredContact": "Προτιμώμενη Επικοινωνία",
+      "language": "Γλώσσα"
+    },
+    
+    "importance": "Σημαντικότητα",
+    "reliability": "Αξιοπιστία",
+    "privateNotes": "Ιδιωτικές Σημειώσεις",
+    "privateNotesHelp": "Ορατές μόνο σε εσάς",
+    "tags": "Ετικέτες"
+  },
+  "inDays": "σε {{days}} ημέρες",
+  "today": "Σήμερα"
+}
