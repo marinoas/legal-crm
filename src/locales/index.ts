@@ -3,7 +3,7 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 // Import translations
-import elCommon from './locales/el/common.json';
+import elCommon from './el/common.json';
 import elAuth from './locales/el/auth.json';
 import elDashboard from './locales/el/dashboard.json';
 import elClients from './locales/el/clients.json';
