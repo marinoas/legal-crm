@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "ES2022",
     "module": "ESNext",
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "jsx": "react-jsx",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "allowJs": true,
     "noEmit": false,
@@ -14,20 +14,30 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@components/*": ["src/components/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@utils/*": ["src/utils/*"],
-      "@contexts/*": ["src/contexts/*"],
-      "@services/*": ["src/services/*"],
-      "@assets/*": ["src/assets/*"],
-      "@theme/*": ["src/theme/*"],
-      "@locales/*": ["src/locales/*"]
+      "@shared/*": ["src/shared/*"],
+      "@components/*": ["src/shared/components/*"],
+      "@theme/*": ["src/shared/theme/*"],
+      "@hooks/*": ["src/shared/hooks/*"],
+      "@utils/*": ["src/shared/utils/*"],
+      "@contexts/*": ["src/shared/contexts/*"],
+      "@services/*": ["src/shared/services/*"],
+      "@assets/*": ["src/shared/assets/*"],
+      "@locales/*": ["src/shared/locales/*"],
+      "@types/*": ["src/shared/types/*"]
     },
-    "types": ["node", "jest", "@testing-library/jest-dom"]
+    "types": ["node", "jest", "@testing-library/jest-dom"],
+    "incremental": true,
+    "tsBuildInfoFile": "./dist/.tsbuildinfo"
   },
   "include": [
     "src/**/*",
