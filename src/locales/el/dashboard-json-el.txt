@@ -1,0 +1,124 @@
+{
+  "dashboard": {
+    "title": "Πίνακας Ελέγχου",
+    "welcome": "Καλώς ήρθατε, {{name}}",
+    "overview": "Επισκόπηση",
+    "today": "Σήμερα",
+    "thisWeek": "Αυτή την Εβδομάδα",
+    "thisMonth": "Αυτόν τον Μήνα",
+    "thisYear": "Φέτος",
+    "lastUpdated": "Τελευταία ενημέρωση",
+    "refresh": "Ανανέωση",
+    "quickActions": "Γρήγορες Ενέργειες",
+    "recentActivity": "Πρόσφατη Δραστηριότητα",
+    "upcomingEvents": "Επερχόμενα Γεγονότα",
+    "statistics": "Στατιστικά",
+    "performance": "Απόδοση",
+    "trends": "Τάσεις",
+    "noData": "Δεν υπάρχουν δεδομένα",
+    "loadingData": "Φόρτωση δεδομένων...",
+    "errorLoadingData": "Σφάλμα φόρτωσης δεδομένων",
+    "tryAgain": "Δοκιμάστε ξανά",
+    
+    "cards": {
+      "totalClients": "Σύνολο Πελατών",
+      "activeClients": "Ενεργοί Πελάτες",
+      "newClients": "Νέοι Πελάτες",
+      "totalCases": "Σύνολο Υποθέσεων",
+      "activeCases": "Ενεργές Υποθέσεις",
+      "closedCases": "Κλειστές Υποθέσεις",
+      "upcomingCourts": "Επερχόμενα Δικαστήρια",
+      "todaysCourts": "Σημερινά Δικαστήρια",
+      "postponedCourts": "Αναβληθέντα",
+      "upcomingDeadlines": "Επερχόμενες Προθεσμίες",
+      "overdueDeadlines": "Εκπρόθεσμες Προθεσμίες",
+      "urgentDeadlines": "Επείγουσες Προθεσμίες",
+      "todaysAppointments": "Σημερινά Ραντεβού",
+      "weekAppointments": "Ραντεβού Εβδομάδας",
+      "pendingPayments": "Εκκρεμείς Πληρωμές",
+      "monthlyRevenue": "Μηνιαία Έσοδα",
+      "yearlyRevenue": "Ετήσια Έσοδα",
+      "outstandingBalance": "Ανεξόφλητο Υπόλοιπο"
+    },
+    
+    "quickActions": {
+      "newClient": "Νέος Πελάτης",
+      "newCase": "Νέα Υπόθεση",
+      "newCourt": "Νέο Δικαστήριο",
+      "newDeadline": "Νέα Προθεσμία",
+      "newAppointment": "Νέο Ραντεβού",
+      "newDocument": "Νέο Έγγραφο",
+      "newInvoice": "Νέο Τιμολόγιο",
+      "searchClient": "Αναζήτηση Πελάτη",
+      "searchCase": "Αναζήτηση Υπόθεσης",
+      "todaysSchedule": "Σημερινό Πρόγραμμα"
+    },
+    
+    "widgets": {
+      "courtCalendar": "Ημερολόγιο Δικαστηρίων",
+      "deadlineTimeline": "Χρονοδιάγραμμα Προθεσμιών",
+      "revenueChart": "Διάγραμμα Εσόδων",
+      "clientGrowth": "Αύξηση Πελατών",
+      "caseDistribution": "Κατανομή Υποθέσεων",
+      "taskProgress": "Πρόοδος Εργασιών",
+      "teamPerformance": "Απόδοση Ομάδας",
+      "notifications": "Ειδοποιήσεις"
+    },
+    
+    "filters": {
+      "all": "Όλα",
+      "today": "Σήμερα",
+      "yesterday": "Χθες",
+      "thisWeek": "Αυτή την Εβδομάδα",
+      "lastWeek": "Προηγούμενη Εβδομάδα",
+      "thisMonth": "Αυτόν τον Μήνα",
+      "lastMonth": "Προηγούμενος Μήνας",
+      "thisQuarter": "Αυτό το Τρίμηνο",
+      "lastQuarter": "Προηγούμενο Τρίμηνο",
+      "thisYear": "Φέτος",
+      "lastYear": "Πέρυσι",
+      "dateRange": "Εύρος Ημερομηνιών",
+      "custom": "Προσαρμοσμένο"
+    },
+    
+    "charts": {
+      "revenue": "Έσοδα",
+      "expenses": "Έξοδα",
+      "profit": "Κέρδος",
+      "cases": "Υποθέσεις",
+      "clients": "Πελάτες",
+      "appointments": "Ραντεβού",
+      "courts": "Δικαστήρια",
+      "deadlines": "Προθεσμίες",
+      "byMonth": "Ανά Μήνα",
+      "byQuarter": "Ανά Τρίμηνο",
+      "byYear": "Ανά Έτος",
+      "byType": "Ανά Τύπο",
+      "byStatus": "Ανά Κατάσταση",
+      "byCategory": "Ανά Κατηγορία"
+    },
+    
+    "notifications": {
+      "courtReminder": "Υπενθύμιση Δικαστηρίου",
+      "deadlineAlert": "Ειδοποίηση Προθεσμίας",
+      "appointmentReminder": "Υπενθύμιση Ραντεβού",
+      "paymentDue": "Οφειλόμενη Πληρωμή",
+      "documentUploaded": "Νέο Έγγραφο",
+      "clientMessage": "Μήνυμα Πελάτη",
+      "systemUpdate": "Ενημέρωση Συστήματος",
+      "taskAssigned": "Νέα Εργασία",
+      "markAsRead": "Σήμανση ως Αναγνωσμένο",
+      "markAllAsRead": "Σήμανση Όλων ως Αναγνωσμένα",
+      "clearAll": "Εκκαθάριση Όλων",
+      "viewAll": "Προβολή Όλων"
+    },
+    
+    "empty": {
+      "noCourts": "Δεν υπάρχουν προγραμματισμένα δικαστήρια",
+      "noDeadlines": "Δεν υπάρχουν επερχόμενες προθεσμίες",
+      "noAppointments": "Δεν υπάρχουν προγραμματισμένα ραντεβού",
+      "noNotifications": "Δεν υπάρχουν νέες ειδοποιήσεις",
+      "noActivity": "Δεν υπάρχει πρόσφατη δραστηριότητα"
+    }
+  }
+}
