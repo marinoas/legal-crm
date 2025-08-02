@@ -1,0 +1,336 @@
+import apiClient from './apiClient';
+
+interface User {
+  _id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  role: 'admin' | 'supervisor' | 'secretary' | 'client';
+  isActive: boolean;
+  twoFactorEnabled: boolean;
+  twoFactorSecret?: string;
+  lastLogin?: Date;
+  loginAttempts?: number;
+  lockUntil?: Date;
+  passwordChangedAt?: Date;
+  resetPasswordToken?: string;
+  resetPasswordExpires?: Date;
+  preferences?: {
+    language: string;
+    theme: string;
+    notifications: {
+      email: boolean;
+      sms: boolean;
+      push: boolean;
+    };
+  };
+  permissions?: string[];
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+interface CreateUserData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  role: 'admin' | 'supervisor' | 'secretary' | 'client';
+  sendWelcomeEmail?: boolean;
+}
+
+interface UpdateUserData {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  password?: string;
+  role?: 'admin' | 'supervisor' | 'secretary' | 'client';
+  isActive?: boolean;
+  permissions?: string[];
+  preferences?: User['preferences'];
+}
+
+interface UsersResponse {
+  success: boolean;
+  data: User[];
+  count?: number;
+  pagination?: {
+    page: number;
+    limit: number;
+    total: number;
+  };
+}
+
+interface UserResponse {
+  success: boolean;
+  data: User;
+}
+
+interface ChangePasswordData {
+  currentPassword: string;
+  newPassword: string;
+}
+
+interface UserActivity {
+  _id: string;
+  user: string;
+  action: string;
+  resource: string;
+  resourceId?: string;
+  ip: string;
+  userAgent: string;
+  timestamp: Date;
+}
+
+class UsersService {
+  private basePath = '/users';
+
+  async getAll(params?: {
+    page?: number;
+    limit?: number;
+    search?: string;
+    role?: string;
+    isActive?: boolean;
+  }): Promise<UsersResponse> {
+    const response = await apiClient.get<UsersResponse>(this.basePath, { params });
+    return response.data;
+  }
+
+  async getById(id: string): Promise<UserResponse> {
+    const response = await apiClient.get<UserResponse>(`${this.basePath}/${id}`);
+    return response.data;
+  }
+
+  async getProfile(): Promise<UserResponse> {
+    const response = await apiClient.get<UserResponse>(`${this.basePath}/profile`);
+    return response.data;
+  }
+
+  async create(data: CreateUserData): Promise<UserResponse> {
+    const response = await apiClient.post<UserResponse>(this.basePath, data);
+    return response.data;
+  }
+
+  async update(id: string, data: UpdateUserData): Promise<UserResponse> {
+    const response = await apiClient.put<UserResponse>(`${this.basePath}/${id}`, data);
+    return response.data;
+  }
+
+  async updateProfile(data: UpdateUserData): Promise<UserResponse> {
+    const response = await apiClient.put<UserResponse>(`${this.basePath}/profile`, data);
+    return response.data;
+  }
+
+  async delete(id: string): Promise<{ success: boolean; message: string }> {
+    const response = await apiClient.delete<{ success: boolean; message: string }>(
+      `${this.basePath}/${id}`
+    );
+    return response.data;
+  }
+
+  async changePassword(data: ChangePasswordData): Promise<{
+    success: boolean;
+    message: string;
+  }> {
+    const response = await apiClient.post<{
+      success: boolean;
+      message: string;
+    }>(`${this.basePath}/change-password`, data);
+    return response.data;
+  }
+
+  async resetPassword(userId: string): Promise<{
+    success: boolean;
+    message: string;
+    temporaryPassword?: string;
+  }> {
+    const response = await apiClient.post<{
+      success: boolean;
+      message: string;
+      temporaryPassword?: string;
+    }>(`${this.basePath}/${userId}/reset-password`);
+    return response.data;
+  }
+
+  async toggleStatus(id: string): Promise<UserResponse> {
+    const response = await apiClient.post<UserResponse>(`${this.basePath}/${id}/toggle-status`);
+    return response.data;
+  }
+
+  async enable2FA(): Promise<{
+    success: boolean;
+    qrCode: string;
+    secret: string;
+  }> {
+    const response = await apiClient.post<{
+      success: boolean;
+      qrCode: string;
+      secret: string;
+    }>(`${this.basePath}/2fa/enable`);
+    return response.data;
+  }
+
+  async verify2FA(token: string): Promise<{
+    success: boolean;
+    message: string;
+  }> {
+    const response = await apiClient.post<{
+      success: boolean;
+      message: string;
+    }>(`${this.basePath}/2fa/verify`, { token });
+    return response.data;
+  }
+
+  async disable2FA(): Promise<{
+    success: boolean;
+    message: string;
+  }> {
+    const response = await apiClient.post<{
+      success: boolean;
+      message: string;
+    }>(`${this.basePath}/2fa/disable`);
+    return response.data;
+  }
+
+  async getActivity(userId?: string, params?: {
+    page?: number;
+    limit?: number;
+    startDate?: Date;
+    endDate?: Date;
+    action?: string;
+  }): Promise<{
+    success: boolean;
+    data: UserActivity[];
+    pagination?: {
+      page: number;
+      limit: number;
+      total: number;
+    };
+  }> {
+    const endpoint = userId ? `${this.basePath}/${userId}/activity` : `${this.basePath}/activity`;
+    const response = await apiClient.get<{
+      success: boolean;
+      data: UserActivity[];
+      pagination?: {
+        page: number;
+        limit: number;
+        total: number;
+      };
+    }>(endpoint, { params });
+    return response.data;
+  }
+
+  async getPermissions(): Promise<{
+    success: boolean;
+    data: {
+      role: string;
+      permissions: string[];
+      availablePermissions: string[];
+    };
+  }> {
+    const response = await apiClient.get<{
+      success: boolean;
+      data: {
+        role: string;
+        permissions: string[];
+        availablePermissions: string[];
+      };
+    }>(`${this.basePath}/permissions`);
+    return response.data;
+  }
+
+  async updatePermissions(userId: string, permissions: string[]): Promise<UserResponse> {
+    const response = await apiClient.put<UserResponse>(
+      `${this.basePath}/${userId}/permissions`,
+      { permissions }
+    );
+    return response.data;
+  }
+
+  async exportUsers(format: 'csv' | 'xlsx' = 'xlsx'): Promise<Blob> {
+    const response = await apiClient.get(`${this.basePath}/export`, {
+      params: { format },
+      responseType: 'blob',
+    });
+    return response.data;
+  }
+
+  async importUsers(file: File): Promise<{
+    success: boolean;
+    imported: number;
+    failed: number;
+    errors?: string[];
+  }> {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const response = await apiClient.post<{
+      success: boolean;
+      imported: number;
+      failed: number;
+      errors?: string[];
+    }>(`${this.basePath}/import`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  }
+
+  async getStats(): Promise<{
+    success: boolean;
+    data: {
+      total: number;
+      active: number;
+      inactive: number;
+      byRole: Record<string, number>;
+      with2FA: number;
+      recentlyActive: number;
+      lockedOut: number;
+    };
+  }> {
+    const response = await apiClient.get<{
+      success: boolean;
+      data: {
+        total: number;
+        active: number;
+        inactive: number;
+        byRole: Record<string, number>;
+        with2FA: number;
+        recentlyActive: number;
+        lockedOut: number;
+      };
+    }>(`${this.basePath}/stats`);
+    return response.data;
+  }
+
+  async inviteUser(data: {
+    email: string;
+    role: 'admin' | 'supervisor' | 'secretary' | 'client';
+    firstName?: string;
+    lastName?: string;
+  }): Promise<{
+    success: boolean;
+    message: string;
+    invitationId: string;
+  }> {
+    const response = await apiClient.post<{
+      success: boolean;
+      message: string;
+      invitationId: string;
+    }>(`${this.basePath}/invite`, data);
+    return response.data;
+  }
+
+  async resendInvitation(userId: string): Promise<{
+    success: boolean;
+    message: string;
+  }> {
+    const response = await apiClient.post<{
+      success: boolean;
+      message: string;
+    }>(`${this.basePath}/${userId}/resend-invitation`);
+    return response.data;
+  }
+}
+
+export default new UsersService();
