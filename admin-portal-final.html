@@ -17,46 +17,112 @@
             font-family: 'Inter', sans-serif;
             background-color: #f5f7fa;
             color: #333;
+            transition: all 0.3s ease;
+        }
+
+        /* Dark theme styles */
+        body.dark-theme {
+            background-color: #1a1a1a !important;
+            color: #e9ecef !important;
+        }
+
+        body.dark-theme .main-content {
+            background-color: #1a1a1a !important;
+        }
+
+        body.dark-theme .content-card {
+            background-color: #2d2d2d !important;
+            color: #e9ecef !important;
+            border: 1px solid #404040 !important;
+        }
+
+        body.dark-theme .action-card {
+            background-color: #2d2d2d !important;
+            color: #e9ecef !important;
+            border: 1px solid #404040 !important;
+        }
+
+        body.dark-theme .upcoming-section {
+            background-color: #2d2d2d !important;
+            color: #e9ecef !important;
+            border: 1px solid #404040 !important;
+        }
+
+        body.dark-theme .stats-card {
+            background-color: #2d2d2d !important;
+            color: #e9ecef !important;
+            border: 1px solid #404040 !important;
+        }
+
+        body.dark-theme h1, body.dark-theme h2, body.dark-theme h3, body.dark-theme h4 {
+            color: #e9ecef !important;
+        }
+
+        body.dark-theme table {
+            background-color: #2d2d2d !important;
+            color: #e9ecef !important;
+        }
+
+        body.dark-theme th {
+            background-color: #404040 !important;
+            color: #e9ecef !important;
+        }
+
+        body.dark-theme td {
+            border-bottom: 1px solid #404040 !important;
+            color: #e9ecef !important;
+        }
+
+        body.dark-theme input {
+            background-color: #404040 !important;
+            color: #e9ecef !important;
+            border: 1px solid #555 !important;
+        }
+
+        body.dark-theme .sidebar {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important;
         }
 
         .app-container {
             display: flex;
-            min-height: 100vh;
+            height: 100vh;
         }
 
         /* Sidebar */
         .sidebar {
             width: 280px;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
             color: white;
+            display: flex;
+            flex-direction: column;
             position: fixed;
             height: 100vh;
-            overflow-y: auto;
+            left: 0;
+            top: 0;
             z-index: 1000;
         }
 
         .sidebar-header {
-            padding: 32px 24px;
-            text-align: center;
+            padding: 24px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
         }
 
-        .avatar {
-            width: 64px;
-            height: 64px;
+        .user-avatar {
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
-            background: #fff;
-            color: #2a5298;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
             font-size: 24px;
-            margin: 0 auto 16px;
+            font-weight: 600;
+            margin: 0 auto 12px;
         }
 
         .user-name {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
             margin-bottom: 4px;
         }
@@ -66,261 +132,356 @@
             opacity: 0.8;
         }
 
-        .sidebar-nav {
+        .nav-menu {
+            flex: 1;
             padding: 24px 0;
         }
 
         .nav-item {
             display: flex;
             align-items: center;
-            padding: 16px 24px;
-            cursor: pointer;
+            padding: 12px 24px;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
             transition: all 0.3s ease;
+            cursor: pointer;
             position: relative;
         }
 
         .nav-item:hover {
             background: rgba(255,255,255,0.1);
+            color: white;
         }
 
         .nav-item.active {
             background: rgba(255,255,255,0.15);
-            border-right: 4px solid #fff;
+            color: white;
+            border-right: 3px solid #667eea;
         }
 
-        .nav-icon {
-            margin-right: 16px;
+        .nav-item .material-icons {
+            margin-right: 12px;
             font-size: 20px;
-        }
-
-        .nav-label {
-            flex: 1;
-            font-weight: 500;
         }
 
         .nav-badge {
             background: #ff4757;
             color: white;
-            border-radius: 12px;
-            padding: 4px 8px;
             font-size: 12px;
-            font-weight: 600;
-            min-width: 20px;
-            text-align: center;
+            padding: 2px 8px;
+            border-radius: 12px;
+            margin-left: auto;
+            font-weight: 500;
+        }
+
+        .nav-badge.high {
+            background: #ff4757;
+        }
+
+        .nav-badge.medium {
+            background: #ff9800;
+        }
+
+        .nav-badge.low {
+            background: #4caf50;
         }
 
         .sidebar-footer {
-            position: absolute;
-            bottom: 24px;
-            left: 24px;
-            right: 24px;
+            padding: 24px;
+            border-top: 1px solid rgba(255,255,255,0.1);
             text-align: center;
+        }
+
+        .version-info {
             font-size: 12px;
             opacity: 0.6;
+            margin-bottom: 16px;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .theme-btn {
+            padding: 8px 12px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+        }
+
+        .theme-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .theme-btn.active {
+            background: #667eea;
+            border-color: #667eea;
+        }
+
+        .theme-btn .material-icons {
+            font-size: 16px;
         }
 
         /* Main Content */
         .main-content {
-            flex: 1;
             margin-left: 280px;
-            padding: 32px;
+            flex: 1;
+            padding: 24px;
+            background-color: #f5f7fa;
             min-height: 100vh;
+            transition: all 0.3s ease;
         }
 
         .page-header {
-            margin-bottom: 32px;
+            margin-bottom: 24px;
         }
 
         .page-title {
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 700;
             color: #2c3e50;
             margin-bottom: 8px;
         }
 
         .page-subtitle {
-            font-size: 16px;
             color: #7f8c8d;
+            font-size: 16px;
         }
 
-        /* Quick Actions */
+        /* Content Cards */
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 24px;
+            transition: all 0.3s ease;
+        }
+
+        /* Quick Actions Grid */
         .quick-actions {
-            margin-bottom: 32px;
-        }
-
-        .section-title {
-            font-size: 24px;
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 20px;
-        }
-
-        .actions-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            gap: 16px;
+            margin-bottom: 32px;
         }
 
         .action-card {
             background: white;
             border-radius: 12px;
-            padding: 24px;
+            padding: 20px;
             text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             cursor: pointer;
             transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
         }
 
         .action-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
         }
 
         .action-icon {
-            font-size: 48px;
-            color: #3498db;
-            margin-bottom: 16px;
+            font-size: 32px;
+            color: #667eea;
+            margin-bottom: 12px;
         }
 
         .action-title {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 600;
             color: #2c3e50;
         }
 
         /* Upcoming Section */
-        .upcoming-section {
-            margin-bottom: 32px;
-        }
-
         .upcoming-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 24px;
+            margin-bottom: 32px;
         }
 
-        .upcoming-card {
+        .upcoming-section {
             background: white;
             border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            border: 1px solid #e9ecef;
         }
 
-        .upcoming-card h3 {
-            font-size: 18px;
+        .section-title {
+            font-size: 16px;
             font-weight: 600;
             color: #2c3e50;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid #ecf0f1;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title .material-icons {
+            margin-right: 8px;
+            color: #667eea;
         }
 
         .upcoming-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            padding: 16px 0;
-            border-bottom: 1px solid #ecf0f1;
+            padding: 12px 0;
+            border-bottom: 1px solid #f1f3f4;
         }
 
         .upcoming-item:last-child {
             border-bottom: none;
         }
 
-        .upcoming-info {
-            flex: 1;
-        }
-
-        .upcoming-title {
-            font-size: 14px;
-            font-weight: 600;
+        .item-title {
+            font-weight: 500;
             color: #2c3e50;
             margin-bottom: 4px;
         }
 
-        .upcoming-date {
+        .item-details {
             font-size: 12px;
             color: #7f8c8d;
+            margin-bottom: 8px;
         }
 
         .status-chip {
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
             font-weight: 500;
         }
 
-        .status-urgent { background-color: #ffebee; color: #c62828; }
-        .status-active { background-color: #e8f5e8; color: #2e7d32; }
-        .status-critical { background-color: #fff3e0; color: #ef6c00; }
-        .status-holiday { background-color: #f3e5f5; color: #7b1fa2; }
-
-        /* Business Stats */
-        .stats-section {
-            margin-bottom: 32px;
+        .status-urgent {
+            background: #ffebee;
+            color: #c62828;
         }
 
+        .status-active {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+
+        .status-critical {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+
+        .status-holiday {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+
+        /* Stats Grid */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 24px;
         }
 
-        .stat-card {
+        .stats-card {
             background: white;
             border-radius: 12px;
             padding: 24px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             text-align: center;
+            border: 1px solid #e9ecef;
         }
 
-        .stat-value {
+        .stats-number {
             font-size: 32px;
             font-weight: 700;
-            color: #2196f3;
+            color: #667eea;
             margin-bottom: 8px;
         }
 
-        .stat-label {
+        .stats-label {
             font-size: 14px;
-            color: #666;
+            color: #7f8c8d;
             margin-bottom: 8px;
         }
 
-        .stat-change {
+        .stats-change {
             font-size: 12px;
             font-weight: 500;
+            color: #4caf50;
         }
 
-        .stat-change.positive { color: #4caf50; }
-        .stat-change.negative { color: #f44336; }
+        /* Print Button */
+        .print-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
 
-        /* Responsive */
+        .print-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .print-btn .material-icons {
+            font-size: 24px;
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
             .sidebar {
                 transform: translateX(-100%);
+                transition: transform 0.3s ease;
             }
-            
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
             .main-content {
                 margin-left: 0;
             }
-            
-            .actions-grid {
-                grid-template-columns: 1fr;
+
+            .quick-actions {
+                grid-template-columns: repeat(2, 1fr);
             }
-            
+
             .upcoming-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
 
-        @media (max-width: 480px) {
-            .stats-grid {
-                grid-template-columns: 1fr;
+        @media print {
+            .sidebar, .print-btn {
+                display: none !important;
+            }
+            
+            .main-content {
+                margin-left: 0 !important;
+            }
+            
+            body {
+                background: white !important;
+                color: black !important;
             }
         }
     </style>
@@ -330,54 +491,71 @@
         <!-- Sidebar -->
         <div class="sidebar">
             <div class="sidebar-header">
-                <div class="avatar">ΜΜ</div>
+                <div class="user-avatar">ΜΜ</div>
                 <div class="user-name">Μάριος Μαρινάκος</div>
                 <div class="user-role">Δικηγόρος</div>
             </div>
-            
-            <div class="sidebar-nav">
-                <div class="nav-item active" data-tab="overview">
-                    <span class="material-icons nav-icon">dashboard</span>
-                    <span class="nav-label">Επισκόπηση</span>
-                </div>
-                <div class="nav-item" data-tab="courts">
-                    <span class="material-icons nav-icon">gavel</span>
-                    <span class="nav-label">Δικαστήρια</span>
-                    <span class="nav-badge">3</span>
-                </div>
-                <div class="nav-item" data-tab="deadlines">
-                    <span class="material-icons nav-icon">schedule</span>
-                    <span class="nav-label">Προθεσμίες</span>
-                    <span class="nav-badge">7</span>
-                </div>
-                <div class="nav-item" data-tab="pending">
-                    <span class="material-icons nav-icon">assignment</span>
-                    <span class="nav-label">Εκκρεμότητες</span>
-                    <span class="nav-badge">12</span>
-                </div>
-                <div class="nav-item" data-tab="appointments">
-                    <span class="material-icons nav-icon">event</span>
-                    <span class="nav-label">Ραντεβού</span>
-                    <span class="nav-badge">5</span>
-                </div>
-                <div class="nav-item" data-tab="clients">
-                    <span class="material-icons nav-icon">people</span>
-                    <span class="nav-label">Εντολείς</span>
+
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active" data-tab="overview">
+                    <span class="material-icons">dashboard</span>
+                    Επισκόπηση
+                </a>
+                <a href="#" class="nav-item" data-tab="courts">
+                    <span class="material-icons">gavel</span>
+                    Δικαστήρια
+                    <span class="nav-badge high">3</span>
+                </a>
+                <a href="#" class="nav-item" data-tab="deadlines">
+                    <span class="material-icons">schedule</span>
+                    Προθεσμίες
+                    <span class="nav-badge medium">7</span>
+                </a>
+                <a href="#" class="nav-item" data-tab="pending">
+                    <span class="material-icons">assignment</span>
+                    Εκκρεμότητες
+                    <span class="nav-badge medium">12</span>
+                </a>
+                <a href="#" class="nav-item" data-tab="appointments">
+                    <span class="material-icons">event</span>
+                    Ραντεβού
+                    <span class="nav-badge low">5</span>
+                </a>
+                <a href="#" class="nav-item" data-tab="clients">
+                    <span class="material-icons">people</span>
+                    Εντολείς
                     <span class="nav-badge">99+</span>
-                </div>
-                <div class="nav-item" data-tab="billing">
-                    <span class="material-icons nav-icon">receipt</span>
-                    <span class="nav-label">Οικονομικά</span>
+                </a>
+                <a href="#" class="nav-item" data-tab="contacts">
+                    <span class="material-icons">contacts</span>
+                    Επαφές
+                    <span class="nav-badge">156</span>
+                </a>
+                <a href="#" class="nav-item" data-tab="billing">
+                    <span class="material-icons">receipt</span>
+                    Οικονομικά
                     <span class="nav-badge">2</span>
-                </div>
-                <div class="nav-item" data-tab="settings">
-                    <span class="material-icons nav-icon">settings</span>
-                    <span class="nav-label">Ρυθμίσεις</span>
-                </div>
-            </div>
-            
+                </a>
+                <a href="#" class="nav-item" data-tab="settings">
+                    <span class="material-icons">settings</span>
+                    Ρυθμίσεις
+                </a>
+            </nav>
+
             <div class="sidebar-footer">
-                Legal CRM v2.0
+                <div class="version-info">Legal CRM v2.0</div>
+                
+                <!-- Theme Toggle -->
+                <div class="theme-toggle">
+                    <button class="theme-btn active" data-theme="light">
+                        <span class="material-icons">light_mode</span>
+                        Light
+                    </button>
+                    <button class="theme-btn" data-theme="dark">
+                        <span class="material-icons">dark_mode</span>
+                        Dark
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -385,169 +563,156 @@
         <div class="main-content">
             <div class="page-header">
                 <h1 class="page-title" id="page-title">Επισκόπηση</h1>
+                <p class="page-subtitle">Γενική επισκόπηση των δραστηριοτήτων σας</p>
             </div>
-            
-            <div id="main-content">
-                <!-- Quick Actions -->
-                <div class="quick-actions">
-                    <h2 class="section-title">Γρήγορες Ενέργειες</h2>
-                    <div class="actions-grid">
+
+            <div id="content-area">
+                <!-- Dashboard Content -->
+                <div class="content-card">
+                    <h2 style="color: #333; margin-bottom: 24px;">Γρήγορες Ενέργειες</h2>
+                    <div class="quick-actions">
                         <div class="action-card">
-                            <div class="material-icons action-icon">person_add</div>
+                            <div class="action-icon material-icons">person_add</div>
                             <div class="action-title">Νέος Εντολέας</div>
                         </div>
                         <div class="action-card">
-                            <div class="material-icons action-icon">gavel</div>
+                            <div class="action-icon material-icons">gavel</div>
                             <div class="action-title">Νέα Δικάσιμος</div>
                         </div>
                         <div class="action-card">
-                            <div class="material-icons action-icon">schedule</div>
+                            <div class="action-icon material-icons">schedule</div>
                             <div class="action-title">Νέα Προθεσμία</div>
                         </div>
                         <div class="action-card">
-                            <div class="material-icons action-icon">assignment</div>
+                            <div class="action-icon material-icons">assignment</div>
                             <div class="action-title">Νέα Εκκρεμότητα</div>
                         </div>
                         <div class="action-card">
-                            <div class="material-icons action-icon">event</div>
+                            <div class="action-icon material-icons">event</div>
                             <div class="action-title">Νέο Ραντεβού</div>
                         </div>
                         <div class="action-card">
-                            <div class="material-icons action-icon">payment</div>
+                            <div class="action-icon material-icons">payment</div>
                             <div class="action-title">Νέα Συναλλαγή</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Upcoming Cards -->
-                <div class="upcoming-section">
-                    <h2 class="section-title">Επερχόμενα (5 Εργάσιμες Ημέρες)</h2>
+                <div class="content-card">
+                    <h2 style="color: #333; margin-bottom: 24px;">Επερχόμενα (5 Εργάσιμες Ημέρες)</h2>
                     <div class="upcoming-grid">
-                        <div class="upcoming-card">
-                            <h3>Επερχόμενα Δικαστήρια</h3>
+                        <div class="upcoming-section">
+                            <div class="section-title">
+                                <span class="material-icons">gavel</span>
+                                Επερχόμενα Δικαστήρια
+                            </div>
                             <div class="upcoming-item">
-                                <div class="upcoming-info">
-                                    <div class="upcoming-title">Μαρινάκος κατά Cepal</div>
-                                    <div class="upcoming-date">Αύριο, 10:00 - Πρωτοδικείο Αθηνών</div>
-                                </div>
+                                <div class="item-title">Μαρινάκος κατά Cepal</div>
+                                <div class="item-details">Αύριο, 10:00 - Πρωτοδικείο Αθηνών</div>
                                 <span class="status-chip status-urgent">Επείγον</span>
                             </div>
                             <div class="upcoming-item">
-                                <div class="upcoming-info">
-                                    <div class="upcoming-title">Παπαδόπουλος κατά Δήμου</div>
-                                    <div class="upcoming-date">Τετάρτη, 14:30 - Ειρηνοδικείο Πειραιά</div>
-                                </div>
+                                <div class="item-title">Παπαδόπουλος κατά Δήμου</div>
+                                <div class="item-details">Τετάρτη, 14:30 - Ειρηνοδικείο Πειραιά</div>
                                 <span class="status-chip status-active">Ενεργό</span>
                             </div>
                             <div class="upcoming-item">
-                                <div class="upcoming-info">
-                                    <div class="upcoming-title">Κωνσταντίνου κατά Τράπεζας</div>
-                                    <div class="upcoming-date">Παρασκευή, 11:15 - Εφετείο Αθηνών</div>
-                                </div>
+                                <div class="item-title">Κωνσταντίνου κατά Τράπεζας</div>
+                                <div class="item-details">Παρασκευή, 11:15 - Εφετείο Αθηνών</div>
                                 <span class="status-chip status-critical">Κρίσιμο</span>
                             </div>
                         </div>
 
-                        <div class="upcoming-card">
-                            <h3>Επερχόμενες Προθεσμίες</h3>
+                        <div class="upcoming-section">
+                            <div class="section-title">
+                                <span class="material-icons">schedule</span>
+                                Επερχόμενες Προθεσμίες
+                            </div>
                             <div class="upcoming-item">
-                                <div class="upcoming-info">
-                                    <div class="upcoming-title">Κατάθεση Ανακοπής Μαρινάκος κατά Cepal</div>
-                                    <div class="upcoming-date">Σήμερα, 17:00</div>
-                                </div>
+                                <div class="item-title">Κατάθεση Ανακοπής Μαρινάκος κατά Cepal</div>
+                                <div class="item-details">Σήμερα, 17:00</div>
                                 <span class="status-chip status-urgent">Επείγον</span>
                             </div>
                             <div class="upcoming-item">
-                                <div class="upcoming-info">
-                                    <div class="upcoming-title">Προσθήκη Αντίκρουση Παπαδόπουλος κατά Δήμου</div>
-                                    <div class="upcoming-date">Αύριο, 12:00</div>
-                                </div>
+                                <div class="item-title">Προσθήκη Αντίκρουση Παπαδόπουλος κατά Δήμου</div>
+                                <div class="item-details">Αύριο, 12:00</div>
                                 <span class="status-chip status-active">Ενεργό</span>
                             </div>
                             <div class="upcoming-item">
-                                <div class="upcoming-info">
-                                    <div class="upcoming-title">Έρευνα Κτηματολογίου Κωνσταντίνου κατά Τράπεζας</div>
-                                    <div class="upcoming-date">Τετάρτη, 09:00</div>
-                                </div>
+                                <div class="item-title">Έρευνα Κτηματολογίου Κωνσταντίνου κατά Τράπεζας</div>
+                                <div class="item-details">Τετάρτη, 09:00</div>
                                 <span class="status-chip status-critical">Κρίσιμο</span>
                             </div>
                         </div>
 
-                        <div class="upcoming-card">
-                            <h3>Εκκρεμότητες</h3>
+                        <div class="upcoming-section">
+                            <div class="section-title">
+                                <span class="material-icons">assignment</span>
+                                Εκκρεμότητες
+                            </div>
                             <div class="upcoming-item">
-                                <div class="upcoming-info">
-                                    <div class="upcoming-title">Προετοιμασία Δικογράφου Μαρινάκος</div>
-                                    <div class="upcoming-date">Σήμερα</div>
-                                </div>
+                                <div class="item-title">Προετοιμασία Δικογράφου Μαρινάκος</div>
+                                <div class="item-details">Σήμερα</div>
                                 <span class="status-chip status-urgent">Επείγον</span>
                             </div>
                             <div class="upcoming-item">
-                                <div class="upcoming-info">
-                                    <div class="upcoming-title">Συλλογή Στοιχείων Παπαδόπουλος</div>
-                                    <div class="upcoming-date">Αύριο</div>
-                                </div>
+                                <div class="item-title">Συλλογή Στοιχείων Παπαδόπουλος</div>
+                                <div class="item-details">Αύριο</div>
                                 <span class="status-chip status-active">Ενεργό</span>
                             </div>
                             <div class="upcoming-item">
-                                <div class="upcoming-info">
-                                    <div class="upcoming-title">Ευχετήριο Email - Μαρία Κωνσταντίνου (Γιορτάζει)</div>
-                                    <div class="upcoming-date">Σήμερα</div>
-                                </div>
+                                <div class="item-title">Ευχετήριο Email - Μαρία Κωνσταντίνου (Γιορτάζει)</div>
+                                <div class="item-details">Σήμερα</div>
                                 <span class="status-chip status-holiday">Εορτή</span>
                             </div>
                         </div>
 
-                        <div class="upcoming-card">
-                            <h3>Προγραμματισμένα Ραντεβού</h3>
+                        <div class="upcoming-section">
+                            <div class="section-title">
+                                <span class="material-icons">event</span>
+                                Προγραμματισμένα Ραντεβού
+                            </div>
                             <div class="upcoming-item">
-                                <div class="upcoming-info">
-                                    <div class="upcoming-title">Συνάντηση με Αλέξανδρο Μητσοτάκη</div>
-                                    <div class="upcoming-date">Αύριο, 15:00</div>
-                                </div>
+                                <div class="item-title">Συνάντηση με Αλέξανδρο Μητσοτάκη</div>
+                                <div class="item-details">Αύριο, 15:00</div>
                                 <span class="status-chip status-active">Ενεργό</span>
                             </div>
                             <div class="upcoming-item">
-                                <div class="upcoming-info">
-                                    <div class="upcoming-title">Τηλεδιάσκεψη με Ελένη Παπαδημητρίου</div>
-                                    <div class="upcoming-date">Τετάρτη, 16:30</div>
-                                </div>
+                                <div class="item-title">Τηλεδιάσκεψη με Ελένη Παπαδημητρίου</div>
+                                <div class="item-details">Τετάρτη, 16:30</div>
                                 <span class="status-chip status-active">Ενεργό</span>
                             </div>
                             <div class="upcoming-item">
-                                <div class="upcoming-info">
-                                    <div class="upcoming-title">Συμβουλευτική με Δημήτρη Αντωνόπουλο</div>
-                                    <div class="upcoming-date">Παρασκευή, 10:00</div>
-                                </div>
+                                <div class="item-title">Συμβουλευτική με Δημήτρη Αντωνόπουλο</div>
+                                <div class="item-details">Παρασκευή, 10:00</div>
                                 <span class="status-chip status-active">Ενεργό</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Business Stats -->
-                <div class="stats-section">
-                    <h2 class="section-title">Επιχειρηματικά Στατιστικά</h2>
+                <div class="content-card">
+                    <h2 style="color: #333; margin-bottom: 24px;">Επιχειρηματικά Στατιστικά</h2>
                     <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-value">23</div>
-                            <div class="stat-label">Υποθέσεις Συζητήθηκαν</div>
-                            <div class="stat-change positive">+27.8%</div>
+                        <div class="stats-card">
+                            <div class="stats-number">23</div>
+                            <div class="stats-label">Υποθέσεις Συζητήθηκαν</div>
+                            <div class="stats-change">+27.8%</div>
                         </div>
-                        <div class="stat-card">
-                            <div class="stat-value">€1,240</div>
-                            <div class="stat-label">Μέσο Έσοδο/Εντολέα</div>
-                            <div class="stat-change positive">+15%</div>
+                        <div class="stats-card">
+                            <div class="stats-number">€1,240</div>
+                            <div class="stats-label">Μέσο Έσοδο/Εντολέα</div>
+                            <div class="stats-change">+15%</div>
                         </div>
-                        <div class="stat-card">
-                            <div class="stat-value">4.2</div>
-                            <div class="stat-label">Μέσος Αριθμός Κλήσεων/Εντολέα</div>
-                            <div class="stat-change positive">+8.5%</div>
+                        <div class="stats-card">
+                            <div class="stats-number">4.2</div>
+                            <div class="stats-label">Μέσος Αριθμός Κλήσεων/Εντολέα</div>
+                            <div class="stats-change">+8.5%</div>
                         </div>
-                        <div class="stat-card">
-                            <div class="stat-value">2.8</div>
-                            <div class="stat-label">Μέσος Όρος Ραντεβού/Εντολέα</div>
-                            <div class="stat-change positive">+12.3%</div>
+                        <div class="stats-card">
+                            <div class="stats-number">2.8</div>
+                            <div class="stats-label">Μέσος Όρος Ραντεβού/Εντολέα</div>
+                            <div class="stats-change">+12.3%</div>
                         </div>
                     </div>
                 </div>
@@ -555,361 +720,135 @@
         </div>
     </div>
 
-    <script>
-        // Tab navigation
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.addEventListener('click', function() {
-                // Remove active class from all items
-                document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
-                
-                // Add active class to clicked item
-                this.classList.add('active');
-                
-                // Update page title
-                const tabName = this.querySelector('.nav-label').textContent;
-                document.getElementById('page-title').textContent = tabName;
-                
-                // Update content based on tab
-                const tab = this.dataset.tab;
-                updateContent(tab);
-            });
-        });
+    <!-- Print Button -->
+    <button class="print-btn" onclick="window.print()">
+        <span class="material-icons">print</span>
+    </button>
 
-        function updateContent(tab) {
-            const content = document.getElementById('main-content');
+    <script>
+        // Theme functionality
+        function setTheme(theme) {
+            const body = document.body;
+            const themeButtons = document.querySelectorAll('.theme-btn');
             
+            // Remove all theme classes
+            body.classList.remove('light-theme', 'dark-theme');
+            
+            // Add the selected theme class
+            if (theme === 'dark') {
+                body.classList.add('dark-theme');
+            } else {
+                body.classList.add('light-theme');
+            }
+            
+            // Update button states
+            themeButtons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.theme === theme) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Save to localStorage
+            localStorage.setItem('theme', theme);
+            
+            console.log('Theme set to:', theme);
+        }
+
+        // Navigation functionality
+        function updateContent(tab) {
+            const contentArea = document.getElementById('content-area');
+            const pageTitle = document.getElementById('page-title');
+            const navItems = document.querySelectorAll('.nav-item');
+            
+            // Update active nav item
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.dataset.tab === tab) {
+                    item.classList.add('active');
+                }
+            });
+            
+            // Update page title and content based on tab
             switch(tab) {
                 case 'overview':
-                    content.innerHTML = `
-                        <!-- Quick Actions -->
-                        <div class="quick-actions">
-                            <h2 class="section-title">Γρήγορες Ενέργειες</h2>
-                            <div class="actions-grid">
-                                <div class="action-card">
-                                    <div class="material-icons action-icon">person_add</div>
-                                    <div class="action-title">Νέος Εντολέας</div>
-                                </div>
-                                <div class="action-card">
-                                    <div class="material-icons action-icon">gavel</div>
-                                    <div class="action-title">Νέα Δικάσιμος</div>
-                                </div>
-                                <div class="action-card">
-                                    <div class="material-icons action-icon">schedule</div>
-                                    <div class="action-title">Νέα Προθεσμία</div>
-                                </div>
-                                <div class="action-card">
-                                    <div class="material-icons action-icon">assignment</div>
-                                    <div class="action-title">Νέα Εκκρεμότητα</div>
-                                </div>
-                                <div class="action-card">
-                                    <div class="material-icons action-icon">event</div>
-                                    <div class="action-title">Νέο Ραντεβού</div>
-                                </div>
-                                <div class="action-card">
-                                    <div class="material-icons action-icon">payment</div>
-                                    <div class="action-title">Νέα Συναλλαγή</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Upcoming Cards -->
-                        <div class="upcoming-section">
-                            <h2 class="section-title">Επερχόμενα (5 Εργάσιμες Ημέρες)</h2>
-                            <div class="upcoming-grid">
-                                <div class="upcoming-card">
-                                    <h3>Επερχόμενα Δικαστήρια</h3>
-                                    <div class="upcoming-item">
-                                        <div class="upcoming-info">
-                                            <div class="upcoming-title">Μαρινάκος κατά Cepal</div>
-                                            <div class="upcoming-date">Αύριο, 10:00 - Πρωτοδικείο Αθηνών</div>
-                                        </div>
-                                        <span class="status-chip status-urgent">Επείγον</span>
-                                    </div>
-                                    <div class="upcoming-item">
-                                        <div class="upcoming-info">
-                                            <div class="upcoming-title">Παπαδόπουλος κατά Δήμου</div>
-                                            <div class="upcoming-date">Τετάρτη, 14:30 - Ειρηνοδικείο Πειραιά</div>
-                                        </div>
-                                        <span class="status-chip status-active">Ενεργό</span>
-                                    </div>
-                                    <div class="upcoming-item">
-                                        <div class="upcoming-info">
-                                            <div class="upcoming-title">Κωνσταντίνου κατά Τράπεζας</div>
-                                            <div class="upcoming-date">Παρασκευή, 11:15 - Εφετείο Αθηνών</div>
-                                        </div>
-                                        <span class="status-chip status-critical">Κρίσιμο</span>
-                                    </div>
-                                </div>
-
-                                <div class="upcoming-card">
-                                    <h3>Επερχόμενες Προθεσμίες</h3>
-                                    <div class="upcoming-item">
-                                        <div class="upcoming-info">
-                                            <div class="upcoming-title">Κατάθεση Ανακοπής Μαρινάκος κατά Cepal</div>
-                                            <div class="upcoming-date">Σήμερα, 17:00</div>
-                                        </div>
-                                        <span class="status-chip status-urgent">Επείγον</span>
-                                    </div>
-                                    <div class="upcoming-item">
-                                        <div class="upcoming-info">
-                                            <div class="upcoming-title">Προσθήκη Αντίκρουση Παπαδόπουλος κατά Δήμου</div>
-                                            <div class="upcoming-date">Αύριο, 12:00</div>
-                                        </div>
-                                        <span class="status-chip status-active">Ενεργό</span>
-                                    </div>
-                                    <div class="upcoming-item">
-                                        <div class="upcoming-info">
-                                            <div class="upcoming-title">Έρευνα Κτηματολογίου Κωνσταντίνου κατά Τράπεζας</div>
-                                            <div class="upcoming-date">Τετάρτη, 09:00</div>
-                                        </div>
-                                        <span class="status-chip status-critical">Κρίσιμο</span>
-                                    </div>
-                                </div>
-
-                                <div class="upcoming-card">
-                                    <h3>Εκκρεμότητες</h3>
-                                    <div class="upcoming-item">
-                                        <div class="upcoming-info">
-                                            <div class="upcoming-title">Προετοιμασία Δικογράφου Μαρινάκος</div>
-                                            <div class="upcoming-date">Σήμερα</div>
-                                        </div>
-                                        <span class="status-chip status-urgent">Επείγον</span>
-                                    </div>
-                                    <div class="upcoming-item">
-                                        <div class="upcoming-info">
-                                            <div class="upcoming-title">Συλλογή Στοιχείων Παπαδόπουλος</div>
-                                            <div class="upcoming-date">Αύριο</div>
-                                        </div>
-                                        <span class="status-chip status-active">Ενεργό</span>
-                                    </div>
-                                    <div class="upcoming-item">
-                                        <div class="upcoming-info">
-                                            <div class="upcoming-title">Ευχετήριο Email - Μαρία Κωνσταντίνου (Γιορτάζει)</div>
-                                            <div class="upcoming-date">Σήμερα</div>
-                                        </div>
-                                        <span class="status-chip status-holiday">Εορτή</span>
-                                    </div>
-                                </div>
-
-                                <div class="upcoming-card">
-                                    <h3>Προγραμματισμένα Ραντεβού</h3>
-                                    <div class="upcoming-item">
-                                        <div class="upcoming-info">
-                                            <div class="upcoming-title">Συνάντηση με Αλέξανδρο Μητσοτάκη</div>
-                                            <div class="upcoming-date">Αύριο, 15:00</div>
-                                        </div>
-                                        <span class="status-chip status-active">Ενεργό</span>
-                                    </div>
-                                    <div class="upcoming-item">
-                                        <div class="upcoming-info">
-                                            <div class="upcoming-title">Τηλεδιάσκεψη με Ελένη Παπαδημητρίου</div>
-                                            <div class="upcoming-date">Τετάρτη, 16:30</div>
-                                        </div>
-                                        <span class="status-chip status-active">Ενεργό</span>
-                                    </div>
-                                    <div class="upcoming-item">
-                                        <div class="upcoming-info">
-                                            <div class="upcoming-title">Συμβουλευτική με Δημήτρη Αντωνόπουλο</div>
-                                            <div class="upcoming-date">Παρασκευή, 10:00</div>
-                                        </div>
-                                        <span class="status-chip status-active">Ενεργό</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Business Stats -->
-                        <div class="stats-section">
-                            <h2 class="section-title">Επιχειρηματικά Στατιστικά</h2>
-                            <div class="stats-grid">
-                                <div class="stat-card">
-                                    <div class="stat-value">23</div>
-                                    <div class="stat-label">Υποθέσεις Συζητήθηκαν</div>
-                                    <div class="stat-change positive">+27.8%</div>
-                                </div>
-                                <div class="stat-card">
-                                    <div class="stat-value">€1,240</div>
-                                    <div class="stat-label">Μέσο Έσοδο/Εντολέα</div>
-                                    <div class="stat-change positive">+15%</div>
-                                </div>
-                                <div class="stat-card">
-                                    <div class="stat-value">4.2</div>
-                                    <div class="stat-label">Μέσος Αριθμός Κλήσεων/Εντολέα</div>
-                                    <div class="stat-change positive">+8.5%</div>
-                                </div>
-                                <div class="stat-card">
-                                    <div class="stat-value">2.8</div>
-                                    <div class="stat-label">Μέσος Όρος Ραντεβού/Εντολέα</div>
-                                    <div class="stat-change positive">+12.3%</div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
+                    pageTitle.textContent = 'Επισκόπηση';
+                    // Keep the existing dashboard content
                     break;
-                    
                 case 'courts':
-                    content.innerHTML = `
-                        <div style="background: white; border-radius: 12px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                            <h2 style="margin-bottom: 24px; color: #333;">Δικαστήρια</h2>
-                            <div style="overflow-x: auto;">
-                                <table style="width: 100%; border-collapse: collapse;">
-                                    <thead>
-                                        <tr style="background-color: #f5f5f5;">
-                                            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">Ημερομηνία</th>
-                                            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">Ώρα</th>
-                                            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">Δικαστήριο</th>
-                                            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">Εντολέας</th>
-                                            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">Αντίδικος</th>
-                                            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">Υπόθεση</th>
-                                            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">Ενέργειες</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">03/08/2025</td>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">10:00</td>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">Πρωτοδικείο Αθηνών</td>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">Μαρινάκος</td>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">Cepal</td>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">Ανακοπή 632 ΚΠολΔ</td>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">
-                                                <div style="display: flex; flex-direction: column; gap: 8px;">
-                                                    <button style="padding: 8px 16px; background: #4caf50; color: white; border: none; border-radius: 6px; cursor: pointer;">Συζήτηση</button>
-                                                    <button style="padding: 8px 16px; background: #ff9800; color: white; border: none; border-radius: 6px; cursor: pointer;">Αναβολή</button>
-                                                    <button style="padding: 8px 16px; background: #f44336; color: white; border: none; border-radius: 6px; cursor: pointer;">Ματαίωση</button>
-                                                    <button style="padding: 8px 16px; background: #2196f3; color: white; border: none; border-radius: 6px; cursor: pointer;">Email</button>
-                                                    <button style="padding: 8px 16px; background: #9c27b0; color: white; border: none; border-radius: 6px; cursor: pointer;">Επεξεργασία</button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">05/08/2025</td>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">14:30</td>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">Ειρηνοδικείο Πειραιά</td>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">Παπαδόπουλος</td>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">Δήμος Αθηναίων</td>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">Αγωγή</td>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">
-                                                <div style="display: flex; flex-direction: column; gap: 8px;">
-                                                    <button style="padding: 8px 16px; background: #4caf50; color: white; border: none; border-radius: 6px; cursor: pointer;">Συζήτηση</button>
-                                                    <button style="padding: 8px 16px; background: #ff9800; color: white; border: none; border-radius: 6px; cursor: pointer;">Αναβολή</button>
-                                                    <button style="padding: 8px 16px; background: #f44336; color: white; border: none; border-radius: 6px; cursor: pointer;">Ματαίωση</button>
-                                                    <button style="padding: 8px 16px; background: #2196f3; color: white; border: none; border-radius: 6px; cursor: pointer;">Email</button>
-                                                    <button style="padding: 8px 16px; background: #9c27b0; color: white; border: none; border-radius: 6px; cursor: pointer;">Επεξεργασία</button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">07/08/2025</td>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">11:15</td>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">Εφετείο Αθηνών</td>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">Κωνσταντίνου</td>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">Εθνική Τράπεζα</td>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">Έφεση</td>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">
-                                                <div style="display: flex; flex-direction: column; gap: 8px;">
-                                                    <button style="padding: 8px 16px; background: #4caf50; color: white; border: none; border-radius: 6px; cursor: pointer;">Συζήτηση</button>
-                                                    <button style="padding: 8px 16px; background: #ff9800; color: white; border: none; border-radius: 6px; cursor: pointer;">Αναβολή</button>
-                                                    <button style="padding: 8px 16px; background: #f44336; color: white; border: none; border-radius: 6px; cursor: pointer;">Ματαίωση</button>
-                                                    <button style="padding: 8px 16px; background: #2196f3; color: white; border: none; border-radius: 6px; cursor: pointer;">Email</button>
-                                                    <button style="padding: 8px 16px; background: #9c27b0; color: white; border: none; border-radius: 6px; cursor: pointer;">Επεξεργασία</button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    `;
+                    pageTitle.textContent = 'Δικαστήρια';
+                    contentArea.innerHTML = getDefaultContent('courts');
                     break;
-                    
+                case 'deadlines':
+                    pageTitle.textContent = 'Προθεσμίες';
+                    contentArea.innerHTML = getDefaultContent('deadlines');
+                    break;
+                case 'pending':
+                    pageTitle.textContent = 'Εκκρεμότητες';
+                    contentArea.innerHTML = getDefaultContent('pending');
+                    break;
+                case 'appointments':
+                    pageTitle.textContent = 'Ραντεβού';
+                    contentArea.innerHTML = getDefaultContent('appointments');
+                    break;
                 case 'clients':
-                    content.innerHTML = `
-                        <div style="background: white; border-radius: 12px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                            <h2 style="margin-bottom: 24px; color: #333;">Εντολείς</h2>
-                            <div style="margin-bottom: 20px;">
-                                <input type="text" placeholder="Αναζήτηση εντολέα..." style="width: 100%; max-width: 400px; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 14px;">
-                            </div>
-                            <div style="overflow-x: auto;">
-                                <table style="width: 100%; border-collapse: collapse;">
-                                    <thead>
-                                        <tr style="background-color: #f5f5f5;">
-                                            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">Φάκελος</th>
-                                            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">Όνομα</th>
-                                            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">Τηλέφωνο</th>
-                                            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">Email</th>
-                                            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">Υποθέσεις</th>
-                                            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">Ενέργειες</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">#245</td>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">Αλέξανδρος Μητσοτάκης</td>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">210-555-0123</td>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">a.mitsotakis@email.com</td>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">3 υποθέσεις</td>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">
-                                                <div style="display: flex; flex-direction: column; gap: 8px;">
-                                                    <button style="padding: 8px 16px; background: #2196f3; color: white; border: none; border-radius: 6px; cursor: pointer;">Προβολή</button>
-                                                    <button style="padding: 8px 16px; background: #ff9800; color: white; border: none; border-radius: 6px; cursor: pointer;">Επεξεργασία</button>
-                                                    <button style="padding: 8px 16px; background: #4caf50; color: white; border: none; border-radius: 6px; cursor: pointer;">Email</button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">#198</td>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">Ελένη Παπαδημητρίου</td>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">210-555-0456</td>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">e.papadimitriou@email.com</td>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">1 υπόθεση</td>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">
-                                                <div style="display: flex; flex-direction: column; gap: 8px;">
-                                                    <button style="padding: 8px 16px; background: #2196f3; color: white; border: none; border-radius: 6px; cursor: pointer;">Προβολή</button>
-                                                    <button style="padding: 8px 16px; background: #ff9800; color: white; border: none; border-radius: 6px; cursor: pointer;">Επεξεργασία</button>
-                                                    <button style="padding: 8px 16px; background: #4caf50; color: white; border: none; border-radius: 6px; cursor: pointer;">Email</button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">#301</td>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">Δημήτρης Αντωνόπουλος</td>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">210-555-0789</td>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">d.antonopoulos@email.com</td>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">2 υποθέσεις</td>
-                                            <td style="padding: 12px; border-bottom: 1px solid #eee;">
-                                                <div style="display: flex; flex-direction: column; gap: 8px;">
-                                                    <button style="padding: 8px 16px; background: #2196f3; color: white; border: none; border-radius: 6px; cursor: pointer;">Προβολή</button>
-                                                    <button style="padding: 8px 16px; background: #ff9800; color: white; border: none; border-radius: 6px; cursor: pointer;">Επεξεργασία</button>
-                                                    <button style="padding: 8px 16px; background: #4caf50; color: white; border: none; border-radius: 6px; cursor: pointer;">Email</button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    `;
+                    pageTitle.textContent = 'Εντολείς';
+                    contentArea.innerHTML = getDefaultContent('clients');
                     break;
-                    
+                case 'contacts':
+                    pageTitle.textContent = 'Επαφές';
+                    contentArea.innerHTML = getDefaultContent('contacts');
+                    break;
                 case 'billing':
-                    content.innerHTML = `
-                        <div style="background: white; border-radius: 12px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                            <h2 style="margin-bottom: 24px; color: #333;">Οικονομικά</h2>
-                            <p style="color: #666; font-size: 16px;">Η καρτέλα Οικονομικά θα περιέχει όλες τις οικονομικές λειτουργίες του συστήματος.</p>
-                        </div>
-                    `;
+                    pageTitle.textContent = 'Οικονομικά';
+                    contentArea.innerHTML = getDefaultContent('billing');
                     break;
-                    
-                default:
-                    content.innerHTML = `
-                        <div style="background: white; border-radius: 12px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                            <h2 style="margin-bottom: 24px; color: #333;">${tab.charAt(0).toUpperCase() + tab.slice(1)}</h2>
-                            <p style="color: #666; font-size: 16px;">Αυτή η καρτέλα θα αναπτυχθεί σύντομα.</p>
-                        </div>
-                    `;
+                case 'settings':
+                    pageTitle.textContent = 'Ρυθμίσεις';
+                    contentArea.innerHTML = getDefaultContent('settings');
+                    break;
             }
         }
+
+        function getDefaultContent(tab) {
+            const tabName = document.getElementById('page-title').textContent;
+            return `
+                <div class="content-card">
+                    <h2 style="color: #333; margin-bottom: 16px;">${tabName} - Υπό Ανάπτυξη</h2>
+                    <p style="color: #666;">Αυτή η καρτέλα θα υλοποιηθεί στην επόμενη φάση.</p>
+                </div>
+            `;
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load saved theme
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            setTheme(savedTheme);
+            
+            // Add theme button event listeners
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    setTheme(this.dataset.theme);
+                });
+            });
+            
+            // Add navigation event listeners
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    updateContent(this.dataset.tab);
+                });
+            });
+            
+            // Add hover effects to action cards
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.action-card')) {
+                    const title = e.target.closest('.action-card').querySelector('.action-title').textContent;
+                    alert(`Γρήγορη ενέργεια: ${title}`);
+                }
+            });
+        });
     </script>
 </body>
 </html>
