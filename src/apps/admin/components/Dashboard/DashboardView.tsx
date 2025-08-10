@@ -13,14 +13,15 @@ const DashboardContainer = styled(Box)(({ theme }) => ({
   height: '100%',
   display: 'flex',
   flexDirection: 'column',
-  gap: theme.spacing(3),
+  gap: theme.spacing(1), // Reduced from 3 to 1 for tighter layout
+  padding: theme.spacing(1), // Add minimal padding for content breathing room
 }));
 
 const SectionTitle = styled(Typography)(({ theme }) => ({
   fontSize: '1.5rem',
   fontWeight: 600,
   color: theme.palette.text.primary,
-  marginBottom: theme.spacing(2),
+  marginBottom: theme.spacing(1), // Reduced from 2 to 1
 }));
 
 const PanelsGrid = styled(Box)(({ theme }) => ({

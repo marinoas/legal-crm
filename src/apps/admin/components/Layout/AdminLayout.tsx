@@ -15,13 +15,13 @@ const MainContent = styled(Box)(({ theme }) => ({
   flexGrow: 1,
   display: 'flex',
   flexDirection: 'column',
-  marginLeft: DRAWER_WIDTH,
   overflow: 'hidden',
+  width: `calc(100% - ${DRAWER_WIDTH}px)`,
 }));
 
 const ContentArea = styled(Box)(({ theme }) => ({
   flexGrow: 1,
-  padding: theme.spacing(1), // Reduced from 3 to 1 for tighter spacing
+  padding: 0, // Remove all padding for tighter layout
   overflow: 'auto',
 }));
 

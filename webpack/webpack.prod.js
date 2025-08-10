@@ -17,7 +17,7 @@ module.exports = (env) => {
       path: require('path').resolve(__dirname, '../dist'),
       filename: `${portal}/js/[name].[contenthash].js`,
       chunkFilename: `${portal}/js/[name].[contenthash].chunk.js`,
-      publicPath: `/`,
+      publicPath: `/${portal}/`,
       crossOriginLoading: 'anonymous',
     },
     
