@@ -9,7 +9,8 @@ import {
   Typography,
   Box,
   Avatar,
-  Badge
+  Badge,
+  Chip
 } from '@mui/material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
@@ -23,20 +24,47 @@ import {
   Receipt,
   Settings
 } from '@mui/icons-material';
+import { navigationItems } from '../../../../data/dashboardData';
 
 const DRAWER_WIDTH = 240;
 
-const menuItems = [
-  { path: '/', label: 'Επισκόπηση', icon: Dashboard },
-  { path: '/courts', label: 'Δικαστήρια', icon: Gavel, badge: 3 },
-  { path: '/deadlines', label: 'Προθεσμίες', icon: Schedule, badge: 7 },
-  { path: '/pending', label: 'Εκκρεμότητες', icon: Assignment, badge: 12 },
-  { path: '/appointments', label: 'Ραντεβού', icon: Event, badge: 5 },
-  { path: '/clients', label: 'Εντολείς', icon: People, badge: '99+' },
-  { path: '/contacts', label: 'Επαφές', icon: Contacts, badge: 156 },
-  { path: '/financial', label: 'Οικονομικά', icon: Receipt, badge: 2 },
-  { path: '/settings', label: 'Ρυθμίσεις', icon: Settings },
-];
+const getIconComponent = (iconName: string) => {
+  switch (iconName) {
+    case 'dashboard':
+      return Dashboard;
+    case 'gavel':
+      return Gavel;
+    case 'schedule':
+      return Schedule;
+    case 'assignment':
+      return Assignment;
+    case 'event':
+      return Event;
+    case 'people':
+      return People;
+    case 'contacts':
+      return Contacts;
+    case 'receipt':
+      return Receipt;
+    case 'settings':
+      return Settings;
+    default:
+      return Dashboard;
+  }
+};
+
+const getBadgeColor = (badgeType?: string) => {
+  switch (badgeType) {
+    case 'high':
+      return 'error';
+    case 'medium':
+      return 'warning';
+    case 'low':
+      return 'info';
+    default:
+      return 'default';
+  }
+};
 
 const Sidebar: React.FC = () => {
   const navigate = useNavigate();
@@ -70,8 +98,8 @@ const Sidebar: React.FC = () => {
 
       {/* Navigation */}
       <List sx={{ flexGrow: 1, py: 1 }}>
-        {menuItems.map((item) => {
-          const Icon = item.icon;
+        {navigationItems.map((item) => {
+          const IconComponent = getIconComponent(item.icon);
           const isActive = location.pathname === item.path;
           
           return (
@@ -90,11 +118,22 @@ const Sidebar: React.FC = () => {
               >
                 <ListItemIcon sx={{ color: isActive ? '#6366f1' : 'rgba(255,255,255,0.7)' }}>
                   {item.badge ? (
-                    <Badge badgeContent={item.badge} color="error">
-                      <Icon />
+                    <Badge 
+                      badgeContent={item.badge} 
+                      color={getBadgeColor(item.badgeType) as any}
+                      sx={{
+                        '& .MuiBadge-badge': {
+                          fontSize: '0.75rem',
+                          height: 18,
+                          minWidth: 18,
+                          fontWeight: 600
+                        }
+                      }}
+                    >
+                      <IconComponent />
                     </Badge>
                   ) : (
-                    <Icon />
+                    <IconComponent />
                   )}
                 </ListItemIcon>
                 <ListItemText 
@@ -103,6 +142,7 @@ const Sidebar: React.FC = () => {
                     color: isActive ? 'white' : 'rgba(255,255,255,0.8)',
                     '& .MuiTypography-root': {
                       fontWeight: isActive ? 600 : 400,
+                      fontSize: '0.875rem'
                     }
                   }}
                 />
@@ -114,7 +154,14 @@ const Sidebar: React.FC = () => {
 
       {/* Footer */}
       <Box sx={{ p: 2, borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-        <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.5)' }}>
+        <Typography 
+          variant="caption" 
+          sx={{ 
+            color: 'rgba(255,255,255,0.5)',
+            display: 'block',
+            textAlign: 'center'
+          }}
+        >
           Legal CRM v2.0
         </Typography>
       </Box>
