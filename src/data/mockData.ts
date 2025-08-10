@@ -177,7 +177,11 @@ export const quickActions: QuickAction[] = [
     icon: 'person_add',
     color: '#6366f1',
     description: 'Προσθήκη νέου εντολέα',
-    action: () => console.log('New client'),
+    action: () => {
+      // Navigate to clients page with new client form
+      window.location.hash = '#/clients/new';
+      alert('Ανακατεύθυνση στη φόρμα νέου εντολέα...');
+    },
   },
   {
     id: 'new-court',
@@ -185,7 +189,11 @@ export const quickActions: QuickAction[] = [
     icon: 'gavel',
     color: '#8b5cf6',
     description: 'Καταχώρηση νέας δικάσιμου',
-    action: () => console.log('New court case'),
+    action: () => {
+      // Navigate to courts page with new case form
+      window.location.hash = '#/courts/new';
+      alert('Ανακατεύθυνση στη φόρμα νέας δικάσιμου...');
+    },
   },
   {
     id: 'new-deadline',
@@ -193,7 +201,11 @@ export const quickActions: QuickAction[] = [
     icon: 'schedule',
     color: '#06b6d4',
     description: 'Προσθήκη νέας προθεσμίας',
-    action: () => console.log('New deadline'),
+    action: () => {
+      // Navigate to deadlines page with new deadline form
+      window.location.hash = '#/deadlines/new';
+      alert('Ανακατεύθυνση στη φόρμα νέας προθεσμίας...');
+    },
   },
   {
     id: 'new-pending',
@@ -201,7 +213,11 @@ export const quickActions: QuickAction[] = [
     icon: 'assignment',
     color: '#10b981',
     description: 'Καταχώρηση νέας εκκρεμότητας',
-    action: () => console.log('New pending item'),
+    action: () => {
+      // Navigate to pending items page with new item form
+      window.location.hash = '#/pending/new';
+      alert('Ανακατεύθυνση στη φόρμα νέας εκκρεμότητας...');
+    },
   },
   {
     id: 'new-appointment',
@@ -209,7 +225,11 @@ export const quickActions: QuickAction[] = [
     icon: 'event',
     color: '#f59e0b',
     description: 'Προγραμματισμός νέου ραντεβού',
-    action: () => console.log('New appointment'),
+    action: () => {
+      // Navigate to appointments page with new appointment form
+      window.location.hash = '#/appointments/new';
+      alert('Ανακατεύθυνση στη φόρμα νέου ραντεβού...');
+    },
   },
   {
     id: 'new-transaction',
@@ -217,7 +237,11 @@ export const quickActions: QuickAction[] = [
     icon: 'payment',
     color: '#ef4444',
     description: 'Καταχώρηση νέας συναλλαγής',
-    action: () => console.log('New transaction'),
+    action: () => {
+      // Navigate to billing page with new transaction form
+      window.location.hash = '#/billing/new';
+      alert('Ανακατεύθυνση στη φόρμα νέας συναλλαγής...');
+    },
   },
 ];
 

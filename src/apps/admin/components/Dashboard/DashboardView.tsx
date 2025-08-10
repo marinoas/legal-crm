@@ -1,21 +1,23 @@
-import React from 'react';
-import { Box, Typography, styled, Paper } from '@mui/material';
+import React, { useState } from 'react';
+import { Box, Typography, styled, Paper, IconButton } from '@mui/material';
+import { CalendarToday } from '@mui/icons-material';
 import QuickActions from './QuickActions';
 import CourtsPanel from './Panels/CourtsPanel';
 import DeadlinesPanel from './Panels/DeadlinesPanel';
 import PendingPanel from './Panels/PendingPanel';
 import AppointmentsPanel from './Panels/AppointmentsPanel';
+import DateRangePicker from '../../../../components/DateRangePicker';
+import { getWorkingDaysRange, formatDateRange } from '../../../../utils/dateUtils';
 
 const DashboardContainer = styled(Box)(({ theme }) => ({
   height: '100%',
   display: 'flex',
   flexDirection: 'column',
-  gap: theme.spacing(2), // Reduced from 3 to 2
-  // Removed padding: theme.spacing(2) for tighter layout
+  gap: theme.spacing(3),
 }));
 
 const SectionTitle = styled(Typography)(({ theme }) => ({
-  fontSize: '1.25rem',
+  fontSize: '1.5rem',
   fontWeight: 600,
   color: theme.palette.text.primary,
   marginBottom: theme.spacing(2),
@@ -48,6 +50,36 @@ const PanelHeader = styled(Box)<{ color: string }>(({ theme, color }) => ({
   fontSize: '0.875rem',
 }));
 
+const PanelTitleBox = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+}));
+
+const PanelTitle = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  gap: theme.spacing(1),
+  fontSize: '0.875rem',
+  fontWeight: 600,
+}));
+
+const DateRangeText = styled(Typography)(({ theme }) => ({
+  fontSize: '0.7rem',
+  opacity: 0.9,
+  marginTop: theme.spacing(0.5),
+}));
+
+const DateRangeButton = styled(IconButton)(({ theme }) => ({
+  backgroundColor: 'rgba(255, 255, 255, 0.2)',
+  color: 'white',
+  width: 28,
+  height: 28,
+  '&:hover': {
+    backgroundColor: 'rgba(255, 255, 255, 0.3)',
+  },
+}));
+
 const PanelContent = styled(Box)(({ theme }) => ({
   flex: 1,
   overflow: 'auto',
@@ -55,34 +87,51 @@ const PanelContent = styled(Box)(({ theme }) => ({
 }));
 
 const DashboardView: React.FC = () => {
+  // Initialize with 10 working days as default
+  const today = new Date();
+  const defaultRange = getWorkingDaysRange(today, 10);
+  const [dateRanges, setDateRanges] = useState({
+    courts: defaultRange,
+    deadlines: defaultRange,
+    pending: defaultRange,
+    appointments: defaultRange,
+  });
+
+  const handleDateRangeChange = (panelType: string, startDate: Date, endDate: Date) => {
+    setDateRanges(prev => ({
+      ...prev,
+      [panelType]: { start: startDate, end: endDate }
+    }));
+  };
+
+  const formatDateRangeDisplay = (start: Date, end: Date) => {
+    return formatDateRange(start, end);
+  };
+
   const panels = [
     {
       id: 'courts',
       title: 'Επερχόμενα Δικαστήρια',
       component: CourtsPanel,
       color: '#8b5cf6',
-      badges: [18, 19, 20]
     },
     {
       id: 'deadlines', 
       title: 'Επερχόμενες Προθεσμίες',
       component: DeadlinesPanel,
       color: '#06b6d4',
-      badges: [21, 22, 23]
     },
     {
       id: 'pending',
       title: 'Εκκρεμότητες', 
       component: PendingPanel,
       color: '#ef4444',
-      badges: [24, 25, 26]
     },
     {
       id: 'appointments',
       title: 'Προγραμματισμένα Ραντεβού',
       component: AppointmentsPanel,
       color: '#f59e0b',
-      badges: [27, 28, 29]
     }
   ];
 
@@ -94,39 +143,44 @@ const DashboardView: React.FC = () => {
       {/* Upcoming Items Section */}
       <Box>
         <SectionTitle>
-          Επερχόμενα (5 Εργάσιμες Ημέρες)
+          Επερχόμενα (10 Εργάσιμες Ημέρες)
         </SectionTitle>
         
         <PanelsGrid>
           {panels.map((panel) => {
             const PanelComponent = panel.component;
+            const panelType = panel.id as keyof typeof dateRanges;
+            
             return (
               <PanelCard key={panel.id} elevation={2}>
                 <PanelHeader color={panel.color}>
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                    <span>📋</span>
-                    <span>{panel.title}</span>
-                    <Box sx={{ display: 'flex', gap: 0.5 }}>
-                      {panel.badges.map((badge, index) => (
-                        <Box
-                          key={badge}
-                          sx={{
-                            backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                            borderRadius: '4px',
-                            padding: '2px 6px',
-                            fontSize: '11px',
-                            fontWeight: 'bold',
-                          }}
-                        >
-                          {badge}
-                        </Box>
-                      ))}
-                    </Box>
-                  </Box>
+                  <PanelTitleBox>
+                    <PanelTitle>
+                      <span>📋</span>
+                      <span>{panel.title}</span>
+                    </PanelTitle>
+                    <DateRangeText>
+                      {formatDateRangeDisplay(dateRanges[panelType].start, dateRanges[panelType].end)}
+                    </DateRangeText>
+                  </PanelTitleBox>
+                  
+                  <DateRangePicker
+                    startDate={dateRanges[panelType].start}
+                    endDate={dateRanges[panelType].end}
+                    onDateRangeChange={(start, end) => handleDateRangeChange(panelType, start, end)}
+                  >
+                    <DateRangeButton>
+                      <CalendarToday sx={{ fontSize: 14 }} />
+                    </DateRangeButton>
+                  </DateRangePicker>
                 </PanelHeader>
                 
                 <PanelContent>
-                  <PanelComponent panelId={panel.id} />
+                  <PanelComponent 
+                    panelId={panel.id}
+                    startDate={dateRanges[panelType].start}
+                    endDate={dateRanges[panelType].end}
+                  />
                 </PanelContent>
               </PanelCard>
             );
