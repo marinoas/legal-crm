@@ -1,143 +1,34 @@
 <!DOCTYPE html>
 <html lang="el">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#1976d2" />
-    <meta name="description" content="Legal CRM - Σύστημα Διαχείρισης Δικηγορικού Γραφείου" />
-    <meta name="author" content="Legal CRM" />
-    
-    <!-- Security Headers -->
-    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-    <meta http-equiv="X-Frame-Options" content="DENY" />
-    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
-    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Legal CRM" />
-    <meta property="og:description" content="Σύστημα Διαχείρισης Δικηγορικού Γραφείου" />
-    <meta property="og:image" content="%PUBLIC_URL%/og-image.png" />
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:title" content="Legal CRM" />
-    <meta property="twitter:description" content="Σύστημα Διαχείρισης Δικηγορικού Γραφείου" />
-    <meta property="twitter:image" content="%PUBLIC_URL%/og-image.png" />
-    
-    <!-- Apple Web App -->
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="apple-mobile-web-app-title" content="Legal CRM" />
-    
-    <!-- PWA Manifest -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-    
-    <!-- Preload Critical Resources -->
-    <link rel="preload" href="/fonts/roboto-v30-greek_latin-regular.woff2" as="font" type="font/woff2" crossorigin />
-    
-    <title>Legal CRM</title>
-    
-    <!-- Copyright Protection Script -->
-    <script>
-      // Disable right-click context menu (for client portal)
-      if (window.location.pathname.includes('/client/')) {
-        document.addEventListener('contextmenu', function(e) {
-          e.preventDefault();
-          return false;
-        });
-        
-        // Disable text selection
-        document.addEventListener('selectstart', function(e) {
-          if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
-            e.preventDefault();
-            return false;
-          }
-        });
-        
-        // Disable print
-        document.addEventListener('keydown', function(e) {
-          if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
-            e.preventDefault();
-            return false;
-          }
-        });
-      }
-    </script>
-    
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": "Legal CRM",
-        "applicationCategory": "BusinessApplication",
-        "description": "Σύστημα Διαχείρισης Δικηγορικού Γραφείου",
-        "operatingSystem": "Web",
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "EUR"
-        }
-      }
-    </script>
-  </head>
-  <body>
-    <noscript>
-      <div style="padding: 20px; text-align: center; font-family: Arial, sans-serif;">
-        <h1>JavaScript Required</h1>
-        <p>Το Legal CRM απαιτεί JavaScript για να λειτουργήσει.</p>
-        <p>Παρακαλώ ενεργοποιήστε το JavaScript στον browser σας.</p>
-      </div>
-    </noscript>
-    
-    <div id="root"></div>
-    
-    <!-- Loading Screen -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Πύλη Δικηγόρου - Μάριος Μαρινάκος</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-      #root:empty::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: #f5f5f5;
-        z-index: 9999;
-      }
-      
-      #root:empty::after {
-        content: '';
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        width: 40px;
-        height: 40px;
-        margin: -20px 0 0 -20px;
-        border: 4px solid #1976d2;
-        border-top-color: transparent;
-        border-radius: 50%;
-        animation: spin 0.8s linear infinite;
-        z-index: 10000;
-      }
-      
-      @keyframes spin {
-        to { transform: rotate(360deg); }
-      }
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f7fa;
+        }
+        #root {
+            min-height: 100vh;
+        }
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-size: 18px;
+            color: #6366f1;
+        }
     </style>
-  </body>
+</head>
+<body>
+    <div id="root">
+        <div class="loading">Φόρτωση...</div>
+    </div>
+</body>
 </html>
+

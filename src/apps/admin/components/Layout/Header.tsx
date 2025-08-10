@@ -1,34 +1,63 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, Box } from '@mui/material';
+import { 
+  AppBar, 
+  Toolbar, 
+  Typography, 
+  Box,
+  styled,
+  alpha
+} from '@mui/material';
 
-const Header: React.FC = () => {
+const StyledAppBar = styled(AppBar)(({ theme }) => ({
+  backgroundColor: theme.palette.background.paper,
+  color: theme.palette.text.primary,
+  boxShadow: 'none',
+  borderBottom: `1px solid ${theme.palette.divider}`,
+  zIndex: theme.zIndex.drawer - 1,
+}));
+
+const HeaderContent = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  padding: theme.spacing(2, 0),
+}));
+
+const PageTitle = styled(Typography)(({ theme }) => ({
+  fontSize: '1.75rem',
+  fontWeight: 600,
+  color: theme.palette.text.primary,
+  marginBottom: theme.spacing(0.5),
+}));
+
+const PageSubtitle = styled(Typography)(({ theme }) => ({
+  fontSize: '0.875rem',
+  color: theme.palette.text.secondary,
+  fontWeight: 400,
+}));
+
+interface HeaderProps {
+  title?: string;
+  subtitle?: string;
+}
+
+const Header: React.FC<HeaderProps> = ({ 
+  title = 'Επισκόπηση',
+  subtitle = 'Γενική επισκόπηση των δραστηριοτήτων σας'
+}) => {
   return (
-    <AppBar 
-      position="static" 
-      elevation={0}
-      sx={{ 
-        backgroundColor: 'background.paper',
-        borderBottom: '1px solid',
-        borderColor: 'divider'
-      }}
-    >
+    <StyledAppBar position="static">
       <Toolbar>
-        <Typography 
-          variant="h6" 
-          component="h1" 
-          sx={{ 
-            flexGrow: 1,
-            color: 'text.primary',
-            fontWeight: 600
-          }}
-        >
-          Πύλη Δικηγόρου - Μάριος Μαρινάκος
-        </Typography>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-          {/* Add header actions here if needed */}
-        </Box>
+        <HeaderContent>
+          <PageTitle variant="h4">
+            {title}
+          </PageTitle>
+          <PageSubtitle variant="body2">
+            {subtitle}
+          </PageSubtitle>
+        </HeaderContent>
       </Toolbar>
-    </AppBar>
+    </StyledAppBar>
   );
 };
 

@@ -1,8 +1,29 @@
 import React from 'react';
-import { Box, Container } from '@mui/material';
+import { Box, styled } from '@mui/material';
 import Sidebar from './Sidebar';
 import Header from './Header';
-import ThemeToggle from './ThemeToggle';
+
+const DRAWER_WIDTH = 240;
+
+const LayoutRoot = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  height: '100vh',
+  backgroundColor: theme.palette.background.default,
+}));
+
+const MainContent = styled(Box)(({ theme }) => ({
+  flexGrow: 1,
+  display: 'flex',
+  flexDirection: 'column',
+  marginLeft: DRAWER_WIDTH,
+  overflow: 'hidden',
+}));
+
+const ContentArea = styled(Box)(({ theme }) => ({
+  flexGrow: 1,
+  padding: theme.spacing(3),
+  overflow: 'auto',
+}));
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -10,23 +31,15 @@ interface AdminLayoutProps {
 
 const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
   return (
-    <Box sx={{ display: 'flex', minHeight: '100vh' }}>
+    <LayoutRoot>
       <Sidebar />
-      <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+      <MainContent>
         <Header />
-        <Container 
-          maxWidth={false} 
-          sx={{ 
-            flexGrow: 1, 
-            py: 3,
-            px: { xs: 2, sm: 3 }
-          }}
-        >
+        <ContentArea>
           {children}
-        </Container>
-        <ThemeToggle />
-      </Box>
-    </Box>
+        </ContentArea>
+      </MainContent>
+    </LayoutRoot>
   );
 };
 
