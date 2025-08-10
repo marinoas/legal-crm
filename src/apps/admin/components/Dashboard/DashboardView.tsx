@@ -10,8 +10,8 @@ const DashboardContainer = styled(Box)(({ theme }) => ({
   height: '100%',
   display: 'flex',
   flexDirection: 'column',
-  gap: theme.spacing(3),
-  padding: theme.spacing(2),
+  gap: theme.spacing(2), // Reduced from 3 to 2
+  // Removed padding: theme.spacing(2) for tighter layout
 }));
 
 const SectionTitle = styled(Typography)(({ theme }) => ({
@@ -52,28 +52,6 @@ const PanelContent = styled(Box)(({ theme }) => ({
   flex: 1,
   overflow: 'auto',
   backgroundColor: theme.palette.background.paper,
-}));
-
-const PanelControls = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  gap: theme.spacing(0.5),
-}));
-
-const ControlButton = styled('button')(({ theme }) => ({
-  background: 'rgba(255, 255, 255, 0.2)',
-  border: 'none',
-  borderRadius: '4px',
-  width: '24px',
-  height: '24px',
-  cursor: 'pointer',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  color: '#ffffff',
-  fontSize: '14px',
-  '&:hover': {
-    backgroundColor: 'rgba(255, 255, 255, 0.3)',
-  },
 }));
 
 const DashboardView: React.FC = () => {
@@ -145,12 +123,6 @@ const DashboardView: React.FC = () => {
                       ))}
                     </Box>
                   </Box>
-                  
-                  <PanelControls>
-                    <ControlButton title="Pin panel">📌</ControlButton>
-                    <ControlButton title="Minimize panel">➖</ControlButton>
-                    <ControlButton title="Close panel">✖️</ControlButton>
-                  </PanelControls>
                 </PanelHeader>
                 
                 <PanelContent>

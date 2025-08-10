@@ -21,7 +21,7 @@ const MainContent = styled(Box)(({ theme }) => ({
 
 const ContentArea = styled(Box)(({ theme }) => ({
   flexGrow: 1,
-  padding: theme.spacing(3),
+  padding: theme.spacing(1), // Reduced from 3 to 1 for tighter spacing
   overflow: 'auto',
 }));
 
