@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { ThemeProvider, CssBaseline } from '@mui/material';
-import { createTheme } from '@mui/material/styles';
-import { theme } from '../theme';
+import { createAppTheme, extendThemeWithLegal } from '../theme';
 
 type ThemeMode = 'light' | 'dark' | 'auto';
 
@@ -9,6 +8,7 @@ interface ThemeContextType {
   mode: ThemeMode;
   setMode: (mode: ThemeMode) => void;
   isDark: boolean;
+  toggleTheme: () => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -48,17 +48,17 @@ export const CustomThemeProvider: React.FC<CustomThemeProviderProps> = ({ childr
     }
   }, [mode]);
 
-  const muiTheme = createTheme({
-    ...theme,
-    palette: {
-      ...theme.palette,
-      mode: isDark ? 'dark' : 'light',
-    },
-  });
+  const toggleTheme = () => {
+    setMode(current => current === 'light' ? 'dark' : 'light');
+  };
+
+  // Create theme with proper mode
+  const baseTheme = createAppTheme(isDark ? 'dark' : 'light');
+  const theme = extendThemeWithLegal(baseTheme);
 
   return (
-    <ThemeContext.Provider value={{ mode, setMode, isDark }}>
-      <ThemeProvider theme={muiTheme}>
+    <ThemeContext.Provider value={{ mode, setMode, isDark, toggleTheme }}>
+      <ThemeProvider theme={theme}>
         <CssBaseline />
         {children}
       </ThemeProvider>

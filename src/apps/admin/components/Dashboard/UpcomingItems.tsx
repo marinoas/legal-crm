@@ -7,7 +7,8 @@ import {
   Chip, 
   Card, 
   CardContent,
-  Stack
+  Stack,
+  alpha
 } from '@mui/material';
 import { 
   Gavel, 
@@ -55,18 +56,37 @@ interface UpcomingItemCardProps {
 }
 
 const UpcomingItemCard: React.FC<UpcomingItemCardProps> = ({ item }) => {
+  const priorityColor = getPriorityColor(item.priority);
+  
   return (
     <Card 
       sx={{ 
         mb: 1.5, 
-        transition: 'all 0.2s',
+        transition: 'all 0.2s ease-in-out',
+        backgroundColor: 'background.paper',
+        border: '1px solid',
+        borderColor: 'divider',
+        position: 'relative',
+        overflow: 'hidden',
         '&:hover': {
           transform: 'translateY(-1px)',
-          boxShadow: 2,
+          boxShadow: (theme) => theme.palette.mode === 'light'
+            ? '0 4px 12px rgba(0, 0, 0, 0.1)'
+            : '0 4px 12px rgba(0, 0, 0, 0.3)',
+          borderColor: alpha(priorityColor, 0.5),
+        },
+        '&::before': {
+          content: '""',
+          position: 'absolute',
+          left: 0,
+          top: 0,
+          bottom: 0,
+          width: 4,
+          backgroundColor: priorityColor,
         }
       }}
     >
-      <CardContent sx={{ py: 2, '&:last-child': { pb: 2 } }}>
+      <CardContent sx={{ py: 2, pl: 3, '&:last-child': { pb: 2 } }}>
         <Stack spacing={1}>
           <Typography 
             variant="subtitle2" 
@@ -80,8 +100,10 @@ const UpcomingItemCard: React.FC<UpcomingItemCardProps> = ({ item }) => {
           </Typography>
           <Typography 
             variant="body2" 
-            color="text.secondary"
-            sx={{ fontSize: '0.875rem' }}
+            sx={{ 
+              color: 'text.secondary',
+              fontSize: '0.875rem'
+            }}
           >
             {item.details}
           </Typography>
@@ -90,11 +112,14 @@ const UpcomingItemCard: React.FC<UpcomingItemCardProps> = ({ item }) => {
               label={getPriorityLabel(item.priority)}
               size="small"
               sx={{
-                backgroundColor: getPriorityColor(item.priority),
+                backgroundColor: priorityColor,
                 color: 'white',
                 fontWeight: 500,
                 fontSize: '0.75rem',
-                height: 24
+                height: 24,
+                '& .MuiChip-label': {
+                  px: 1.5,
+                }
               }}
             />
           </Box>
@@ -124,12 +149,36 @@ const UpcomingSection: React.FC<UpcomingSectionProps> = ({
       sx={{ 
         p: 3, 
         height: 'fit-content',
+        backgroundColor: 'background.paper',
         border: '1px solid',
-        borderColor: 'divider'
+        borderColor: 'divider',
+        position: 'relative',
+        overflow: 'hidden',
+        '&::before': {
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: 3,
+          backgroundColor: color,
+        }
       }}
     >
       <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-        <Icon sx={{ color, mr: 1, fontSize: 20 }} />
+        <Box
+          sx={{
+            backgroundColor: alpha(color, 0.1),
+            borderRadius: '50%',
+            p: 1,
+            mr: 1.5,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+        >
+          <Icon sx={{ color, fontSize: 20 }} />
+        </Box>
         <Typography 
           variant="h6" 
           sx={{ 
@@ -148,13 +197,21 @@ const UpcomingSection: React.FC<UpcomingSectionProps> = ({
             <UpcomingItemCard key={item.id} item={item} />
           ))
         ) : (
-          <Typography 
-            variant="body2" 
-            color="text.secondary"
-            sx={{ textAlign: 'center', py: 2 }}
+          <Box 
+            sx={{ 
+              textAlign: 'center', 
+              py: 4,
+              color: 'text.secondary'
+            }}
           >
-            Δεν υπάρχουν επερχόμενα στοιχεία
-          </Typography>
+            <Icon sx={{ fontSize: 48, opacity: 0.3, mb: 1 }} />
+            <Typography 
+              variant="body2" 
+              sx={{ opacity: 0.7 }}
+            >
+              Δεν υπάρχουν επερχόμενα στοιχεία
+            </Typography>
+          </Box>
         )}
       </Stack>
     </Paper>
