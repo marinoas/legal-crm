@@ -14,7 +14,10 @@ import {
   Gavel,
   EuroSymbol,
   Phone,
-  Event
+  Event,
+  AddCircle,
+  AccountBalance,
+  Schedule
 } from '@mui/icons-material';
 import { businessStats, BusinessStat } from '../../../../data/dashboardData';
 
@@ -28,6 +31,14 @@ const getIconComponent = (iconName?: string) => {
       return Phone;
     case 'event':
       return Event;
+    case 'add_circle':
+      return AddCircle;
+    case 'account_balance':
+      return AccountBalance;
+    case 'schedule':
+      return Schedule;
+    case 'trending_up':
+      return TrendingUp;
     default:
       return TrendingUp;
   }
@@ -185,7 +196,7 @@ const BusinessStats: React.FC = () => {
       
       <Grid container spacing={3}>
         {businessStats.map((stat) => (
-          <Grid item xs={12} sm={6} md={3} key={stat.id}>
+          <Grid item xs={12} sm={6} md={4} lg={2} key={stat.id}>
             <StatCard stat={stat} />
           </Grid>
         ))}

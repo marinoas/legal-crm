@@ -198,36 +198,52 @@ export const upcomingItems: UpcomingItem[] = [
 // Business Statistics Data
 export const businessStats: BusinessStat[] = [
   {
-    id: 'cases-discussed',
-    title: 'Υποθέσεις Συζητήθηκαν',
-    value: 23,
-    change: '+27.8%',
+    id: 'cases-discussed-vs-postponed',
+    title: 'Συζητήθηκαν vs Αναβλήθηκαν',
+    value: '78% / 22%',
+    change: '+5.2%',
     trend: 'up',
     icon: 'gavel'
   },
   {
-    id: 'average-revenue',
-    title: 'Μέσο Έσοδο/Εντολέα',
-    value: '€1,240',
-    change: '+15%',
+    id: 'new-court-cases',
+    title: 'Νέες Δικάσιμοι (vs Προηγ. Μήνα)',
+    value: '+12',
+    change: '+35%',
+    trend: 'up',
+    icon: 'add_circle'
+  },
+  {
+    id: 'revenue-per-client',
+    title: 'Έσοδα ανά Εντολέα',
+    value: '€2,340',
+    change: '+18.5%',
     trend: 'up',
     icon: 'euro_symbol'
   },
   {
-    id: 'average-calls',
-    title: 'Μέσος Αριθμός Κλήσεων/Εντολέα',
-    value: 4.2,
-    change: '+8.5%',
-    trend: 'up',
-    icon: 'phone'
-  },
-  {
-    id: 'average-appointments',
-    title: 'Μέσος Όρος Ραντεβού/Εντολέα',
-    value: 2.8,
+    id: 'revenue-per-case',
+    title: 'Έσοδα ανά Υπόθεση',
+    value: '€890',
     change: '+12.3%',
     trend: 'up',
-    icon: 'event'
+    icon: 'account_balance'
+  },
+  {
+    id: 'time-cost-per-client',
+    title: 'Χρόνος/Κόστος ανά Εντολέα',
+    value: '3.2h / €480',
+    change: '-8.1%',
+    trend: 'down',
+    icon: 'schedule'
+  },
+  {
+    id: 'client-roi',
+    title: 'ROI Αποδοτικότητα',
+    value: '487%',
+    change: '+22.7%',
+    trend: 'up',
+    icon: 'trending_up'
   }
 ];
 
