@@ -5,6 +5,8 @@ import {
   List, 
   ListItem, 
   Chip,
+  IconButton,
+  Tooltip,
   styled,
   alpha
 } from '@mui/material';
@@ -15,7 +17,8 @@ import {
   LocationOn,
   VideoCall,
   Phone,
-  Business
+  Business,
+  Email
 } from '@mui/icons-material';
 import { appointments, getPriorityColor, getPriorityLabel } from '../../../../../data/mockData';
 
@@ -59,6 +62,30 @@ const ItemHeader = styled(Box)(({ theme }) => ({
   alignItems: 'flex-start',
   justifyContent: 'space-between',
   marginBottom: 8,
+}));
+
+const HeaderLeft = styled(Box)(({ theme }) => ({
+  flex: 1,
+  marginRight: 8,
+}));
+
+const HeaderRight = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  gap: 4,
+}));
+
+const EmailButton = styled(IconButton)(({ theme }) => ({
+  padding: 4,
+  backgroundColor: alpha(theme.palette.primary.main, 0.1),
+  color: theme.palette.primary.main,
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.primary.main, 0.2),
+    transform: 'scale(1.1)',
+  },
+  '& .MuiSvgIcon-root': {
+    fontSize: 16,
+  },
 }));
 
 const ItemTitle = styled(Typography)(({ theme }) => ({
@@ -155,6 +182,14 @@ const AppointmentsPanel: React.FC<AppointmentsPanelProps> = ({ panelId }) => {
     // Here you would typically navigate to the appointment details or open a modal
   };
 
+  const handleEmailClick = (e: React.MouseEvent, appointment: typeof appointments[0]) => {
+    e.stopPropagation(); // Prevent triggering the item click
+    console.log('Email button clicked for:', appointment.title);
+    // Here you would open an email modal or compose window
+    // For now, we'll show a simple alert
+    alert(`📧 Email για: ${appointment.title}\n👤 Παραλήπτης: ${appointment.client}\n📅 Ραντεβού: ${appointment.details}\n📍 Τοποθεσία: ${appointment.location || 'Δεν καθορίστηκε'}\n📝 Θέμα: Επιβεβαίωση ραντεβού`);
+  };
+
   const getMeetingIcon = (meetingType: string) => {
     switch (meetingType) {
       case 'video-call':
@@ -207,14 +242,26 @@ const AppointmentsPanel: React.FC<AppointmentsPanelProps> = ({ panelId }) => {
               onClick={() => handleItemClick(appointment)}
             >
               <ItemHeader>
-                <ItemTitle>
-                  {appointment.title}
-                </ItemTitle>
-                <PriorityChip
-                  priority={appointment.priority}
-                  label={getPriorityLabel(appointment.priority)}
-                  size="small"
-                />
+                <HeaderLeft>
+                  <ItemTitle>
+                    {appointment.title}
+                  </ItemTitle>
+                </HeaderLeft>
+                <HeaderRight>
+                  <Tooltip title="Αποστολή Email" arrow>
+                    <EmailButton
+                      onClick={(e) => handleEmailClick(e, appointment)}
+                      size="small"
+                    >
+                      <Email />
+                    </EmailButton>
+                  </Tooltip>
+                  <PriorityChip
+                    priority={appointment.priority}
+                    label={getPriorityLabel(appointment.priority)}
+                    size="small"
+                  />
+                </HeaderRight>
               </ItemHeader>
               
               <ItemDetails>
