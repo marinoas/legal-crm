@@ -5,6 +5,8 @@ import {
   List, 
   ListItem, 
   Chip,
+  IconButton,
+  Tooltip,
   styled,
   alpha
 } from '@mui/material';
@@ -58,6 +60,30 @@ const ItemHeader = styled(Box)(({ theme }) => ({
   alignItems: 'flex-start',
   justifyContent: 'space-between',
   marginBottom: 8,
+}));
+
+const HeaderLeft = styled(Box)(({ theme }) => ({
+  flex: 1,
+  marginRight: 8,
+}));
+
+const HeaderRight = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  gap: 4,
+}));
+
+const EmailButton = styled(IconButton)(({ theme }) => ({
+  padding: 4,
+  backgroundColor: alpha(theme.palette.primary.main, 0.1),
+  color: theme.palette.primary.main,
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.primary.main, 0.2),
+    transform: 'scale(1.1)',
+  },
+  '& .MuiSvgIcon-root': {
+    fontSize: 16,
+  },
 }));
 
 const ItemTitle = styled(Typography)(({ theme }) => ({
@@ -137,6 +163,14 @@ const PendingPanel: React.FC<PendingPanelProps> = ({ panelId }) => {
     // Here you would typically navigate to the task details or open a modal
   };
 
+  const handleEmailClick = (e: React.MouseEvent, pendingItem: typeof pendingItems[0]) => {
+    e.stopPropagation(); // Prevent triggering the item click
+    console.log('Email button clicked for:', pendingItem.title);
+    // Here you would open an email modal or compose window
+    // For now, we'll show a simple alert
+    alert(`📧 Email για: ${pendingItem.title}\n👤 Παραλήπτης: ${pendingItem.assignedTo || 'Εντολέας'}\n📋 Εργασία: ${pendingItem.taskType}\n📝 Θέμα: Ενημέρωση για εκκρεμότητα`);
+  };
+
   const getTaskIcon = (taskType: string) => {
     switch (taskType.toLowerCase()) {
       case 'δικόγραφο':
@@ -184,14 +218,26 @@ const PendingPanel: React.FC<PendingPanelProps> = ({ panelId }) => {
               onClick={() => handleItemClick(pendingItem)}
             >
               <ItemHeader>
-                <ItemTitle>
-                  {pendingItem.title}
-                </ItemTitle>
-                <PriorityChip
-                  priority={pendingItem.priority}
-                  label={getPriorityLabel(pendingItem.priority)}
-                  size="small"
-                />
+                <HeaderLeft>
+                  <ItemTitle>
+                    {pendingItem.title}
+                  </ItemTitle>
+                </HeaderLeft>
+                <HeaderRight>
+                  <Tooltip title="Αποστολή Email" arrow>
+                    <EmailButton
+                      onClick={(e) => handleEmailClick(e, pendingItem)}
+                      size="small"
+                    >
+                      <Email />
+                    </EmailButton>
+                  </Tooltip>
+                  <PriorityChip
+                    priority={pendingItem.priority}
+                    label={getPriorityLabel(pendingItem.priority)}
+                    size="small"
+                  />
+                </HeaderRight>
               </ItemHeader>
               
               <ItemDetails>
