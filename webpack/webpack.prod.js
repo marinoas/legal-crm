@@ -14,11 +14,12 @@ module.exports = (env) => {
     devtool: 'source-map',
     
     output: {
-      path: require('path').resolve(__dirname, '../dist'),
-      filename: `${portal}/js/[name].[contenthash].js`,
-      chunkFilename: `${portal}/js/[name].[contenthash].chunk.js`,
+      path: require('path').resolve(__dirname, `../dist/${portal}`),
+      filename: `js/[name].[contenthash].js`,
+      chunkFilename: `js/[name].[contenthash].chunk.js`,
       publicPath: `/`,
       crossOriginLoading: 'anonymous',
+      clean: true,
     },
     
     module: {
@@ -60,8 +61,8 @@ module.exports = (env) => {
     
     plugins: [
       new MiniCssExtractPlugin({
-        filename: `${portal}/css/[name].[contenthash].css`,
-        chunkFilename: `${portal}/css/[id].[contenthash].css`,
+        filename: `css/[name].[contenthash].css`,
+        chunkFilename: `css/[id].[contenthash].css`,
       }),
       
       new webpack.DefinePlugin({
@@ -177,10 +178,10 @@ module.exports = (env) => {
     prodConfig.plugins.push(
       new BundleAnalyzerPlugin({
         analyzerMode: 'static',
-        reportFilename: `${portal}/bundle-report.html`,
+        reportFilename: `bundle-report.html`,
         openAnalyzer: false,
         generateStatsFile: true,
-        statsFilename: `${portal}/stats.json`,
+        statsFilename: `stats.json`,
       })
     );
   }

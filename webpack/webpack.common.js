@@ -174,7 +174,7 @@ module.exports = (env) => {
       
       new HtmlWebpackPlugin({
         template: path.resolve(__dirname, '../public/index.html'),
-        filename: `${portal}/index.html`,
+        filename: `index.html`,
         chunks: [portal],
         inject: true,
         title: `Legal CRM - ${portal.charAt(0).toUpperCase() + portal.slice(1)} Portal`,
@@ -204,12 +204,12 @@ module.exports = (env) => {
         patterns: [
           {
             from: path.resolve(__dirname, '../public/assets'),
-            to: `${portal}/assets`,
+            to: `assets`,
             noErrorOnMissing: true,
           },
           {
             from: path.resolve(__dirname, '../public/locales'),
-            to: `${portal}/locales`,
+            to: `locales`,
             noErrorOnMissing: true,
           },
         ],
