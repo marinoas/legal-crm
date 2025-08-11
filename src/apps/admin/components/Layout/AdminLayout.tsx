@@ -15,8 +15,8 @@ const MainContent = styled(Box)(({ theme }) => ({
   flexGrow: 1,
   display: 'flex',
   flexDirection: 'column',
-  marginLeft: DRAWER_WIDTH,
   overflow: 'hidden',
+  width: `calc(100% - ${DRAWER_WIDTH}px)`,
 }));
 
 const ContentArea = styled(Box)(({ theme }) => ({
