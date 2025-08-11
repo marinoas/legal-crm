@@ -5,13 +5,16 @@ import {
   List, 
   ListItem, 
   Chip,
+  IconButton,
+  Tooltip,
   styled,
   alpha
 } from '@mui/material';
 import { 
   Gavel,
   AccessTime,
-  LocationOn
+  LocationOn,
+  Email
 } from '@mui/icons-material';
 import { courtCases, getPriorityColor, getPriorityLabel } from '../../../../../data/mockData';
 
@@ -55,6 +58,30 @@ const ItemHeader = styled(Box)(({ theme }) => ({
   alignItems: 'flex-start',
   justifyContent: 'space-between',
   marginBottom: 8,
+}));
+
+const HeaderLeft = styled(Box)(({ theme }) => ({
+  flex: 1,
+  marginRight: 8,
+}));
+
+const HeaderRight = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  gap: 4,
+}));
+
+const EmailButton = styled(IconButton)(({ theme }) => ({
+  padding: 4,
+  backgroundColor: alpha(theme.palette.primary.main, 0.1),
+  color: theme.palette.primary.main,
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.primary.main, 0.2),
+    transform: 'scale(1.1)',
+  },
+  '& .MuiSvgIcon-root': {
+    fontSize: 16,
+  },
 }));
 
 const ItemTitle = styled(Typography)(({ theme }) => ({
@@ -121,6 +148,14 @@ const CourtsPanel: React.FC<CourtsPanelProps> = ({ panelId }) => {
     // Here you would typically navigate to the case details or open a modal
   };
 
+  const handleEmailClick = (e: React.MouseEvent, courtCase: typeof courtCases[0]) => {
+    e.stopPropagation(); // Prevent triggering the item click
+    console.log('Email button clicked for:', courtCase.title);
+    // Here you would open an email modal or compose window
+    // For now, we'll show a simple alert
+    alert(`Άνοιγμα email για: ${courtCase.title}\nΠαραλήπτης: ${courtCase.opponent || 'Εντολέας'}`);
+  };
+
   if (courtCases.length === 0) {
     return (
       <PanelContainer>
@@ -144,14 +179,26 @@ const CourtsPanel: React.FC<CourtsPanelProps> = ({ panelId }) => {
             onClick={() => handleItemClick(courtCase)}
           >
             <ItemHeader>
-              <ItemTitle>
-                {courtCase.title}
-              </ItemTitle>
-              <PriorityChip
-                priority={courtCase.priority}
-                label={getPriorityLabel(courtCase.priority)}
-                size="small"
-              />
+              <HeaderLeft>
+                <ItemTitle>
+                  {courtCase.title}
+                </ItemTitle>
+              </HeaderLeft>
+              <HeaderRight>
+                <Tooltip title="Αποστολή Email" arrow>
+                  <EmailButton
+                    onClick={(e) => handleEmailClick(e, courtCase)}
+                    size="small"
+                  >
+                    <Email />
+                  </EmailButton>
+                </Tooltip>
+                <PriorityChip
+                  priority={courtCase.priority}
+                  label={getPriorityLabel(courtCase.priority)}
+                  size="small"
+                />
+              </HeaderRight>
             </ItemHeader>
             
             <ItemDetails>
