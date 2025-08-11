@@ -5,6 +5,8 @@ import {
   List, 
   ListItem, 
   Chip,
+  IconButton,
+  Tooltip,
   styled,
   alpha
 } from '@mui/material';
@@ -12,7 +14,8 @@ import {
   Schedule,
   Assignment,
   Warning,
-  CheckCircle
+  CheckCircle,
+  Email
 } from '@mui/icons-material';
 import { deadlines, getPriorityColor, getPriorityLabel } from '../../../../../data/mockData';
 
@@ -56,6 +59,30 @@ const ItemHeader = styled(Box)(({ theme }) => ({
   alignItems: 'flex-start',
   justifyContent: 'space-between',
   marginBottom: 8,
+}));
+
+const HeaderLeft = styled(Box)(({ theme }) => ({
+  flex: 1,
+  marginRight: 8,
+}));
+
+const HeaderRight = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  gap: 4,
+}));
+
+const EmailButton = styled(IconButton)(({ theme }) => ({
+  padding: 4,
+  backgroundColor: alpha(theme.palette.primary.main, 0.1),
+  color: theme.palette.primary.main,
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.primary.main, 0.2),
+    transform: 'scale(1.1)',
+  },
+  '& .MuiSvgIcon-root': {
+    fontSize: 16,
+  },
 }));
 
 const ItemTitle = styled(Typography)(({ theme }) => ({
@@ -138,6 +165,14 @@ const DeadlinesPanel: React.FC<DeadlinesPanelProps> = ({ panelId }) => {
     // Here you would typically navigate to the deadline details or open a modal
   };
 
+  const handleEmailClick = (e: React.MouseEvent, deadline: typeof deadlines[0]) => {
+    e.stopPropagation(); // Prevent triggering the item click
+    console.log('Email button clicked for:', deadline.title);
+    // Here you would open an email modal or compose window
+    // For now, we'll show a simple alert
+    alert(`📧 Email για: ${deadline.title}\n👤 Παραλήπτης: Εντολέας\n📅 Προθεσμία: ${deadline.details}\n📝 Θέμα: Υπενθύμιση προθεσμίας`);
+  };
+
   const getDeadlineIcon = (deadlineType: string) => {
     switch (deadlineType.toLowerCase()) {
       case 'ανακοπή':
@@ -178,14 +213,26 @@ const DeadlinesPanel: React.FC<DeadlinesPanelProps> = ({ panelId }) => {
               onClick={() => handleItemClick(deadline)}
             >
               <ItemHeader>
-                <ItemTitle>
-                  {deadline.title}
-                </ItemTitle>
-                <PriorityChip
-                  priority={deadline.priority}
-                  label={getPriorityLabel(deadline.priority)}
-                  size="small"
-                />
+                <HeaderLeft>
+                  <ItemTitle>
+                    {deadline.title}
+                  </ItemTitle>
+                </HeaderLeft>
+                <HeaderRight>
+                  <Tooltip title="Αποστολή Email" arrow>
+                    <EmailButton
+                      onClick={(e) => handleEmailClick(e, deadline)}
+                      size="small"
+                    >
+                      <Email />
+                    </EmailButton>
+                  </Tooltip>
+                  <PriorityChip
+                    priority={deadline.priority}
+                    label={getPriorityLabel(deadline.priority)}
+                    size="small"
+                  />
+                </HeaderRight>
               </ItemHeader>
               
               <ItemDetails>
