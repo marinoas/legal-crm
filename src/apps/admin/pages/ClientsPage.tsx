@@ -19,7 +19,15 @@ import {
   InputAdornment,
   TablePagination,
   Tooltip,
-  Avatar
+  Avatar,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem
 } from '@mui/material';
 import {
   Search as SearchIcon,
@@ -33,11 +41,27 @@ import {
   AccountBalance as AccountBalanceIcon
 } from '@mui/icons-material';
 import { clientsData } from '../../../data/dashboardData';
+import ClientDetailView from '../components/ClientDetailView';
 
 const ClientsPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [openNewClientModal, setOpenNewClientModal] = useState(false);
+  const [openClientDetail, setOpenClientDetail] = useState(false);
+  const [selectedClient, setSelectedClient] = useState<any>(null);
+  const [newClientData, setNewClientData] = useState({
+    firstName: '',
+    lastName: '',
+    fatherName: '',
+    address: '',
+    afm: '',
+    landlinePhone: '',
+    mobilePhone: '',
+    email: '',
+    folderNumber: '',
+    type: 'Φυσικό Πρόσωπο'
+  });
 
   // Filter data based on search term
   const filteredData = clientsData.filter(item =>
@@ -70,6 +94,62 @@ const ClientsPage: React.FC = () => {
 
   const handleEdit = (clientId: string) => {
     console.log('Editing client:', clientId);
+  };
+
+  // Client Detail Handlers
+  const handleClientClick = (client: any) => {
+    setSelectedClient(client);
+    setOpenClientDetail(true);
+  };
+
+  const handleCloseClientDetail = () => {
+    setOpenClientDetail(false);
+    setSelectedClient(null);
+  };
+
+  // New Client Modal Handlers
+  const handleNewClientInputChange = (field: string, value: string) => {
+    setNewClientData(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+
+  const handleSaveNewClient = () => {
+    // TODO: Save to database
+    console.log('Saving new client:', newClientData);
+    
+    // Reset form and close modal
+    setNewClientData({
+      firstName: '',
+      lastName: '',
+      fatherName: '',
+      address: '',
+      afm: '',
+      landlinePhone: '',
+      mobilePhone: '',
+      email: '',
+      folderNumber: '',
+      type: 'Φυσικό Πρόσωπο'
+    });
+    setOpenNewClientModal(false);
+  };
+
+  const handleCancelNewClient = () => {
+    // Reset form and close modal
+    setNewClientData({
+      firstName: '',
+      lastName: '',
+      fatherName: '',
+      address: '',
+      afm: '',
+      landlinePhone: '',
+      mobilePhone: '',
+      email: '',
+      folderNumber: '',
+      type: 'Φυσικό Πρόσωπο'
+    });
+    setOpenNewClientModal(false);
   };
 
   // Calculate statistics
@@ -114,11 +194,30 @@ const ClientsPage: React.FC = () => {
     <Box sx={{ p: 3 }}>
       {/* Header */}
       <Box sx={{ mb: 4 }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-          <PersonIcon sx={{ mr: 1, color: 'primary.main', fontSize: 28 }} />
-          <Typography variant="h4" sx={{ fontWeight: 600, color: 'primary.main' }}>
-            Εντολείς
-          </Typography>
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <PersonIcon sx={{ mr: 1, color: 'primary.main', fontSize: 28 }} />
+            <Typography variant="h4" sx={{ fontWeight: 600, color: 'primary.main' }}>
+              Εντολείς
+            </Typography>
+          </Box>
+          <Button
+            variant="contained"
+            startIcon={<PersonIcon />}
+            onClick={() => setOpenNewClientModal(true)}
+            sx={{
+              backgroundColor: 'success.main',
+              color: 'success.contrastText',
+              '&:hover': {
+                backgroundColor: 'success.dark',
+              },
+              fontWeight: 600,
+              px: 3,
+              py: 1.5,
+            }}
+          >
+            +Νέος Εντολέας
+          </Button>
         </Box>
         <Typography variant="subtitle1" color="text.secondary">
           Διαχείριση πελατών και εντολέων του δικηγορικού γραφείου
@@ -129,9 +228,12 @@ const ClientsPage: React.FC = () => {
       <Grid container spacing={3} sx={{ mb: 4 }}>
         <Grid item xs={12} sm={6} md={3}>
           <Card sx={{ 
-            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-            color: 'white',
-            height: '100%'
+            backgroundColor: 'primary.main',
+            color: 'primary.contrastText',
+            height: '100%',
+            '&:hover': {
+              backgroundColor: 'primary.dark',
+            }
           }}>
             <CardContent>
               <Typography variant="h3" sx={{ fontWeight: 'bold', mb: 1 }}>
@@ -145,9 +247,12 @@ const ClientsPage: React.FC = () => {
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
           <Card sx={{ 
-            background: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
-            color: 'white',
-            height: '100%'
+            backgroundColor: 'success.main',
+            color: 'success.contrastText',
+            height: '100%',
+            '&:hover': {
+              backgroundColor: 'success.dark',
+            }
           }}>
             <CardContent>
               <Typography variant="h3" sx={{ fontWeight: 'bold', mb: 1 }}>
@@ -161,9 +266,12 @@ const ClientsPage: React.FC = () => {
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
           <Card sx={{ 
-            background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-            color: 'white',
-            height: '100%'
+            backgroundColor: 'info.main',
+            color: 'info.contrastText',
+            height: '100%',
+            '&:hover': {
+              backgroundColor: 'info.dark',
+            }
           }}>
             <CardContent>
               <Typography variant="h3" sx={{ fontWeight: 'bold', mb: 1 }}>
@@ -177,9 +285,12 @@ const ClientsPage: React.FC = () => {
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
           <Card sx={{ 
-            background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-            color: 'white',
-            height: '100%'
+            backgroundColor: 'secondary.main',
+            color: 'secondary.contrastText',
+            height: '100%',
+            '&:hover': {
+              backgroundColor: 'secondary.dark',
+            }
           }}>
             <CardContent>
               <Typography variant="h3" sx={{ fontWeight: 'bold', mb: 1 }}>
@@ -243,8 +354,9 @@ const ClientsPage: React.FC = () => {
             {paginatedData.map((client) => (
               <TableRow 
                 key={client.id}
+                onClick={() => handleClientClick(client)}
                 sx={{ 
-                  '&:hover': { backgroundColor: 'action.hover' },
+                  '&:hover': { backgroundColor: 'action.hover', cursor: 'pointer' },
                   '&:nth-of-type(odd)': { backgroundColor: 'action.selected' }
                 }}
               >
@@ -345,6 +457,192 @@ const ClientsPage: React.FC = () => {
           labelDisplayedRows={({ from, to, count }) => `${from}-${to} από ${count}`}
         />
       </TableContainer>
+
+      {/* New Client Modal */}
+      <Dialog
+        open={openNewClientModal}
+        onClose={handleCancelNewClient}
+        maxWidth="md"
+        fullWidth
+        PaperProps={{
+          sx: {
+            borderRadius: 2,
+            p: 1
+          }
+        }}
+      >
+        <DialogTitle sx={{ 
+          display: 'flex', 
+          alignItems: 'center', 
+          justifyContent: 'space-between',
+          pb: 2,
+          borderBottom: '1px solid',
+          borderColor: 'divider'
+        }}>
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <PersonIcon sx={{ mr: 1, color: 'primary.main' }} />
+            <Typography variant="h6" sx={{ fontWeight: 600 }}>
+              Νέος Εντολέας
+            </Typography>
+          </Box>
+          <IconButton onClick={handleCancelNewClient} size="small">
+            <Typography sx={{ fontSize: 18, fontWeight: 'bold' }}>×</Typography>
+          </IconButton>
+        </DialogTitle>
+
+        <DialogContent sx={{ pt: 3 }}>
+          <Grid container spacing={3}>
+            {/* First Row */}
+            <Grid item xs={12} sm={4}>
+              <TextField
+                fullWidth
+                label="Όνομα *"
+                value={newClientData.firstName}
+                onChange={(e) => handleNewClientInputChange('firstName', e.target.value)}
+                variant="outlined"
+                required
+              />
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <TextField
+                fullWidth
+                label="Επώνυμο *"
+                value={newClientData.lastName}
+                onChange={(e) => handleNewClientInputChange('lastName', e.target.value)}
+                variant="outlined"
+                required
+              />
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <TextField
+                fullWidth
+                label="Πατρώνυμο"
+                value={newClientData.fatherName}
+                onChange={(e) => handleNewClientInputChange('fatherName', e.target.value)}
+                variant="outlined"
+              />
+            </Grid>
+
+            {/* Second Row */}
+            <Grid item xs={12} sm={6}>
+              <TextField
+                fullWidth
+                label="Διεύθυνση κατοικίας (οδός, αριθμός)"
+                value={newClientData.address}
+                onChange={(e) => handleNewClientInputChange('address', e.target.value)}
+                variant="outlined"
+                multiline
+                rows={2}
+              />
+            </Grid>
+            <Grid item xs={12} sm={3}>
+              <TextField
+                fullWidth
+                label="ΑΦΜ"
+                value={newClientData.afm}
+                onChange={(e) => handleNewClientInputChange('afm', e.target.value)}
+                variant="outlined"
+              />
+            </Grid>
+            <Grid item xs={12} sm={3}>
+              <TextField
+                fullWidth
+                label="Αριθμός φακέλου"
+                value={newClientData.folderNumber}
+                onChange={(e) => handleNewClientInputChange('folderNumber', e.target.value)}
+                variant="outlined"
+              />
+            </Grid>
+
+            {/* Third Row */}
+            <Grid item xs={12} sm={4}>
+              <TextField
+                fullWidth
+                label="Σταθερό τηλέφωνο"
+                value={newClientData.landlinePhone}
+                onChange={(e) => handleNewClientInputChange('landlinePhone', e.target.value)}
+                variant="outlined"
+              />
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <TextField
+                fullWidth
+                label="Κινητό τηλέφωνο"
+                value={newClientData.mobilePhone}
+                onChange={(e) => handleNewClientInputChange('mobilePhone', e.target.value)}
+                variant="outlined"
+              />
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <TextField
+                fullWidth
+                label="Email"
+                type="email"
+                value={newClientData.email}
+                onChange={(e) => handleNewClientInputChange('email', e.target.value)}
+                variant="outlined"
+              />
+            </Grid>
+
+            {/* Fourth Row */}
+            <Grid item xs={12} sm={6}>
+              <FormControl fullWidth variant="outlined">
+                <InputLabel>Τύπος Εντολέα</InputLabel>
+                <Select
+                  value={newClientData.type}
+                  onChange={(e) => handleNewClientInputChange('type', e.target.value)}
+                  label="Τύπος Εντολέα"
+                >
+                  <MenuItem value="Φυσικό Πρόσωπο">Φυσικό Πρόσωπο</MenuItem>
+                  <MenuItem value="Εταιρεία">Εταιρεία</MenuItem>
+                  <MenuItem value="Οργανισμός">Οργανισμός</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+          </Grid>
+        </DialogContent>
+
+        <DialogActions sx={{ 
+          p: 3, 
+          pt: 2, 
+          borderTop: '1px solid',
+          borderColor: 'divider',
+          gap: 2 
+        }}>
+          <Button
+            onClick={handleCancelNewClient}
+            variant="outlined"
+            sx={{ 
+              minWidth: 120,
+              fontWeight: 600 
+            }}
+          >
+            Ακύρωση
+          </Button>
+          <Button
+            onClick={handleSaveNewClient}
+            variant="contained"
+            disabled={!newClientData.firstName || !newClientData.lastName}
+            sx={{ 
+              minWidth: 120,
+              fontWeight: 600,
+              backgroundColor: 'success.main',
+              '&:hover': {
+                backgroundColor: 'success.dark',
+              }
+            }}
+          >
+            Καταχώρηση
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Client Detail View */}
+      <ClientDetailView
+        open={openClientDetail}
+        onClose={handleCloseClientDetail}
+        client={selectedClient}
+      />
     </Box>
   );
 };
