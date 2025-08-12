@@ -1,6 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import ProfessionalAdminApp from './App.simple';
+import WorkingAdminApp from './App.working';
 import '../../styles/global.css';
 
 // Get root element
@@ -17,10 +17,10 @@ console.log('Loading Professional Admin Portal...');
 if (process.env.NODE_ENV === 'development') {
   root.render(
     <React.StrictMode>
-      <ProfessionalAdminApp />
+      <WorkingAdminApp />
     </React.StrictMode>
   );
 } else {
-  root.render(<ProfessionalAdminApp />);
+  root.render(<WorkingAdminApp />);
 }
 

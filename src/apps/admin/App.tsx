@@ -4,7 +4,7 @@ import { AppProviders } from '../../providers/AppProviders';
 import AdminLayout from './components/Layout/AdminLayout';
 import DashboardView from './components/Dashboard/DashboardView';
 import CourtsView from './components/Courts/CourtsView';
-import DeadlinesView from './components/Deadlines/DeadlinesView';
+import DeadlinesPage from './pages/DeadlinesPage';
 import PendingView from './components/Pending/PendingView';
 import AppointmentsView from './components/Appointments/AppointmentsView';
 import ClientsView from './components/Clients/ClientsView';
@@ -17,15 +17,15 @@ const AdminApp: React.FC = () => {
     <AppProviders>
       <AdminLayout>
         <Routes>
-          <Route path="/" element={<DashboardView />} />
-          <Route path="/courts" element={<CourtsView />} />
-          <Route path="/deadlines" element={<DeadlinesView />} />
-          <Route path="/pending" element={<PendingView />} />
-          <Route path="/appointments" element={<AppointmentsView />} />
-          <Route path="/clients" element={<ClientsView />} />
-          <Route path="/contacts" element={<ContactsView />} />
-          <Route path="/financial" element={<FinancialView />} />
-          <Route path="/settings" element={<SettingsView />} />
+          <Route path="/admin" element={<DashboardView />} />
+          <Route path="/admin/courts" element={<CourtsView />} />
+          <Route path="/admin/deadlines" element={<DeadlinesPage />} />
+          <Route path="/admin/pending" element={<PendingView />} />
+          <Route path="/admin/appointments" element={<AppointmentsView />} />
+          <Route path="/admin/clients" element={<ClientsView />} />
+          <Route path="/admin/contacts" element={<ContactsView />} />
+          <Route path="/admin/financial" element={<FinancialView />} />
+          <Route path="/admin/settings" element={<SettingsView />} />
         </Routes>
       </AdminLayout>
     </AppProviders>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Box, Typography, styled, Paper, IconButton } from '@mui/material';
 import { CalendarToday } from '@mui/icons-material';
 import QuickActions from './QuickActions';
+import BusinessStats from './BusinessStats';
 import CourtsPanel from './Panels/CourtsPanel';
 import DeadlinesPanel from './Panels/DeadlinesPanel';
 import PendingPanel from './Panels/PendingPanel';
@@ -187,6 +188,9 @@ const DashboardView: React.FC = () => {
           })}
         </PanelsGrid>
       </Box>
+      
+      {/* Business Statistics Section */}
+      <BusinessStats />
     </DashboardContainer>
   );
 };

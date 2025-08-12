@@ -155,16 +155,8 @@ const getIconComponent = (iconName: string) => {
 };
 
 const getBadgeColor = (badgeType?: string) => {
-  switch (badgeType) {
-    case 'high':
-      return 'error';
-    case 'medium':
-      return 'warning';
-    case 'low':
-      return 'info';
-    default:
-      return 'default';
-  }
+  // Standardize all badges to use primary color for consistency
+  return 'primary';
 };
 
 const Sidebar: React.FC = () => {

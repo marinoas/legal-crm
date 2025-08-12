@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   Box, 
   Typography, 
@@ -17,6 +17,7 @@ import {
   Email
 } from '@mui/icons-material';
 import { courtCases, getPriorityColor, getPriorityLabel } from '../../../../../data/mockData';
+import EmailModal from '../../../../../components/EmailModal';
 
 const PanelContainer = styled(Box)(({ theme }) => ({
   height: '100%',
@@ -143,6 +144,9 @@ interface CourtsPanelProps {
 }
 
 const CourtsPanel: React.FC<CourtsPanelProps> = ({ panelId }) => {
+  const [emailModalOpen, setEmailModalOpen] = useState(false);
+  const [selectedCourtCase, setSelectedCourtCase] = useState<typeof courtCases[0] | null>(null);
+
   const handleItemClick = (courtCase: typeof courtCases[0]) => {
     console.log('Court case clicked:', courtCase.title);
     // Here you would typically navigate to the case details or open a modal
@@ -150,10 +154,13 @@ const CourtsPanel: React.FC<CourtsPanelProps> = ({ panelId }) => {
 
   const handleEmailClick = (e: React.MouseEvent, courtCase: typeof courtCases[0]) => {
     e.stopPropagation(); // Prevent triggering the item click
-    console.log('Email button clicked for:', courtCase.title);
-    // Here you would open an email modal or compose window
-    // For now, we'll show a simple alert
-    alert(`Άνοιγμα email για: ${courtCase.title}\nΠαραλήπτης: ${courtCase.opponent || 'Εντολέας'}`);
+    setSelectedCourtCase(courtCase);
+    setEmailModalOpen(true);
+  };
+
+  const handleEmailModalClose = () => {
+    setEmailModalOpen(false);
+    setSelectedCourtCase(null);
   };
 
   if (courtCases.length === 0) {
@@ -236,6 +243,19 @@ const CourtsPanel: React.FC<CourtsPanelProps> = ({ panelId }) => {
           </CourtItem>
         ))}
       </ItemsList>
+
+      {/* Email Modal */}
+      <EmailModal
+        open={emailModalOpen}
+        onClose={handleEmailModalClose}
+        defaultRecipient={selectedCourtCase?.opponent || 'Εντολέας'}
+        emailType="court"
+        contextData={{
+          title: selectedCourtCase?.title || '',
+          client: selectedCourtCase?.opponent || '',
+          details: selectedCourtCase?.details || ''
+        }}
+      />
     </PanelContainer>
   );
 };

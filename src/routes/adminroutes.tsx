@@ -9,7 +9,7 @@ const Courts = lazy(() => import('../pages/admin/Courts'));
 const CourtDetails = lazy(() => import('../pages/admin/CourtDetails'));
 const Clients = lazy(() => import('../pages/admin/Clients'));
 const ClientDetails = lazy(() => import('../pages/admin/ClientDetails'));
-const Deadlines = lazy(() => import('../pages/admin/Deadlines'));
+const Deadlines = lazy(() => import('../apps/admin/pages/DeadlinesPage'));
 const Appointments = lazy(() => import('../pages/admin/Appointments'));
 const Documents = lazy(() => import('../pages/admin/Documents'));
 const FinancialOverview = lazy(() => import('../pages/admin/financial/Overview'));

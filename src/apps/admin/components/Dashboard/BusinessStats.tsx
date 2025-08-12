@@ -6,7 +6,9 @@ import {
   Card, 
   CardContent,
   Stack,
-  alpha
+  alpha,
+  Tooltip,
+  IconButton
 } from '@mui/material';
 import { 
   TrendingUp, 
@@ -17,7 +19,8 @@ import {
   Event,
   AddCircle,
   AccountBalance,
-  Schedule
+  Schedule,
+  Info
 } from '@mui/icons-material';
 import { businessStats, BusinessStat } from '../../../../data/dashboardData';
 
@@ -138,10 +141,32 @@ const StatCard: React.FC<StatCardProps> = ({ stat }) => {
               lineHeight: 1.3,
               minHeight: 40,
               display: 'flex',
-              alignItems: 'center'
+              alignItems: 'center',
+              gap: 1
             }}
           >
             {stat.title}
+            {stat.id === 'client-roi' && (
+              <Tooltip 
+                title="ROI (Return on Investment): Δείκτης απόδοσης επένδυσης που υπολογίζεται ως (Έσοδα - Κόστος) / Κόστος × 100%. Δείχνει πόσα ευρώ κερδίζουμε για κάθε ευρώ που επενδύουμε στο γραφείο."
+                arrow
+                placement="top"
+              >
+                <IconButton 
+                  size="small" 
+                  sx={{ 
+                    p: 0.5,
+                    color: 'text.secondary',
+                    '&:hover': {
+                      color: 'primary.main',
+                      backgroundColor: alpha('#6366f1', 0.1)
+                    }
+                  }}
+                >
+                  <Info sx={{ fontSize: 16 }} />
+                </IconButton>
+              </Tooltip>
+            )}
           </Typography>
 
           {/* Change Indicator */}
